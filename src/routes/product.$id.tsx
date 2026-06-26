@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { getPassport, passports } from "@/data/dpp";
+import { getPassport, passports, type DigitalProductPassport } from "@/data/dpp";
 import {
   ArrowLeft,
   Leaf,
