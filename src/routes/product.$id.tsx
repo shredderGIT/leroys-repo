@@ -217,16 +217,8 @@ function IdRow({
   );
 }
 
-function EpdFact({ label, value, compact }: { label: string; value: string; compact?: boolean }) {
-  return (
-    <div className={compact ? "" : "rounded-xl border border-border bg-card p-4"}>
-      <div className="text-[10px] font-medium uppercase tracking-widest text-muted-foreground">
-        {label}
-      </div>
-      <div className="mt-1 text-sm">{value}</div>
-    </div>
-  );
-}
+
+
 
 
 function BigMetric({
