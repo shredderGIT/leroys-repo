@@ -10,6 +10,33 @@ export type DppOrganisation = {
   role: string;
 };
 
+export type DppMaterial = { name: string; kg: number; share: number; recycled: number };
+
+export type DppEpd = {
+  declarationNumber: string;
+  programOperator: string;
+  standards: string;
+  pcr: string;
+  issued: string;
+  validTo: string;
+  yearOfStudy: string;
+  declaredUnit: string;
+  modulesDeclared: string;
+  referenceServiceLife: string;
+  totalWeightKg: number;
+  description: string;
+  productUrl: string;
+  certifications: string[];
+  technicalStandards: string[];
+  fireStandards: string[];
+  managementSystems: string[];
+  manufacturer: { name: string; orgNr: string; address: string };
+  developer: { tool: string; author: string; reviewer: string };
+  transport: { vehicle: string; distanceKm: number; fuelLPerTkm: number; capacityUtil: string };
+  impacts: { gwp: number; energyMJ: number; recycledPct: number; recycledKg: number };
+  materials: DppMaterial[];
+};
+
 export type DigitalProductPassport = {
   id: string;
   product: string;
@@ -23,7 +50,9 @@ export type DigitalProductPassport = {
   businessRole: string;
   organisations: DppOrganisation[];
   documents: DppDocument[];
+  epd?: DppEpd;
 };
+
 
 const raw = [
   {
