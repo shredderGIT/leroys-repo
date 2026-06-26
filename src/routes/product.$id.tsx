@@ -94,12 +94,13 @@ function ProductPage() {
           <h1 className="mt-2 text-3xl font-medium sm:text-4xl">{p.product}</h1>
           <p className="mt-3 max-w-2xl text-sm text-muted-foreground">{p.presentation}</p>
 
-          <div className="mt-6 grid gap-3 sm:grid-cols-3">
+          <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            <IdRow icon={<Hash className="h-4 w-4" />} label="DPP ID" value={p.dppId} />
             <IdRow icon={<Hash className="h-4 w-4" />} label="Passport ID" value={p.id} />
             <IdRow
               icon={<Factory className="h-4 w-4" />}
               label="Model"
-              value={p.model}
+              value={p.modelPresentation ?? p.model}
             />
             {p.artNr && (
               <IdRow icon={<Hash className="h-4 w-4" />} label="Article nr" value={p.artNr} />
