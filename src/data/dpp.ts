@@ -10,7 +10,14 @@ export type DppOrganisation = {
   name: string;
   orgNr: string;
   role: string;
+  url?: string;
 };
+
+const orgUrls: Record<string, string> = {
+  "Kinnarps AB": "https://www.kinnarps.com",
+  "epd-global": "https://www.epd-norge.no",
+};
+
 
 export type DppMaterial = {
   name: string;
@@ -254,15 +261,24 @@ for (const row of raw) {
         ? { name: issuerName, orgNr: row["Role (document)Org nr"] ?? "" }
         : undefined,
   };
+  const orgName = row.Organisation.replace(/\s*\([^)]+\)\s*$/, "");
+  const mappedRole = row.Role === "Manufacturer" ? "Product Manufacturer" : row.Role;
   const org: DppOrganisation = {
-    name: row.Organisation.replace(/\s*\([^)]+\)\s*$/, ""),
+    name: orgName,
     orgNr: row["OrganisationOrg nr"],
-    role: row.Role,
+    role: mappedRole,
+    url: orgUrls[orgName],
   };
 
   const issuerOrg: DppOrganisation | undefined = doc.issuer
-    ? { name: doc.issuer.name, orgNr: doc.issuer.orgNr, role: "Issuer" }
+    ? {
+        name: doc.issuer.name,
+        orgNr: doc.issuer.orgNr,
+        role: "Document Issuer",
+        url: orgUrls[doc.issuer.name],
+      }
     : undefined;
+
 
   if (existing) {
     if (!existing.documents.some((d) => d.url === doc.url)) existing.documents.push(doc);

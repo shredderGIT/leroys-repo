@@ -149,12 +149,24 @@ function ProductPage() {
                 <Building2 className="h-5 w-5" />
               </div>
               <div>
-                <div className="text-base font-medium">{o.name}</div>
+                {o.url ? (
+                  <a
+                    href={o.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-base font-medium text-primary hover:underline"
+                  >
+                    {o.name} <ExternalLink className="inline h-3 w-3" />
+                  </a>
+                ) : (
+                  <div className="text-base font-medium">{o.name}</div>
+                )}
                 <div className="text-sm text-muted-foreground">Org nr · {o.orgNr}</div>
                 <span className="mt-2 inline-block rounded-full bg-accent/30 px-2.5 py-1 text-xs font-medium text-accent-foreground">
                   {o.role}
                 </span>
               </div>
+
             </div>
           ))}
         </div>
