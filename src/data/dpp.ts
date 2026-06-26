@@ -28,6 +28,11 @@ export type DppMaterial = {
   source?: string;
 };
 
+export type DppClassification = {
+  category: string;
+  materials: string[];
+};
+
 export type DigitalProductPassport = {
   id: string;
   dppId: string;
@@ -44,7 +49,9 @@ export type DigitalProductPassport = {
   organisations: DppOrganisation[];
   documents: DppDocument[];
   materials: DppMaterial[];
+  classification: DppClassification[];
 };
+
 
 
 type RawRow = {
