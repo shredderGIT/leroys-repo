@@ -36,8 +36,8 @@ export const Route = createFileRoute("/product/$id")({
   notFoundComponent: () => (
     <div className="flex min-h-screen items-center justify-center px-4">
       <div className="text-center">
-        <h1 className="font-display text-3xl">Passport not found</h1>
-        <p className="mt-2 text-muted-foreground">No DPP exists for this ID.</p>
+        <h1 className="text-xl font-medium">Passport not found</h1>
+        <p className="mt-2 text-sm text-muted-foreground">No DPP exists for this ID.</p>
         <Link
           to="/"
           className="mt-6 inline-flex rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground"
@@ -50,7 +50,7 @@ export const Route = createFileRoute("/product/$id")({
   errorComponent: ({ error, reset }) => (
     <div className="flex min-h-screen items-center justify-center px-4 text-center">
       <div>
-        <h1 className="font-display text-2xl">Couldn't load this passport</h1>
+        <h1 className="text-lg font-medium">Couldn't load this passport</h1>
         <p className="mt-2 text-sm text-muted-foreground">{error.message}</p>
         <button
           onClick={reset}
@@ -86,15 +86,15 @@ function ProductPage() {
         </div>
       </header>
 
-      <section className="border-b border-border/60 bg-gradient-to-b from-secondary/40 to-background">
-        <div className="mx-auto max-w-6xl px-6 py-16">
-          <p className="text-sm font-medium uppercase tracking-widest text-primary/80">
+      <section className="border-b border-border/60 bg-secondary">
+        <div className="mx-auto max-w-6xl px-6 py-12">
+          <p className="text-xs font-medium uppercase tracking-widest text-primary">
             {p.series ?? "Digital Product Passport"}
           </p>
-          <h1 className="mt-2 font-display text-5xl font-semibold sm:text-6xl">{p.product}</h1>
-          <p className="mt-3 max-w-2xl text-muted-foreground">{p.presentation}</p>
+          <h1 className="mt-2 text-3xl font-medium sm:text-4xl">{p.product}</h1>
+          <p className="mt-3 max-w-2xl text-sm text-muted-foreground">{p.presentation}</p>
 
-          <div className="mt-8 grid gap-3 sm:grid-cols-3">
+          <div className="mt-6 grid gap-3 sm:grid-cols-3">
             <IdRow icon={<Hash className="h-4 w-4" />} label="Passport ID" value={p.id} />
             <IdRow
               icon={<Factory className="h-4 w-4" />}
@@ -108,9 +108,9 @@ function ProductPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-6 py-12">
-        <h2 className="text-2xl font-semibold">Environmental performance</h2>
-        <div className="mt-6 grid gap-4 sm:grid-cols-3">
+      <section className="mx-auto max-w-6xl px-6 py-10">
+        <h2 className="text-xl font-medium">Environmental performance</h2>
+        <div className="mt-5 grid gap-4 sm:grid-cols-3">
           <BigMetric
             icon={<Zap className="h-5 w-5" />}
             label="Energy use"
@@ -136,19 +136,19 @@ function ProductPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-6 py-6">
-        <h2 className="text-2xl font-semibold">Organisations</h2>
-        <div className="mt-6 grid gap-4 sm:grid-cols-2">
+      <section className="mx-auto max-w-6xl px-6 py-4">
+        <h2 className="text-xl font-medium">Organisations</h2>
+        <div className="mt-5 grid gap-4 sm:grid-cols-2">
           {p.organisations.map((o, i) => (
             <div
               key={`${o.orgNr}-${o.role}-${i}`}
-              className="flex items-start gap-4 rounded-2xl border border-border bg-card p-5"
+              className="flex items-start gap-4 rounded-xl border border-border bg-card p-5"
             >
               <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-secondary text-secondary-foreground">
                 <Building2 className="h-5 w-5" />
               </div>
               <div>
-                <div className="font-display text-lg font-semibold">{o.name}</div>
+                <div className="text-base font-medium">{o.name}</div>
                 <div className="text-sm text-muted-foreground">Org nr · {o.orgNr}</div>
                 <span className="mt-2 inline-block rounded-full bg-accent/30 px-2.5 py-1 text-xs font-medium text-accent-foreground">
                   {o.role}
@@ -159,9 +159,9 @@ function ProductPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-6 py-12">
-        <h2 className="text-2xl font-semibold">Documentation</h2>
-        <div className="mt-6 divide-y divide-border overflow-hidden rounded-2xl border border-border bg-card">
+      <section className="mx-auto max-w-6xl px-6 py-10">
+        <h2 className="text-xl font-medium">Documentation</h2>
+        <div className="mt-5 divide-y divide-border overflow-hidden rounded-xl border border-border bg-card">
           {p.documents.map((d) => (
             <a
               key={d.url}
@@ -183,8 +183,8 @@ function ProductPage() {
         </div>
       </section>
 
-      <footer className="border-t border-border/60 py-8">
-        <div className="mx-auto max-w-6xl px-6 text-sm text-muted-foreground">
+      <footer className="border-t border-border/60 py-6">
+        <div className="mx-auto max-w-6xl px-6 text-xs text-muted-foreground">
           Passport data exported from KS: Digital Product Passport.
         </div>
       </footer>
@@ -207,7 +207,7 @@ function IdRow({
         {icon}
         {label}
       </div>
-      <div className="mt-1 truncate font-mono text-sm">{value}</div>
+      <div className="mt-1 truncate font-mono text-xs">{value}</div>
     </div>
   );
 }
@@ -228,7 +228,7 @@ function BigMetric({
   progress?: number;
 }) {
   return (
-    <div className="rounded-2xl border border-border bg-card p-6">
+    <div className="rounded-xl border border-border bg-card p-5">
       <div className="flex items-center gap-2 text-sm text-muted-foreground">
         <span
           className={`flex h-8 w-8 items-center justify-center rounded-lg ${
@@ -239,12 +239,12 @@ function BigMetric({
         </span>
         {label}
       </div>
-      <div className="mt-4 font-display text-4xl font-semibold">
+      <div className="mt-3 text-2xl font-medium">
         {value}
-        <span className="ml-2 text-base font-normal text-muted-foreground">{unit}</span>
+        <span className="ml-2 text-sm font-normal text-muted-foreground">{unit}</span>
       </div>
       {progress !== undefined && (
-        <div className="mt-4 h-2 w-full overflow-hidden rounded-full bg-secondary">
+        <div className="mt-3 h-2 w-full overflow-hidden rounded-full bg-secondary">
           <div
             className="h-full rounded-full bg-leaf transition-all"
             style={{ width: `${Math.min(100, Math.max(0, progress))}%` }}
