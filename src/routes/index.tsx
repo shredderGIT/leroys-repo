@@ -193,3 +193,20 @@ function Metric({
     </div>
   );
 }
+
+function CropMark({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 12 12"
+      className={`absolute h-3 w-3 text-foreground/50 ${className ?? ""}`}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1"
+      aria-hidden="true"
+    >
+      <path d="M0 1 H8" />
+      <path d="M1 0 V8" />
+    </svg>
+  );
+}
+
