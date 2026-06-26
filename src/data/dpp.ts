@@ -66,7 +66,6 @@ const raw: RawRow[] = [
       "https://www.kinnarps.se/mediacdn/79ff6f4f-b68a-4716-a33a-53abc54cbd74/b6f02ea8-d12a-574a-834c-7c1b066e8b1e/0120200914_plus6_Kinnarps_se.pdf",
     ID: "26545bed-5bb4-fd00-8a2f-b47200bf8062",
     Organisation: "Kinnarps AB (556256-6736)",
-    OrganisationOrgNr: "556256-6736" as never,
     "OrganisationOrg nr": "556256-6736",
     Role: "Manufacturer",
     "Product SeriesPresentation": "Plus 6",
