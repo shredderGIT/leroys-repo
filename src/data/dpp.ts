@@ -260,10 +260,20 @@ for (const row of raw) {
     role: row.Role,
   };
 
+  const issuerOrg: DppOrganisation | undefined = doc.issuer
+    ? { name: doc.issuer.name, orgNr: doc.issuer.orgNr, role: "Issuer" }
+    : undefined;
+
   if (existing) {
     if (!existing.documents.some((d) => d.url === doc.url)) existing.documents.push(doc);
     if (!existing.organisations.some((o) => o.orgNr === org.orgNr && o.role === org.role))
       existing.organisations.push(org);
+    if (
+      issuerOrg &&
+      !existing.organisations.some((o) => o.orgNr === issuerOrg.orgNr && o.role === issuerOrg.role)
+    )
+      existing.organisations.push(issuerOrg);
+
   } else {
     map.set(row.ID, {
       id: row.ID,
