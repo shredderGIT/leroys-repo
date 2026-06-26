@@ -10,6 +10,15 @@ export type DppOrganisation = {
   role: string;
 };
 
+export type DppMaterial = {
+  name: string;
+  category: string;
+  kg?: number;
+  percent?: number;
+  recycledPercent?: number;
+  source?: string;
+};
+
 export type DigitalProductPassport = {
   id: string;
   dppId: string;
@@ -25,7 +34,9 @@ export type DigitalProductPassport = {
   businessRole: string;
   organisations: DppOrganisation[];
   documents: DppDocument[];
+  materials: DppMaterial[];
 };
+
 
 type RawRow = {
   "DPP ID": string;
@@ -233,10 +244,87 @@ for (const row of raw) {
       businessRole: row["Business Role"],
       organisations: [org],
       documents: [doc],
+      materials: [],
     });
   }
+}
+
+// Allowed materials per product (from dpp_material.json — "KS: Product Material" export).
+// Only these materials may be surfaced from the EPD source documents.
+const allowedMaterials: Record<string, { name: string; category: string }[]> = {
+  "Plus 6": [
+    { name: "Glass", category: "Material" },
+    { name: "Zinc", category: "Metal" },
+    { name: "Cuttings", category: "Wood" },
+    { name: "Synthetic Textile", category: "Textile" },
+    { name: "Papper", category: "Material" },
+    { name: "Oak", category: "Wood" },
+    { name: "Wood Textile", category: "Textile" },
+    { name: "Aluminium", category: "Metal" },
+    { name: "MDF", category: "Wood" },
+    { name: "Steel", category: "Metal" },
+    { name: "Birch", category: "Wood" },
+    { name: "Fiberglass", category: "Plastic" },
+  ],
+  "Plus 8": [
+    { name: "Glass", category: "Material" },
+    { name: "Zinc", category: "Metal" },
+    { name: "Cuttings", category: "Wood" },
+    { name: "Synthetic Textile", category: "Textile" },
+    { name: "Papper", category: "Material" },
+    { name: "Oak", category: "Wood" },
+    { name: "Wood Textile", category: "Textile" },
+    { name: "Aluminium", category: "Metal" },
+    { name: "MDF", category: "Wood" },
+    { name: "Steel", category: "Metal" },
+    { name: "Birch", category: "Wood" },
+    { name: "Fiberglass", category: "Plastic" },
+  ],
+  "Capella X": [
+    { name: "Glass", category: "Material" },
+    { name: "Zinc", category: "Metal" },
+    { name: "Cuttings", category: "Wood" },
+    { name: "Synthetic Textile", category: "Textile" },
+    { name: "Papper", category: "Material" },
+    { name: "Oak", category: "Wood" },
+    { name: "Wood Textile", category: "Textile" },
+    { name: "Aluminium", category: "Metal" },
+    { name: "MDF", category: "Wood" },
+    { name: "Steel", category: "Metal" },
+    { name: "Birch", category: "Wood" },
+    { name: "Fiberglass", category: "Plastic" },
+  ],
+};
+
+// Composition values extracted from the EPD PDFs (only entries that correspond to
+// materials present in the allowed list above are kept).
+const epdMaterials: Record<string, DppMaterial[]> = {
+  "Plus 6": [
+    { name: "Aluminium", category: "Metal", kg: 1.92, percent: 10.43, recycledPercent: 75.99, source: "NEPD-3609-2539-EN" },
+    { name: "Steel", category: "Metal", kg: 9.62, percent: 52.36, recycledPercent: 22.98, source: "NEPD-3609-2539-EN" },
+    { name: "Zinc", category: "Metal", kg: 0.03, percent: 0.16, recycledPercent: 0, source: "NEPD-3609-2539-EN" },
+    { name: "Fiberglass", category: "Plastic", kg: 0.28, percent: 1.55, recycledPercent: 100, source: "NEPD-3609-2539-EN" },
+  ],
+  "Plus 8": [
+    { name: "Aluminium", category: "Metal", kg: 1.92, percent: 10.43, recycledPercent: 75.99, source: "NEPD-3609-2539-EN" },
+    { name: "Steel", category: "Metal", kg: 9.62, percent: 52.36, recycledPercent: 22.98, source: "NEPD-3609-2539-EN" },
+    { name: "Zinc", category: "Metal", kg: 0.03, percent: 0.16, recycledPercent: 0, source: "NEPD-3609-2539-EN" },
+    { name: "Fiberglass", category: "Plastic", kg: 0.28, percent: 1.55, recycledPercent: 100, source: "NEPD-3609-2539-EN" },
+  ],
+  "Capella X": [
+    { name: "Aluminium", category: "Metal", kg: 1.84, percent: 12.91, recycledPercent: 100, source: "NEPD-9216-8804" },
+    { name: "Steel", category: "Metal", kg: 2.91, percent: 20.41, recycledPercent: 39.86, source: "NEPD-9216-8804" },
+    { name: "Zinc", category: "Metal", kg: 0.18, percent: 1.26, recycledPercent: 0, source: "NEPD-9216-8804" },
+    { name: "Synthetic Textile", category: "Textile", kg: 0.61, percent: 4.26, recycledPercent: 63.93, source: "NEPD-9216-8804" },
+  ],
+};
+
+for (const p of map.values()) {
+  const allow = new Set((allowedMaterials[p.product] ?? []).map((m) => m.name));
+  p.materials = (epdMaterials[p.product] ?? []).filter((m) => allow.has(m.name));
 }
 
 export const passports: DigitalProductPassport[] = Array.from(map.values());
 
 export const getPassport = (id: string) => passports.find((p) => p.id === id);
+
