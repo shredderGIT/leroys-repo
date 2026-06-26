@@ -1,6 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { passports } from "@/data/dpp";
 import { Leaf, Zap, Recycle, ArrowRight } from "lucide-react";
+import { ChairSketch } from "@/components/ChairSketch";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -70,54 +72,82 @@ function Index() {
         </div>
 
         <div className="mt-6 grid gap-6 sm:grid-cols-2">
-          {passports.map((p) => (
-            <Link
-              key={p.id}
-              to="/product/$id"
-              params={{ id: p.id }}
-              className="group flex flex-col justify-between rounded-xl border border-border bg-card p-5 transition-all hover:-translate-y-0.5 hover:border-primary/30 hover:shadow-md"
-            >
-              <div>
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-medium uppercase tracking-widest text-muted-foreground">
-                    {p.series ?? "Series"}
-                  </span>
-                  <span className="rounded-full bg-leaf/20 px-2.5 py-1 text-xs font-medium text-leaf-foreground">
-                    {p.businessRole}
-                  </span>
+          {passports.map((p) => {
+            const variant = p.product.includes("8") ? "plus8" : "plus6";
+            return (
+              <Link
+                key={p.id}
+                to="/product/$id"
+                params={{ id: p.id }}
+                className="group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all hover:-translate-y-0.5 hover:border-foreground hover:shadow-[0_18px_40px_-20px_rgba(0,0,0,0.35)]"
+              >
+                {/* Sketch panel */}
+                <div className="relative h-56 overflow-hidden border-b border-border bg-[radial-gradient(circle_at_30%_20%,#fafafa,transparent_60%),repeating-linear-gradient(45deg,transparent_0_10px,rgba(0,0,0,0.025)_10px_11px)]">
+                  <div className="absolute right-4 top-4 z-10 flex items-center gap-2">
+                    <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+                    <span className="text-[10px] font-medium uppercase tracking-[0.18em] text-foreground/70">
+                      {p.businessRole}
+                    </span>
+                  </div>
+                  <div className="absolute left-5 top-4 z-10">
+                    <div className="text-[10px] font-medium uppercase tracking-[0.18em] text-muted-foreground">
+                      {p.series ?? "Kinnarps"}
+                    </div>
+                    <div className="mt-1 font-mono text-[10px] text-muted-foreground/70">
+                      ID · {p.id.slice(0, 8).toUpperCase()}
+                    </div>
+                  </div>
+                  <ChairSketch
+                    variant={variant}
+                    className="absolute left-1/2 top-1/2 h-[230px] w-[230px] -translate-x-1/2 -translate-y-1/2 text-foreground/85 transition-transform duration-500 group-hover:scale-105"
+                  />
+                  {/* corner crop marks */}
+                  <CropMark className="left-2 top-2" />
+                  <CropMark className="right-2 top-2 rotate-90" />
+                  <CropMark className="bottom-2 left-2 -rotate-90" />
+                  <CropMark className="bottom-2 right-2 rotate-180" />
                 </div>
-                <h3 className="mt-3 text-xl font-medium">{p.product}</h3>
-                <p className="mt-1 text-sm text-muted-foreground">{p.presentation}</p>
-              </div>
 
-              <div className="mt-6 grid grid-cols-3 gap-4 border-t border-border pt-4">
-                <Metric
-                  icon={<Zap className="h-4 w-4" />}
-                  label="Energy"
-                  value={`${Number(p.energyUse).toFixed(0)}`}
-                  unit="kWh"
-                />
-                <Metric
-                  icon={<Leaf className="h-4 w-4" />}
-                  label="Footprint"
-                  value={p.footprint.toString()}
-                  unit="kg CO₂e"
-                />
-                <Metric
-                  icon={<Recycle className="h-4 w-4" />}
-                  label="Recycled"
-                  value={`${p.recycledContent}`}
-                  unit="%"
-                />
-              </div>
+                <div className="flex flex-1 flex-col p-5">
+                  <div className="flex items-baseline justify-between gap-3">
+                    <h3 className="text-xl font-medium tracking-tight">{p.product}</h3>
+                    <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+                      DPP
+                    </span>
+                  </div>
+                  <p className="mt-1 text-sm text-muted-foreground">{p.presentation}</p>
 
-              <div className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-primary">
-                View passport
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </div>
-            </Link>
-          ))}
+                  <div className="mt-5 grid grid-cols-3 gap-4 border-t border-dashed border-border pt-4">
+                    <Metric
+                      icon={<Zap className="h-4 w-4" />}
+                      label="Energy"
+                      value={`${Number(p.energyUse).toFixed(0)}`}
+                      unit="kWh"
+                    />
+                    <Metric
+                      icon={<Leaf className="h-4 w-4" />}
+                      label="Footprint"
+                      value={p.footprint.toString()}
+                      unit="kg CO₂e"
+                    />
+                    <Metric
+                      icon={<Recycle className="h-4 w-4" />}
+                      label="Recycled"
+                      value={`${p.recycledContent}`}
+                      unit="%"
+                    />
+                  </div>
+
+                  <div className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-primary">
+                    View passport
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </div>
+                </div>
+              </Link>
+            );
+          })}
         </div>
+
       </section>
 
       <footer className="border-t border-border/60 py-6">
@@ -163,3 +193,20 @@ function Metric({
     </div>
   );
 }
+
+function CropMark({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 12 12"
+      className={`absolute h-3 w-3 text-foreground/50 ${className ?? ""}`}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1"
+      aria-hidden="true"
+    >
+      <path d="M0 1 H8" />
+      <path d="M1 0 V8" />
+    </svg>
+  );
+}
+
