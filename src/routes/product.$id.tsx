@@ -276,7 +276,7 @@ function ProductPage() {
 
 
 
-      <section className="mx-auto max-w-6xl px-6 py-10">
+      <section>
         <h2 className="text-xl font-medium">Documentation</h2>
 
         <div className="mt-5 divide-y divide-border overflow-hidden rounded-xl border border-border bg-card">
