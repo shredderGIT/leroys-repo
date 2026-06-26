@@ -1,6 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { passports } from "@/data/dpp";
 import { Leaf, Zap, Recycle, ArrowRight } from "lucide-react";
+import { ChairSketch } from "@/components/ChairSketch";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
