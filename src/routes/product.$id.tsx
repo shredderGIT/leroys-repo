@@ -65,7 +65,7 @@ export const Route = createFileRoute("/product/$id")({
 });
 
 function ProductPage() {
-  const p = Route.useLoaderData() as ReturnType<typeof getPassport> & object;
+  const p = Route.useLoaderData() as DigitalProductPassport;
 
   return (
     <div className="min-h-screen">
