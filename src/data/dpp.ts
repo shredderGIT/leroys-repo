@@ -10,6 +10,15 @@ export type DppOrganisation = {
   role: string;
 };
 
+export type DppMaterial = {
+  name: string;
+  category: string;
+  kg?: number;
+  percent?: number;
+  recycledPercent?: number;
+  source?: string;
+};
+
 export type DigitalProductPassport = {
   id: string;
   dppId: string;
@@ -25,7 +34,9 @@ export type DigitalProductPassport = {
   businessRole: string;
   organisations: DppOrganisation[];
   documents: DppDocument[];
+  materials: DppMaterial[];
 };
+
 
 type RawRow = {
   "DPP ID": string;
