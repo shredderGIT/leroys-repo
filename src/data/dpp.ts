@@ -314,6 +314,8 @@ for (const row of raw) {
       organisations: issuerOrg ? [org, issuerOrg] : [org],
       documents: [doc],
       materials: [],
+      classification: [],
+
     });
 
   }
