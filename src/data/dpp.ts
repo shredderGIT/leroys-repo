@@ -288,10 +288,11 @@ for (const row of raw) {
       recycledContent: row["Recycled Content"],
       presentation: row.Presentation,
       businessRole: row["Business Role"],
-      organisations: [org],
+      organisations: issuerOrg ? [org, issuerOrg] : [org],
       documents: [doc],
       materials: [],
     });
+
   }
 }
 
