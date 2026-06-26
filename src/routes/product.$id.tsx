@@ -10,7 +10,9 @@ import {
   Building2,
   Hash,
   Factory,
+  Layers,
 } from "lucide-react";
+
 
 export const Route = createFileRoute("/product/$id")({
   head: ({ params }) => {
