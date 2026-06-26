@@ -392,9 +392,20 @@ const epdMaterials: Record<string, DppMaterial[]> = {
 };
 
 for (const p of map.values()) {
-  const allow = new Set((allowedMaterials[p.product] ?? []).map((m) => m.name));
+  const reg = allowedMaterials[p.product] ?? [];
+  const allow = new Set(reg.map((m) => m.name));
   p.materials = (epdMaterials[p.product] ?? []).filter((m) => allow.has(m.name));
+
+  const byCat = new Map<string, string[]>();
+  for (const m of reg) {
+    if (!byCat.has(m.category)) byCat.set(m.category, []);
+    byCat.get(m.category)!.push(m.name);
+  }
+  p.classification = Array.from(byCat.entries())
+    .map(([category, materials]) => ({ category, materials: materials.sort() }))
+    .sort((a, b) => a.category.localeCompare(b.category));
 }
+
 
 export const passports: DigitalProductPassport[] = Array.from(map.values());
 
