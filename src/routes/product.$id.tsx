@@ -65,7 +65,7 @@ export const Route = createFileRoute("/product/$id")({
 });
 
 function ProductPage() {
-  const p = Route.useLoaderData();
+  const p = Route.useLoaderData() as ReturnType<typeof getPassport> & object;
 
   return (
     <div className="min-h-screen">
