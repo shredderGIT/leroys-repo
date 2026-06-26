@@ -244,6 +244,7 @@ for (const row of raw) {
       businessRole: row["Business Role"],
       organisations: [org],
       documents: [doc],
+      materials: [],
     });
   }
 }
