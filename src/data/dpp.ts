@@ -165,6 +165,28 @@ const raw: RawRow[] = [
     Presentation: "Kinnarps AB (556256-6736)",
     "Org nr": "556256-6736",
     "Business Role": "Holder",
+    Name: "Environmental Product Declaration",
+    Document: "NEPD-9216-8804",
+    "URL Link":
+      "https://www.epd-norge.no/getfile.php/1322181-1741010592/EPDer/M%C3%B8bler/Kontorm%C3%B8bler/NEPD-9216-8804_Capella-X-Task-Chair.pdf",
+    ID: "3a96dfc7-2c65-9678-c289-b47500a803d1",
+    Organisation: "Kinnarps AB (556256-6736)",
+    "OrganisationOrg nr": "556256-6736",
+    Role: "Manufacturer",
+    "Product SeriesPresentation": "Capella X",
+    ModelPresentation: "Capella ESD",
+  },
+
+  {
+    "DPP ID": "DPP-00004",
+    "Energy Use": "933",
+    "Carbon Footprint": 68,
+    "Recycled Content": 24,
+    Product: "Capella X",
+    Model: "a73d4f70-e400-917a-c5ff-b475008edee1",
+    Presentation: "Kinnarps AB (556256-6736)",
+    "Org nr": "556256-6736",
+    "Business Role": "Holder",
     Name: "Sustainability Declaration",
     Document: "SD Capella X",
     "URL Link":
