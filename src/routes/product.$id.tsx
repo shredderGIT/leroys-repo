@@ -10,7 +10,9 @@ import {
   Building2,
   Hash,
   Factory,
+  Layers,
 } from "lucide-react";
+
 
 export const Route = createFileRoute("/product/$id")({
   head: ({ params }) => {
@@ -109,7 +111,63 @@ function ProductPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-6 py-10">
+      <div className="mx-auto grid max-w-6xl gap-8 px-6 py-10 lg:grid-cols-[260px_1fr]">
+        <aside className="lg:sticky lg:top-6 lg:self-start">
+          <div className="rounded-xl border border-border bg-card p-5">
+            <div className="flex items-center gap-2 text-xs uppercase tracking-widest text-muted-foreground">
+              <Layers className="h-4 w-4" />
+              Classification
+            </div>
+            <p className="mt-1 text-xs text-muted-foreground">
+              Materials grouped by category for {p.product}
+            </p>
+            {p.classification.length === 0 ? (
+              <p className="mt-4 text-sm text-muted-foreground">No classification available.</p>
+            ) : (
+              <ul className="mt-4 space-y-4">
+                {p.classification.map((c) => {
+                  const declared = new Set(p.materials.map((m) => m.name));
+                  return (
+                    <li key={c.category}>
+                      <div className="flex items-baseline justify-between">
+                        <span className="text-sm font-medium">{c.category}</span>
+                        <span className="text-[10px] uppercase tracking-widest text-muted-foreground">
+                          {c.materials.length}
+                        </span>
+                      </div>
+                      <ul className="mt-2 space-y-1">
+                        {c.materials.map((m) => {
+                          const isDeclared = declared.has(m);
+                          return (
+                            <li
+                              key={m}
+                              className={`flex items-center justify-between rounded-md px-2 py-1 text-xs ${
+                                isDeclared
+                                  ? "bg-primary/10 text-foreground"
+                                  : "text-muted-foreground"
+                              }`}
+                            >
+                              <span>{m}</span>
+                              {isDeclared && (
+                                <span className="rounded-full bg-primary px-1.5 text-[9px] font-medium uppercase tracking-wider text-primary-foreground">
+                                  EPD
+                                </span>
+                              )}
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
+          </div>
+        </aside>
+
+        <div className="space-y-10">
+      <section>
+
         <h2 className="text-xl font-medium">Environmental performance</h2>
         <div className="mt-5 grid gap-4 sm:grid-cols-3">
           <BigMetric
@@ -137,7 +195,7 @@ function ProductPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-6 py-4">
+      <section>
         <h2 className="text-xl font-medium">Organisations</h2>
         <div className="mt-5 grid gap-4 sm:grid-cols-2">
           {p.organisations.map((o, i) => (
@@ -173,7 +231,8 @@ function ProductPage() {
       </section>
 
       {p.materials.length > 0 && (
-        <section className="mx-auto max-w-6xl px-6 py-10">
+        <section>
+
           <div className="flex items-baseline justify-between gap-4">
             <h2 className="text-xl font-medium">Material composition</h2>
             <p className="text-xs text-muted-foreground">
@@ -217,7 +276,7 @@ function ProductPage() {
 
 
 
-      <section className="mx-auto max-w-6xl px-6 py-10">
+      <section>
         <h2 className="text-xl font-medium">Documentation</h2>
 
         <div className="mt-5 divide-y divide-border overflow-hidden rounded-xl border border-border bg-card">
@@ -248,6 +307,8 @@ function ProductPage() {
           ))}
         </div>
       </section>
+        </div>
+      </div>
 
       <footer className="border-t border-border/60 py-6">
         <div className="mx-auto max-w-6xl px-6 text-xs text-muted-foreground">
@@ -255,6 +316,7 @@ function ProductPage() {
         </div>
       </footer>
     </div>
+
   );
 }
 
