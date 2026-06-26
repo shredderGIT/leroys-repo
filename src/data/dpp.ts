@@ -60,7 +60,11 @@ type RawRow = {
   Role: string;
   "Product SeriesPresentation"?: string;
   ModelPresentation?: string;
+  "Role (document)Presentation"?: string;
+  "Role (document)Org nr"?: string;
+  "Document IssuerPresentation"?: string;
 };
+
 
 const raw: RawRow[] = [
   {
