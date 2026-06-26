@@ -2,7 +2,9 @@ export type DppDocument = {
   name: string;
   document: string;
   url: string;
+  issuer?: { name: string; orgNr: string };
 };
+
 
 export type DppOrganisation = {
   name: string;
