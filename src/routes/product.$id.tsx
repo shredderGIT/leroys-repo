@@ -94,12 +94,13 @@ function ProductPage() {
           <h1 className="mt-2 text-3xl font-medium sm:text-4xl">{p.product}</h1>
           <p className="mt-3 max-w-2xl text-sm text-muted-foreground">{p.presentation}</p>
 
-          <div className="mt-6 grid gap-3 sm:grid-cols-3">
+          <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            <IdRow icon={<Hash className="h-4 w-4" />} label="DPP ID" value={p.dppId} />
             <IdRow icon={<Hash className="h-4 w-4" />} label="Passport ID" value={p.id} />
             <IdRow
               icon={<Factory className="h-4 w-4" />}
               label="Model"
-              value={p.model}
+              value={p.modelPresentation ?? p.model}
             />
             {p.artNr && (
               <IdRow icon={<Hash className="h-4 w-4" />} label="Article nr" value={p.artNr} />
@@ -159,106 +160,8 @@ function ProductPage() {
         </div>
       </section>
 
-      {p.epd && (
-        <section className="mx-auto max-w-6xl px-6 py-10">
-          <div className="flex items-baseline justify-between gap-4">
-            <h2 className="text-xl font-medium">Environmental Product Declaration</h2>
-            <span className="font-mono text-xs text-muted-foreground">{p.epd.declarationNumber}</span>
-          </div>
-          <p className="mt-2 max-w-3xl text-sm text-muted-foreground">{p.epd.description}</p>
 
-          <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            <EpdFact label="Program operator" value={p.epd.programOperator} />
-            <EpdFact label="Standards" value={p.epd.standards} />
-            <EpdFact label="PCR" value={p.epd.pcr} />
-            <EpdFact label="Declared unit" value={p.epd.declaredUnit} />
-            <EpdFact label="Modules declared" value={p.epd.modulesDeclared} />
-            <EpdFact label="Reference service life" value={p.epd.referenceServiceLife} />
-            <EpdFact label="Issued" value={p.epd.issued} />
-            <EpdFact label="Valid to" value={p.epd.validTo} />
-          </div>
 
-          <div className="mt-8 grid gap-6 lg:grid-cols-2">
-            <div className="rounded-xl border border-border bg-card p-5">
-              <h3 className="text-sm font-medium uppercase tracking-widest text-muted-foreground">
-                Material composition · {p.epd.totalWeightKg} kg total
-              </h3>
-              <div className="mt-4 space-y-2">
-                {p.epd.materials.map((m) => (
-                  <div key={m.name} className="grid grid-cols-[1fr_auto_auto] items-center gap-3 text-sm">
-                    <div className="truncate">{m.name}</div>
-                    <div className="font-mono text-xs text-muted-foreground">{m.kg.toFixed(2)} kg</div>
-                    <div className="flex items-center gap-2">
-                      <div className="h-1.5 w-24 overflow-hidden rounded-full bg-secondary">
-                        <div className="h-full bg-foreground" style={{ width: `${m.share}%` }} />
-                      </div>
-                      <span className="w-10 text-right font-mono text-xs">{m.share.toFixed(1)}%</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="space-y-6">
-              <div className="rounded-xl border border-border bg-card p-5">
-                <h3 className="text-sm font-medium uppercase tracking-widest text-muted-foreground">
-                  Certifications
-                </h3>
-                <div className="mt-3 flex flex-wrap gap-2">
-                  {p.epd.certifications.map((c) => (
-                    <span key={c} className="rounded-full border border-border px-2.5 py-1 text-xs">
-                      {c}
-                    </span>
-                  ))}
-                </div>
-                <h4 className="mt-5 text-xs font-medium uppercase tracking-widest text-muted-foreground">
-                  Technical
-                </h4>
-                <ul className="mt-2 space-y-1 text-sm text-muted-foreground">
-                  {p.epd.technicalStandards.map((s) => <li key={s}>· {s}</li>)}
-                </ul>
-                <h4 className="mt-4 text-xs font-medium uppercase tracking-widest text-muted-foreground">
-                  Fire safety
-                </h4>
-                <ul className="mt-2 space-y-1 text-sm text-muted-foreground">
-                  {p.epd.fireStandards.map((s) => <li key={s}>· {s}</li>)}
-                </ul>
-                <h4 className="mt-4 text-xs font-medium uppercase tracking-widest text-muted-foreground">
-                  Management systems
-                </h4>
-                <p className="mt-2 text-sm text-muted-foreground">
-                  {p.epd.managementSystems.join(" · ")}
-                </p>
-              </div>
-
-              <div className="rounded-xl border border-border bg-card p-5">
-                <h3 className="text-sm font-medium uppercase tracking-widest text-muted-foreground">
-                  Transport to user (A4)
-                </h3>
-                <p className="mt-2 text-sm">{p.epd.transport.vehicle}</p>
-                <div className="mt-3 grid grid-cols-3 gap-3 text-sm">
-                  <EpdFact label="Distance" value={`${p.epd.transport.distanceKm} km`} compact />
-                  <EpdFact label="Fuel" value={`${p.epd.transport.fuelLPerTkm} l/tkm`} compact />
-                  <EpdFact label="Capacity" value={p.epd.transport.capacityUtil} compact />
-                </div>
-              </div>
-
-              <div className="rounded-xl border border-border bg-card p-5 text-sm">
-                <h3 className="text-sm font-medium uppercase tracking-widest text-muted-foreground">
-                  EPD developed by
-                </h3>
-                <p className="mt-2">
-                  {p.epd.developer.author} · reviewed by {p.epd.developer.reviewer}
-                </p>
-                <p className="mt-1 text-muted-foreground">Tool: {p.epd.developer.tool}</p>
-                <p className="mt-3 text-muted-foreground">
-                  Manufactured by {p.epd.manufacturer.name} · {p.epd.manufacturer.address}
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-      )}
 
       <section className="mx-auto max-w-6xl px-6 py-10">
         <h2 className="text-xl font-medium">Documentation</h2>
@@ -314,16 +217,8 @@ function IdRow({
   );
 }
 
-function EpdFact({ label, value, compact }: { label: string; value: string; compact?: boolean }) {
-  return (
-    <div className={compact ? "" : "rounded-xl border border-border bg-card p-4"}>
-      <div className="text-[10px] font-medium uppercase tracking-widest text-muted-foreground">
-        {label}
-      </div>
-      <div className="mt-1 text-sm">{value}</div>
-    </div>
-  );
-}
+
+
 
 
 function BigMetric({
