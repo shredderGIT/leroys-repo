@@ -223,7 +223,14 @@ function ProductPage() {
               <div className="flex-1">
                 <div className="font-medium">{d.name}</div>
                 <div className="text-sm text-muted-foreground">{d.document}</div>
+                {d.issuer && (
+                  <div className="mt-1 text-xs text-muted-foreground">
+                    Issued by <span className="font-medium text-foreground">{d.issuer.name}</span>
+                    {d.issuer.orgNr && ` · ${d.issuer.orgNr}`}
+                  </div>
+                )}
               </div>
+
               <ExternalLink className="h-4 w-4 text-muted-foreground transition-colors group-hover:text-foreground" />
             </a>
           ))}
