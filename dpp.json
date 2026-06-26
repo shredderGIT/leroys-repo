@@ -1,0 +1,345 @@
+{
+  "paged": false,
+  "page": 1,
+  "pageSize": 4,
+  "totalSize": 4,
+  "totalPages": 1,
+  "objectSets": [
+    {
+      "metadata": {
+        "id": "20586171-c21d-ca62-7124-b47400d6074d",
+        "name": "KS: Digital Product Passport (export)",
+        "attributeNames": [
+          "ID",
+          "Energy Use",
+          "Footprint",
+          "Recycled Content",
+          "Product",
+          "Art nr",
+          "Model",
+          "Series",
+          "Presentation",
+          "Org nr",
+          "Business Role",
+          "Name",
+          "Document",
+          "URL Link",
+          "Organisation - Product - RoleID",
+          "Organisation",
+          "OrganisationOrg nr",
+          "Role"
+        ],
+        "columns": [
+          {
+            "id": "43f7a54a-dd23-5a06-14fc-b47400d60779",
+            "title": "ID",
+            "index": 0,
+            "dataType": "AsInstance",
+            "calculated": false,
+            "path": [
+              "Digital Product Passport",
+              "ID"
+            ]
+          },
+          {
+            "id": "cb295d29-f6e9-3d8f-1086-b47400d6128a",
+            "title": "Energy Use",
+            "index": 1,
+            "dataType": "String",
+            "calculated": false,
+            "path": [
+              "Digital Product Passport",
+              "Energy Use"
+            ]
+          },
+          {
+            "id": "49aec3d3-1e54-006e-a35e-b47400d6128a",
+            "title": "Footprint",
+            "index": 2,
+            "dataType": "Double",
+            "calculated": false,
+            "path": [
+              "Digital Product Passport",
+              "Footprint"
+            ]
+          },
+          {
+            "id": "1a8e4767-f7cf-931c-4dd6-b47400d6128e",
+            "title": "Recycled Content",
+            "index": 3,
+            "dataType": "Double",
+            "calculated": false,
+            "path": [
+              "Digital Product Passport",
+              "Recycled Content"
+            ]
+          },
+          {
+            "id": "5e9fdb60-e064-7d4a-3405-b475005dcf66",
+            "title": "Product",
+            "index": 4,
+            "dataType": "String",
+            "calculated": false,
+            "path": [
+              "Digital Product Passport",
+              "Product",
+              "Product"
+            ]
+          },
+          {
+            "id": "9c4ff815-dd27-39aa-c318-b47400d7674d",
+            "title": "Art nr",
+            "index": 5,
+            "dataType": "String",
+            "calculated": false,
+            "path": [
+              "Digital Product Passport",
+              "Product",
+              "Art nr"
+            ]
+          },
+          {
+            "id": "a3fdeb44-f62b-4bf0-b799-b47400d7674f",
+            "title": "Model",
+            "index": 6,
+            "dataType": "AsInstance",
+            "calculated": false,
+            "path": [
+              "Digital Product Passport",
+              "Product",
+              "Model"
+            ]
+          },
+          {
+            "id": "e2586cb4-15ac-ea75-6bfb-b475005e22a4",
+            "title": "Series",
+            "index": 7,
+            "dataType": "String",
+            "calculated": false,
+            "path": [
+              "Digital Product Passport",
+              "Product",
+              "Product Series - Product",
+              "Product Series",
+              "Series"
+            ]
+          },
+          {
+            "id": "8670a2ea-f550-81f5-8043-b475005f3f0b",
+            "title": "Presentation",
+            "index": 8,
+            "dataType": "String",
+            "calculated": false,
+            "path": [
+              "Digital Product Passport",
+              "Organisation - DPP - Role",
+              "Organisation (DPP)",
+              "Presentation"
+            ]
+          },
+          {
+            "id": "0cb0a026-17ae-65b8-dffd-b475005e5840",
+            "title": "Org nr",
+            "index": 9,
+            "dataType": "String",
+            "calculated": false,
+            "path": [
+              "Digital Product Passport",
+              "Organisation - DPP - Role",
+              "Organisation (DPP)",
+              "Org nr"
+            ]
+          },
+          {
+            "id": "09a750a3-4848-9c98-4277-b475005f4957",
+            "title": "Business Role",
+            "index": 10,
+            "dataType": "String",
+            "calculated": false,
+            "path": [
+              "Digital Product Passport",
+              "Organisation - DPP - Role",
+              "Business Role",
+              "Business Role"
+            ]
+          },
+          {
+            "id": "d608fb4b-6c10-13ba-da5d-b47500669396",
+            "title": "Name",
+            "index": 11,
+            "dataType": "String",
+            "calculated": false,
+            "path": [
+              "Digital Product Passport",
+              "Product",
+              "Product - Document",
+              "Document Type",
+              "Name"
+            ]
+          },
+          {
+            "id": "9130886c-6c26-3e4b-2119-b475006596ac",
+            "title": "Document",
+            "index": 12,
+            "dataType": "String",
+            "calculated": false,
+            "path": [
+              "Digital Product Passport",
+              "Product",
+              "Product - Document",
+              "Document",
+              "Document"
+            ]
+          },
+          {
+            "id": "0b94e34d-7466-e337-83a8-b475006596ac",
+            "title": "URL Link",
+            "index": 13,
+            "dataType": "External Link",
+            "calculated": false,
+            "path": [
+              "Digital Product Passport",
+              "Product",
+              "Product - Document",
+              "Document",
+              "URL Link"
+            ]
+          },
+          {
+            "id": "33cc9687-28d4-19fd-56e1-b475006921e4",
+            "title": "ID",
+            "index": 14,
+            "dataType": "AsInstance",
+            "calculated": false,
+            "path": [
+              "Digital Product Passport",
+              "Product",
+              "Organisation - Product - Role",
+              "ID"
+            ]
+          },
+          {
+            "id": "150e5b1e-254f-01b0-8831-b47500693d1c",
+            "title": "Organisation",
+            "index": 15,
+            "dataType": "String",
+            "calculated": false,
+            "path": [
+              "Digital Product Passport",
+              "Product",
+              "Organisation - Product - Role",
+              "Organisation",
+              "Organisation"
+            ]
+          },
+          {
+            "id": "60b398d1-5cb7-d360-d0a1-b47500693d1c",
+            "title": "Org nr",
+            "index": 16,
+            "dataType": "String",
+            "calculated": false,
+            "path": [
+              "Digital Product Passport",
+              "Product",
+              "Organisation - Product - Role",
+              "Organisation",
+              "Org nr"
+            ]
+          },
+          {
+            "id": "c87ff76b-af6d-b02b-d012-b47500694f30",
+            "title": "Role",
+            "index": 17,
+            "dataType": "String",
+            "calculated": false,
+            "path": [
+              "Digital Product Passport",
+              "Product",
+              "Organisation - Product - Role",
+              "Business Role (product)",
+              "Role"
+            ]
+          }
+        ]
+      },
+      "objects": [
+        {
+          "ID": "6c78323f-bb4f-0887-9a3f-b4730090314a",
+          "Energy Use": "933",
+          "Footprint": 84,
+          "Recycled Content": 83,
+          "Product": "Plus 8",
+          "Model": "15e2a21e-ac2b-060a-9a63-b4720117a5a7",
+          "Presentation": "Kinnarps AB (556256-6736)",
+          "Org nr": "556256-6736",
+          "Business Role": "Holder",
+          "Name": "Möbelfakta",
+          "Document": "0220200914",
+          "URL Link": "https://www.kinnarps.se/mediacdn/79ff6f4f-b68a-4716-a33a-53abc54cbd74/50a17ae5-0401-561f-917f-0586d65ff057/0220200914_plus8_Kinnarps_se.pdf",
+          "Organisation - Product - RoleID": "ae07eb1c-6d87-6ddc-02d3-b4730090e13a",
+          "Organisation": "Kinnarps AB (556256-6736)",
+          "OrganisationOrg nr": "556256-6736",
+          "Role": "Manufacturer"
+        },
+        {
+          "ID": "6c78323f-bb4f-0887-9a3f-b4730090314a",
+          "Energy Use": "933",
+          "Footprint": 84,
+          "Recycled Content": 83,
+          "Product": "Plus 8",
+          "Model": "15e2a21e-ac2b-060a-9a63-b4720117a5a7",
+          "Presentation": "Kinnarps AB (556256-6736)",
+          "Org nr": "556256-6736",
+          "Business Role": "Holder",
+          "Name": "Sustainability Declaration",
+          "Document": "SD Plus 8",
+          "URL Link": "https://www.kinnarps.se/mediastudio/79ff6f4f-b68a-4716-a33a-53abc54cbd74/cf000d85-50d7-5f6a-93b8-6f13fe3d73d2/Sustainability_Declaration_Kinnarps_Plus_8.pdf",
+          "Organisation - Product - RoleID": "ae07eb1c-6d87-6ddc-02d3-b4730090e13a",
+          "Organisation": "Kinnarps AB (556256-6736)",
+          "OrganisationOrg nr": "556256-6736",
+          "Role": "Manufacturer"
+        },
+        {
+          "ID": "08d5cdfd-6715-2bac-55d4-b472009a81fc",
+          "Energy Use": "1668.04",
+          "Footprint": 81.29,
+          "Recycled Content": 21.58,
+          "Product": "Plus 6",
+          "Art nr": "2BScgD7enQ",
+          "Model": "7991ba47-992b-0c02-8a45-b47100bc2c1e",
+          "Series": "Plus 6",
+          "Presentation": "Kinnarps AB (556256-6736)",
+          "Org nr": "556256-6736",
+          "Business Role": "Holder",
+          "Name": "Sustainability Declaration",
+          "Document": "SD Plus 6",
+          "URL Link": "https://www.kinnarps.se/mediacdn/79ff6f4f-b68a-4716-a33a-53abc54cbd74/43e3655e-26a2-556d-845c-1ca806c55673/Sustainability_Declaration_Kinnarps_Plus_6.pdf",
+          "Organisation - Product - RoleID": "26545bed-5bb4-fd00-8a2f-b47200bf8062",
+          "Organisation": "Kinnarps AB (556256-6736)",
+          "OrganisationOrg nr": "556256-6736",
+          "Role": "Manufacturer"
+        },
+        {
+          "ID": "08d5cdfd-6715-2bac-55d4-b472009a81fc",
+          "Energy Use": "1668.04",
+          "Footprint": 81.29,
+          "Recycled Content": 21.58,
+          "Product": "Plus 6",
+          "Art nr": "2BScgD7enQ",
+          "Model": "7991ba47-992b-0c02-8a45-b47100bc2c1e",
+          "Series": "Plus 6",
+          "Presentation": "Kinnarps AB (556256-6736)",
+          "Org nr": "556256-6736",
+          "Business Role": "Holder",
+          "Name": "Möbelfakta",
+          "Document": "0120200914",
+          "URL Link": "https://www.kinnarps.se/mediacdn/79ff6f4f-b68a-4716-a33a-53abc54cbd74/b6f02ea8-d12a-574a-834c-7c1b066e8b1e/0120200914_plus6_Kinnarps_se.pdf",
+          "Organisation - Product - RoleID": "26545bed-5bb4-fd00-8a2f-b47200bf8062",
+          "Organisation": "Kinnarps AB (556256-6736)",
+          "OrganisationOrg nr": "556256-6736",
+          "Role": "Manufacturer"
+        }
+      ]
+    }
+  ]
+}

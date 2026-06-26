@@ -1,0 +1,290 @@
+{
+  "paged": false,
+  "page": 1,
+  "pageSize": 36,
+  "totalSize": 36,
+  "totalPages": 1,
+  "objectSets": [
+    {
+      "metadata": {
+        "id": "4fc12a2e-558e-a509-9a33-b47500b03f8b",
+        "name": "KS: Product Material (export)",
+        "attributeNames": [
+          "Presentation",
+          "Model",
+          "Name",
+          "Is a kind of Association Definition 2Name"
+        ],
+        "columns": [
+          {
+            "id": "0d7ab6a8-ff5b-e33c-dbe9-b47500b051c5",
+            "title": "Presentation",
+            "index": 0,
+            "dataType": "String",
+            "calculated": false,
+            "path": [
+              "Product",
+              "Presentation"
+            ]
+          },
+          {
+            "id": "2b3c4406-d89c-749b-1fad-b47500b04e3f",
+            "title": "Model",
+            "index": 1,
+            "dataType": "AsInstance",
+            "calculated": false,
+            "path": [
+              "Product",
+              "Model"
+            ]
+          },
+          {
+            "id": "bc36aaa1-1ec3-0428-4e35-b47500b078c5",
+            "title": "Name",
+            "index": 2,
+            "dataType": "String",
+            "calculated": false,
+            "path": [
+              "Product",
+              "Product - Material Composition",
+              "Material",
+              "Name"
+            ]
+          },
+          {
+            "id": "edf38b4b-032e-dfa4-3147-b47500b0ae71",
+            "title": "Name",
+            "index": 3,
+            "dataType": "String",
+            "calculated": false,
+            "path": [
+              "Product",
+              "Product - Material Composition",
+              "Material",
+              "Is a kind of Association Definition 2",
+              "Name"
+            ]
+          }
+        ]
+      },
+      "objects": [
+        {
+          "Presentation": "Plus 6",
+          "Model": "7991ba47-992b-0c02-8a45-b47100bc2c1e",
+          "Name": "Glass",
+          "Is a kind of Association Definition 2Name": "Material"
+        },
+        {
+          "Presentation": "Plus 6",
+          "Model": "7991ba47-992b-0c02-8a45-b47100bc2c1e",
+          "Name": "Zinc",
+          "Is a kind of Association Definition 2Name": "Metal"
+        },
+        {
+          "Presentation": "Plus 6",
+          "Model": "7991ba47-992b-0c02-8a45-b47100bc2c1e",
+          "Name": "Cuttings",
+          "Is a kind of Association Definition 2Name": "Wood"
+        },
+        {
+          "Presentation": "Plus 6",
+          "Model": "7991ba47-992b-0c02-8a45-b47100bc2c1e",
+          "Name": "Synthetic Textile",
+          "Is a kind of Association Definition 2Name": "Textile"
+        },
+        {
+          "Presentation": "Plus 6",
+          "Model": "7991ba47-992b-0c02-8a45-b47100bc2c1e",
+          "Name": "Papper",
+          "Is a kind of Association Definition 2Name": "Material"
+        },
+        {
+          "Presentation": "Plus 6",
+          "Model": "7991ba47-992b-0c02-8a45-b47100bc2c1e",
+          "Name": "Oak",
+          "Is a kind of Association Definition 2Name": "Wood"
+        },
+        {
+          "Presentation": "Plus 6",
+          "Model": "7991ba47-992b-0c02-8a45-b47100bc2c1e",
+          "Name": "Wood Textile",
+          "Is a kind of Association Definition 2Name": "Textile"
+        },
+        {
+          "Presentation": "Plus 6",
+          "Model": "7991ba47-992b-0c02-8a45-b47100bc2c1e",
+          "Name": "Aluminium",
+          "Is a kind of Association Definition 2Name": "Metal"
+        },
+        {
+          "Presentation": "Plus 6",
+          "Model": "7991ba47-992b-0c02-8a45-b47100bc2c1e",
+          "Name": "MDF",
+          "Is a kind of Association Definition 2Name": "Wood"
+        },
+        {
+          "Presentation": "Plus 6",
+          "Model": "7991ba47-992b-0c02-8a45-b47100bc2c1e",
+          "Name": "Steel",
+          "Is a kind of Association Definition 2Name": "Metal"
+        },
+        {
+          "Presentation": "Plus 6",
+          "Model": "7991ba47-992b-0c02-8a45-b47100bc2c1e",
+          "Name": "Birch",
+          "Is a kind of Association Definition 2Name": "Wood"
+        },
+        {
+          "Presentation": "Plus 6",
+          "Model": "7991ba47-992b-0c02-8a45-b47100bc2c1e",
+          "Name": "Fiberglass",
+          "Is a kind of Association Definition 2Name": "Plastic"
+        },
+        {
+          "Presentation": "Plus 8",
+          "Model": "15e2a21e-ac2b-060a-9a63-b4720117a5a7",
+          "Name": "Wood Textile",
+          "Is a kind of Association Definition 2Name": "Textile"
+        },
+        {
+          "Presentation": "Plus 8",
+          "Model": "15e2a21e-ac2b-060a-9a63-b4720117a5a7",
+          "Name": "Zinc",
+          "Is a kind of Association Definition 2Name": "Metal"
+        },
+        {
+          "Presentation": "Plus 8",
+          "Model": "15e2a21e-ac2b-060a-9a63-b4720117a5a7",
+          "Name": "MDF",
+          "Is a kind of Association Definition 2Name": "Wood"
+        },
+        {
+          "Presentation": "Plus 8",
+          "Model": "15e2a21e-ac2b-060a-9a63-b4720117a5a7",
+          "Name": "Glass",
+          "Is a kind of Association Definition 2Name": "Material"
+        },
+        {
+          "Presentation": "Plus 8",
+          "Model": "15e2a21e-ac2b-060a-9a63-b4720117a5a7",
+          "Name": "Papper",
+          "Is a kind of Association Definition 2Name": "Material"
+        },
+        {
+          "Presentation": "Plus 8",
+          "Model": "15e2a21e-ac2b-060a-9a63-b4720117a5a7",
+          "Name": "Birch",
+          "Is a kind of Association Definition 2Name": "Wood"
+        },
+        {
+          "Presentation": "Plus 8",
+          "Model": "15e2a21e-ac2b-060a-9a63-b4720117a5a7",
+          "Name": "Aluminium",
+          "Is a kind of Association Definition 2Name": "Metal"
+        },
+        {
+          "Presentation": "Plus 8",
+          "Model": "15e2a21e-ac2b-060a-9a63-b4720117a5a7",
+          "Name": "Fiberglass",
+          "Is a kind of Association Definition 2Name": "Plastic"
+        },
+        {
+          "Presentation": "Plus 8",
+          "Model": "15e2a21e-ac2b-060a-9a63-b4720117a5a7",
+          "Name": "Cuttings",
+          "Is a kind of Association Definition 2Name": "Wood"
+        },
+        {
+          "Presentation": "Plus 8",
+          "Model": "15e2a21e-ac2b-060a-9a63-b4720117a5a7",
+          "Name": "Steel",
+          "Is a kind of Association Definition 2Name": "Metal"
+        },
+        {
+          "Presentation": "Plus 8",
+          "Model": "15e2a21e-ac2b-060a-9a63-b4720117a5a7",
+          "Name": "Synthetic Textile",
+          "Is a kind of Association Definition 2Name": "Textile"
+        },
+        {
+          "Presentation": "Plus 8",
+          "Model": "15e2a21e-ac2b-060a-9a63-b4720117a5a7",
+          "Name": "Oak",
+          "Is a kind of Association Definition 2Name": "Wood"
+        },
+        {
+          "Presentation": "Capella X",
+          "Model": "a73d4f70-e400-917a-c5ff-b475008edee1",
+          "Name": "Glass",
+          "Is a kind of Association Definition 2Name": "Material"
+        },
+        {
+          "Presentation": "Capella X",
+          "Model": "a73d4f70-e400-917a-c5ff-b475008edee1",
+          "Name": "Aluminium",
+          "Is a kind of Association Definition 2Name": "Metal"
+        },
+        {
+          "Presentation": "Capella X",
+          "Model": "a73d4f70-e400-917a-c5ff-b475008edee1",
+          "Name": "Steel",
+          "Is a kind of Association Definition 2Name": "Metal"
+        },
+        {
+          "Presentation": "Capella X",
+          "Model": "a73d4f70-e400-917a-c5ff-b475008edee1",
+          "Name": "Birch",
+          "Is a kind of Association Definition 2Name": "Wood"
+        },
+        {
+          "Presentation": "Capella X",
+          "Model": "a73d4f70-e400-917a-c5ff-b475008edee1",
+          "Name": "Synthetic Textile",
+          "Is a kind of Association Definition 2Name": "Textile"
+        },
+        {
+          "Presentation": "Capella X",
+          "Model": "a73d4f70-e400-917a-c5ff-b475008edee1",
+          "Name": "MDF",
+          "Is a kind of Association Definition 2Name": "Wood"
+        },
+        {
+          "Presentation": "Capella X",
+          "Model": "a73d4f70-e400-917a-c5ff-b475008edee1",
+          "Name": "Cuttings",
+          "Is a kind of Association Definition 2Name": "Wood"
+        },
+        {
+          "Presentation": "Capella X",
+          "Model": "a73d4f70-e400-917a-c5ff-b475008edee1",
+          "Name": "Wood Textile",
+          "Is a kind of Association Definition 2Name": "Textile"
+        },
+        {
+          "Presentation": "Capella X",
+          "Model": "a73d4f70-e400-917a-c5ff-b475008edee1",
+          "Name": "Oak",
+          "Is a kind of Association Definition 2Name": "Wood"
+        },
+        {
+          "Presentation": "Capella X",
+          "Model": "a73d4f70-e400-917a-c5ff-b475008edee1",
+          "Name": "Papper",
+          "Is a kind of Association Definition 2Name": "Material"
+        },
+        {
+          "Presentation": "Capella X",
+          "Model": "a73d4f70-e400-917a-c5ff-b475008edee1",
+          "Name": "Zinc",
+          "Is a kind of Association Definition 2Name": "Metal"
+        },
+        {
+          "Presentation": "Capella X",
+          "Model": "a73d4f70-e400-917a-c5ff-b475008edee1",
+          "Name": "Fiberglass",
+          "Is a kind of Association Definition 2Name": "Plastic"
+        }
+      ]
+    }
+  ]
+}
