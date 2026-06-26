@@ -215,21 +215,51 @@ const raw: RawRow[] = [
     "Product SeriesPresentation": "Capella X",
     ModelPresentation: "Capella ESD",
   },
+  {
+    "DPP ID": "DPP-00002",
+    "Energy Use": "1668.04",
+    "Carbon Footprint": 81.29,
+    "Recycled Content": 21.58,
+    Product: "Plus 6",
+    Model: "7991ba47-992b-0c02-8a45-b47100bc2c1e",
+    Presentation: "Kinnarps AB (556256-6736)",
+    "Org nr": "556256-6736",
+    "Business Role": "Holder",
+    Name: "Certification",
+    Document: "NEPD-3609-2539-EN",
+    "URL Link":
+      "https://www.kinnarps.se/mediastudio/79ff6f4f-b68a-4716-a33a-53abc54cbd74/097f8361-a00c-58b3-ace5-470a30652bde/NEPD-3609-2539_Task_Chair_Plus_%5B6%5D_%5B8%5D.pdf",
+    ID: "26545bed-5bb4-fd00-8a2f-b47200bf8062",
+    Organisation: "Kinnarps AB (556256-6736)",
+    "OrganisationOrg nr": "556256-6736",
+    Role: "Manufacturer",
+    "Product SeriesPresentation": "Plus 6",
+    ModelPresentation: "6770",
+    "Role (document)Presentation": "epd-global (556256-6736)",
+    "Role (document)Org nr": "556256-6736",
+    "Document IssuerPresentation": "Issuer",
+  },
 ];
 
 const map = new Map<string, DigitalProductPassport>();
 for (const row of raw) {
   const existing = map.get(row.ID);
+  const issuerName = row["Role (document)Presentation"]?.replace(/\s*\([^)]+\)\s*$/, "");
   const doc: DppDocument = {
     name: row.Name,
     document: row.Document,
     url: row["URL Link"],
+    issuer:
+      issuerName && row["Document IssuerPresentation"] === "Issuer"
+        ? { name: issuerName, orgNr: row["Role (document)Org nr"] ?? "" }
+        : undefined,
   };
   const org: DppOrganisation = {
     name: row.Organisation.replace(/\s*\([^)]+\)\s*$/, ""),
     orgNr: row["OrganisationOrg nr"],
     role: row.Role,
   };
+
   if (existing) {
     if (!existing.documents.some((d) => d.url === doc.url)) existing.documents.push(doc);
     if (!existing.organisations.some((o) => o.orgNr === org.orgNr && o.role === org.role))
