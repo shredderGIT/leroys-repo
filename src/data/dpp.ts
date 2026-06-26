@@ -10,7 +10,14 @@ export type DppOrganisation = {
   name: string;
   orgNr: string;
   role: string;
+  url?: string;
 };
+
+const orgUrls: Record<string, string> = {
+  "Kinnarps AB": "https://www.kinnarps.com",
+  "epd-global": "https://www.epd-norge.no",
+};
+
 
 export type DppMaterial = {
   name: string;
