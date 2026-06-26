@@ -195,7 +195,7 @@ function ProductPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-6 py-4">
+      <section>
         <h2 className="text-xl font-medium">Organisations</h2>
         <div className="mt-5 grid gap-4 sm:grid-cols-2">
           {p.organisations.map((o, i) => (
