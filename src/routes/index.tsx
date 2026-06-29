@@ -82,7 +82,7 @@ function Index() {
 
         <div className="mt-6 grid gap-6 sm:grid-cols-2">
           {passports.map((p) => {
-            const variant = p.product.includes("8") ? "plus8" : "plus6";
+            const img = productImage[p.product];
             return (
               <Link
                 key={p.id}
@@ -90,7 +90,7 @@ function Index() {
                 params={{ id: p.id }}
                 className="group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all hover:-translate-y-0.5 hover:border-foreground hover:shadow-[0_18px_40px_-20px_rgba(0,0,0,0.35)]"
               >
-                {/* Sketch panel */}
+                {/* Image panel */}
                 <div className="relative h-56 overflow-hidden border-b border-border bg-[radial-gradient(circle_at_30%_20%,#fafafa,transparent_60%),repeating-linear-gradient(45deg,transparent_0_10px,rgba(0,0,0,0.025)_10px_11px)]">
                   <div className="absolute right-4 top-4 z-10 flex items-center gap-2">
                     <span className="h-1.5 w-1.5 rounded-full bg-primary" />
@@ -106,16 +106,19 @@ function Index() {
                       ID · {p.id.slice(0, 8).toUpperCase()}
                     </div>
                   </div>
-                  <ChairSketch
-                    variant={variant}
-                    className="absolute left-1/2 top-1/2 h-[230px] w-[230px] -translate-x-1/2 -translate-y-1/2 text-foreground/85 transition-transform duration-500 group-hover:scale-105"
-                  />
-                  {/* corner crop marks */}
+                  {img && (
+                    <img
+                      src={img}
+                      alt={`${p.product} task chair`}
+                      className="absolute left-1/2 top-1/2 h-[210px] w-[210px] -translate-x-1/2 -translate-y-1/2 object-contain transition-transform duration-500 group-hover:scale-105"
+                    />
+                  )}
                   <CropMark className="left-2 top-2" />
                   <CropMark className="right-2 top-2 rotate-90" />
                   <CropMark className="bottom-2 left-2 -rotate-90" />
                   <CropMark className="bottom-2 right-2 rotate-180" />
                 </div>
+
 
                 <div className="flex flex-1 flex-col p-5">
                   <div className="flex items-baseline justify-between gap-3">
