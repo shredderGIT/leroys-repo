@@ -317,29 +317,47 @@ function ProductPage() {
 
         <div className="mt-5 divide-y divide-border overflow-hidden rounded-xl border border-border bg-card">
           {p.documents.map((d) => (
-            <a
-              key={d.url}
-              href={d.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex items-center gap-4 p-5 transition-colors hover:bg-muted/60"
-            >
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                <FileText className="h-5 w-5" />
-              </div>
-              <div className="flex-1">
-                <div className="font-medium">{d.name}</div>
-                <div className="text-sm text-muted-foreground">{d.document}</div>
-                {d.issuer && (
-                  <div className="mt-1 text-xs text-muted-foreground">
-                    Issued by <span className="font-medium text-foreground">{d.issuer.name}</span>
-                    {d.issuer.orgNr && ` · ${d.issuer.orgNr}`}
-                  </div>
-                )}
-              </div>
+            <div key={d.url} className="p-5">
+              <a
+                href={d.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center gap-4"
+              >
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                  <FileText className="h-5 w-5" />
+                </div>
+                <div className="flex-1">
+                  <div className="font-medium">{d.name}</div>
+                  <div className="text-sm text-muted-foreground">{d.document}</div>
+                  {d.issuer && (
+                    <div className="mt-1 text-xs text-muted-foreground">
+                      Issued by <span className="font-medium text-foreground">{d.issuer.name}</span>
+                      {d.issuer.orgNr && ` · ${d.issuer.orgNr}`}
+                    </div>
+                  )}
+                </div>
+                <ExternalLink className="h-4 w-4 text-muted-foreground transition-colors group-hover:text-foreground" />
+              </a>
 
-              <ExternalLink className="h-4 w-4 text-muted-foreground transition-colors group-hover:text-foreground" />
-            </a>
+              {d.epdInfo && (
+                <div className="mt-4 grid gap-3 rounded-lg bg-muted/40 p-4 text-xs sm:grid-cols-2">
+                  <EpdField label="Declaration" value={d.epdInfo.declarationNumber} />
+                  <EpdField label="Product" value={d.epdInfo.product} />
+                  <EpdField label="Issue date" value={d.epdInfo.issueDate} />
+                  <EpdField label="Valid to" value={d.epdInfo.validTo} />
+                  <EpdField label="Programme operator" value={d.epdInfo.programmeOperator} />
+                  <EpdField label="Standard" value={d.epdInfo.standard} />
+                  <EpdField label="Owner contact" value={d.epdInfo.ownerContact.person} />
+                  <EpdField
+                    label="Contact"
+                    value={`${d.epdInfo.ownerContact.phone} · ${d.epdInfo.ownerContact.email}`}
+                  />
+                  <EpdField label="Third-party verifier" value={d.epdInfo.verifier} />
+                  <EpdField label="Approval" value={d.epdInfo.approvalStatus} />
+                </div>
+              )}
+            </div>
           ))}
         </div>
       </section>
@@ -375,6 +393,15 @@ function IdRow({
     </div>
   );
 }
+function EpdField({ label, value }: { label: string; value: string }) {
+  return (
+    <div>
+      <div className="text-[10px] uppercase tracking-widest text-muted-foreground">{label}</div>
+      <div className="mt-0.5 text-foreground">{value}</div>
+    </div>
+  );
+}
+
 
 
 

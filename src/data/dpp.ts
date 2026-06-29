@@ -1,8 +1,21 @@
+export type DppEpdInfo = {
+  declarationNumber: string;
+  product: string;
+  issueDate: string;
+  validTo: string;
+  programmeOperator: string;
+  ownerContact: { person: string; phone: string; email: string };
+  verifier: string;
+  approvalStatus: string;
+  standard: string;
+};
+
 export type DppDocument = {
   name: string;
   document: string;
   url: string;
   issuer?: { name: string; orgNr: string };
+  epdInfo?: DppEpdInfo;
 };
 
 
@@ -420,6 +433,40 @@ const recyclability: Record<string, DppRecyclability> = {
   "Capella X": { materialRecyclingPercent: 90, energyRecoveryPercent: 10, totalPercent: 100, source: "SD Capella X" },
 };
 
+// EPD document metadata extracted via the epdDocInfo skill from the source PDFs
+const epdInfoByDocNumber: Record<string, DppEpdInfo> = {
+  "NEPD-3609-2539-EN": {
+    declarationNumber: "NEPD-3609-2539-EN",
+    product: "Task Chair Plus[6]/[8]",
+    issueDate: "30.06.2022",
+    validTo: "30.06.2027",
+    programmeOperator: "The Norwegian EPD Foundation",
+    ownerContact: {
+      person: "Johanna Ljunggren — Corporate Sustainability Manager",
+      phone: "+46 515 381 21",
+      email: "johanna.ljunggren@kinnarps.se",
+    },
+    verifier: "Erik Svanes, Norsus AS",
+    approvalStatus: "Approved (typed approval block, no signature required)",
+    standard: "ISO 14025, ISO 21930, EN 15804",
+  },
+  "NEPD-9216-8804": {
+    declarationNumber: "NEPD-9216-8804",
+    product: "Capella X Task Chair",
+    issueDate: "03.03.2025",
+    validTo: "03.03.2030",
+    programmeOperator: "The Norwegian EPD Foundation",
+    ownerContact: {
+      person: "Johanna Ljunggren — Corporate Sustainability Manager",
+      phone: "+46 515 381 21",
+      email: "johanna.ljunggren@kinnarps.se",
+    },
+    verifier: "Elisabet Amat, GREENIZE projects",
+    approvalStatus: "Approved (typed approval block, no signature required)",
+    standard: "ISO 14025, EN 15804+A2",
+  },
+};
+
 for (const p of map.values()) {
   const reg = allowedMaterials[p.product] ?? [];
   const allow = new Set(reg.map((m) => m.name));
@@ -434,6 +481,11 @@ for (const p of map.values()) {
   p.classification = Array.from(byCat.entries())
     .map(([category, materials]) => ({ category, materials: materials.sort() }))
     .sort((a, b) => a.category.localeCompare(b.category));
+
+  for (const d of p.documents) {
+    const info = epdInfoByDocNumber[d.document];
+    if (info) d.epdInfo = info;
+  }
 }
 
 
