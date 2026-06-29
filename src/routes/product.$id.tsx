@@ -105,26 +105,64 @@ function ProductPage() {
 
       <section className="border-b border-border/60 bg-secondary">
         <div className="mx-auto max-w-6xl px-6 py-12">
-          <p className="text-xs font-medium uppercase tracking-widest text-primary">
-            {p.series ?? "Digital Product Passport"}
-          </p>
-          <h1 className="mt-2 text-3xl font-medium sm:text-4xl">{p.product}</h1>
-          <p className="mt-3 max-w-2xl text-sm text-muted-foreground">{p.presentation}</p>
+          <div className="grid items-start gap-8 sm:grid-cols-[1fr_220px]">
+            <div>
+              <p className="text-xs font-medium uppercase tracking-widest text-primary">
+                {p.series ?? "Digital Product Passport"}
+              </p>
+              <h1 className="mt-2 text-3xl font-medium sm:text-4xl">{p.product}</h1>
+              <p className="mt-3 max-w-2xl text-sm text-muted-foreground">{p.presentation}</p>
 
-          <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            <IdRow icon={<Hash className="h-4 w-4" />} label="DPP ID" value={p.dppId} />
-            <IdRow icon={<Hash className="h-4 w-4" />} label="Passport ID" value={p.id} />
-            <IdRow
-              icon={<Factory className="h-4 w-4" />}
-              label="Model"
-              value={p.modelPresentation ?? p.model}
-            />
-            {p.artNr && (
-              <IdRow icon={<Hash className="h-4 w-4" />} label="Article nr" value={p.artNr} />
+              <dl className="mt-6 grid gap-x-6 gap-y-3 text-sm sm:grid-cols-2">
+                <MetaRow
+                  icon={<Factory className="h-3.5 w-3.5" />}
+                  label="Product Model"
+                  value={p.modelPresentation ?? "—"}
+                />
+                <MetaRow
+                  icon={<Hash className="h-3.5 w-3.5" />}
+                  label="DPP ID"
+                  value={p.dppId}
+                />
+                <MetaRow
+                  icon={<Hash className="h-3.5 w-3.5" />}
+                  label="Model"
+                  value={p.model}
+                  mono
+                />
+                <MetaRow
+                  icon={<Layers className="h-3.5 w-3.5" />}
+                  label="Series"
+                  value={p.series ?? "—"}
+                />
+                <MetaRow
+                  icon={<Hash className="h-3.5 w-3.5" />}
+                  label="Passport ID"
+                  value={p.id}
+                  mono
+                />
+                {p.artNr && (
+                  <MetaRow
+                    icon={<Hash className="h-3.5 w-3.5" />}
+                    label="Article nr"
+                    value={p.artNr}
+                  />
+                )}
+              </dl>
+            </div>
+            {productImage[p.product] && (
+              <div className="relative flex h-[220px] items-center justify-center overflow-hidden rounded-2xl border border-border bg-card">
+                <img
+                  src={productImage[p.product]}
+                  alt={`${p.product} task chair`}
+                  className="h-[190px] w-[190px] object-contain"
+                />
+              </div>
             )}
           </div>
         </div>
       </section>
+
 
       <div className="mx-auto grid max-w-6xl gap-8 px-6 py-10 lg:grid-cols-[260px_1fr]">
         <aside className="lg:sticky lg:top-6 lg:self-start">
