@@ -290,45 +290,18 @@ function ProductPage() {
 
       {p.materials.length > 0 && (
         <section>
-
           <div className="flex items-baseline justify-between gap-4">
             <h2 className="text-xl font-medium">Material composition</h2>
-            <p className="text-xs text-muted-foreground">
-              Filtered to materials declared in the product material registry
-            </p>
+            <p className="text-xs text-muted-foreground">Grouped by source document</p>
           </div>
-          <div className="mt-5 overflow-hidden rounded-xl border border-border bg-card">
-            <table className="w-full text-sm">
-              <thead className="bg-muted/50 text-xs uppercase tracking-wider text-muted-foreground">
-                <tr>
-                  <th className="px-4 py-3 text-left font-medium">Material</th>
-                  <th className="px-4 py-3 text-left font-medium">Category</th>
-                  <th className="px-4 py-3 text-right font-medium">kg</th>
-                  <th className="px-4 py-3 text-right font-medium">%</th>
-                  <th className="px-4 py-3 text-right font-medium">Recycled</th>
-                  <th className="px-4 py-3 text-left font-medium">Source</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-border">
-                {p.materials.map((m, i) => (
-                  <tr key={`${m.name}-${m.source}-${i}`}>
-                    <td className="px-4 py-3 font-medium">{m.name}</td>
-                    <td className="px-4 py-3 text-muted-foreground">{m.category}</td>
-                    <td className="px-4 py-3 text-right font-mono">{m.kg?.toFixed(2) ?? "—"}</td>
-                    <td className="px-4 py-3 text-right font-mono">
-                      {m.percent !== undefined ? `${m.percent.toFixed(2)}%` : "—"}
-                    </td>
-                    <td className="px-4 py-3 text-right font-mono">
-                      {m.recycledPercent !== undefined ? `${m.recycledPercent.toFixed(2)}%` : "—"}
-                    </td>
-                    <td className="px-4 py-3 text-xs text-muted-foreground">{m.source ?? "—"}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <div className="mt-5 space-y-6">
+            {groupBySource(p.materials).map(({ source, items, isEpd }) => (
+              <MaterialTable key={source} source={source} items={items} isEpd={isEpd} />
+            ))}
           </div>
         </section>
       )}
+
 
       {p.recyclability && (
         <section>
