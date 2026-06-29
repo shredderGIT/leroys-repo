@@ -1,5 +1,11 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { getPassport, passports, type DigitalProductPassport } from "@/data/dpp";
+import {
+  getPassport,
+  passports,
+  registryNameMap,
+  type DigitalProductPassport,
+  type DppMaterial,
+} from "@/data/dpp";
 import {
   ArrowLeft,
   Leaf,
@@ -12,6 +18,15 @@ import {
   Factory,
   Layers,
 } from "lucide-react";
+import plus6Img from "@/assets/plus-6.png";
+import plus8Img from "@/assets/plus-8.png";
+import capellaImg from "@/assets/capella-esd.png";
+
+const productImage: Record<string, string> = {
+  "Plus 6": plus6Img,
+  "Plus 8": plus8Img,
+  "Capella X": capellaImg,
+};
 
 
 export const Route = createFileRoute("/product/$id")({
@@ -90,26 +105,64 @@ function ProductPage() {
 
       <section className="border-b border-border/60 bg-secondary">
         <div className="mx-auto max-w-6xl px-6 py-12">
-          <p className="text-xs font-medium uppercase tracking-widest text-primary">
-            {p.series ?? "Digital Product Passport"}
-          </p>
-          <h1 className="mt-2 text-3xl font-medium sm:text-4xl">{p.product}</h1>
-          <p className="mt-3 max-w-2xl text-sm text-muted-foreground">{p.presentation}</p>
+          <div className="grid items-start gap-8 sm:grid-cols-[1fr_220px]">
+            <div>
+              <p className="text-xs font-medium uppercase tracking-widest text-primary">
+                {p.series ?? "Digital Product Passport"}
+              </p>
+              <h1 className="mt-2 text-3xl font-medium sm:text-4xl">{p.product}</h1>
+              <p className="mt-3 max-w-2xl text-sm text-muted-foreground">{p.presentation}</p>
 
-          <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            <IdRow icon={<Hash className="h-4 w-4" />} label="DPP ID" value={p.dppId} />
-            <IdRow icon={<Hash className="h-4 w-4" />} label="Passport ID" value={p.id} />
-            <IdRow
-              icon={<Factory className="h-4 w-4" />}
-              label="Model"
-              value={p.modelPresentation ?? p.model}
-            />
-            {p.artNr && (
-              <IdRow icon={<Hash className="h-4 w-4" />} label="Article nr" value={p.artNr} />
+              <dl className="mt-6 grid gap-x-6 gap-y-3 text-sm sm:grid-cols-2">
+                <MetaRow
+                  icon={<Factory className="h-3.5 w-3.5" />}
+                  label="Product Model"
+                  value={p.modelPresentation ?? "—"}
+                />
+                <MetaRow
+                  icon={<Hash className="h-3.5 w-3.5" />}
+                  label="DPP ID"
+                  value={p.dppId}
+                />
+                <MetaRow
+                  icon={<Hash className="h-3.5 w-3.5" />}
+                  label="Model"
+                  value={p.model}
+                  mono
+                />
+                <MetaRow
+                  icon={<Layers className="h-3.5 w-3.5" />}
+                  label="Series"
+                  value={p.series ?? "—"}
+                />
+                <MetaRow
+                  icon={<Hash className="h-3.5 w-3.5" />}
+                  label="Passport ID"
+                  value={p.id}
+                  mono
+                />
+                {p.artNr && (
+                  <MetaRow
+                    icon={<Hash className="h-3.5 w-3.5" />}
+                    label="Article nr"
+                    value={p.artNr}
+                  />
+                )}
+              </dl>
+            </div>
+            {productImage[p.product] && (
+              <div className="relative flex h-[220px] items-center justify-center overflow-hidden rounded-2xl border border-border bg-card">
+                <img
+                  src={productImage[p.product]}
+                  alt={`${p.product} task chair`}
+                  className="h-[190px] w-[190px] object-contain"
+                />
+              </div>
             )}
           </div>
         </div>
       </section>
+
 
       <div className="mx-auto grid max-w-6xl gap-8 px-6 py-10 lg:grid-cols-[260px_1fr]">
         <aside className="lg:sticky lg:top-6 lg:self-start">
@@ -126,7 +179,11 @@ function ProductPage() {
             ) : (
               <ul className="mt-4 space-y-4">
                 {p.classification.map((c) => {
-                  const declared = new Set(p.materials.map((m) => m.name));
+                  const declared = new Set(
+                    p.materials
+                      .map((m) => registryNameMap[m.name])
+                      .filter((n): n is string => Boolean(n)),
+                  );
                   return (
                     <li key={c.category}>
                       <div className="flex items-baseline justify-between">
@@ -161,6 +218,7 @@ function ProductPage() {
                   );
                 })}
               </ul>
+
             )}
           </div>
         </aside>
@@ -232,45 +290,18 @@ function ProductPage() {
 
       {p.materials.length > 0 && (
         <section>
-
           <div className="flex items-baseline justify-between gap-4">
             <h2 className="text-xl font-medium">Material composition</h2>
-            <p className="text-xs text-muted-foreground">
-              Filtered to materials declared in the product material registry
-            </p>
+            <p className="text-xs text-muted-foreground">Grouped by source document</p>
           </div>
-          <div className="mt-5 overflow-hidden rounded-xl border border-border bg-card">
-            <table className="w-full text-sm">
-              <thead className="bg-muted/50 text-xs uppercase tracking-wider text-muted-foreground">
-                <tr>
-                  <th className="px-4 py-3 text-left font-medium">Material</th>
-                  <th className="px-4 py-3 text-left font-medium">Category</th>
-                  <th className="px-4 py-3 text-right font-medium">kg</th>
-                  <th className="px-4 py-3 text-right font-medium">%</th>
-                  <th className="px-4 py-3 text-right font-medium">Recycled</th>
-                  <th className="px-4 py-3 text-left font-medium">Source</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-border">
-                {p.materials.map((m, i) => (
-                  <tr key={`${m.name}-${m.source}-${i}`}>
-                    <td className="px-4 py-3 font-medium">{m.name}</td>
-                    <td className="px-4 py-3 text-muted-foreground">{m.category}</td>
-                    <td className="px-4 py-3 text-right font-mono">{m.kg?.toFixed(2) ?? "—"}</td>
-                    <td className="px-4 py-3 text-right font-mono">
-                      {m.percent !== undefined ? `${m.percent.toFixed(2)}%` : "—"}
-                    </td>
-                    <td className="px-4 py-3 text-right font-mono">
-                      {m.recycledPercent !== undefined ? `${m.recycledPercent.toFixed(2)}%` : "—"}
-                    </td>
-                    <td className="px-4 py-3 text-xs text-muted-foreground">{m.source ?? "—"}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <div className="mt-5 space-y-6">
+            {groupBySource(p.materials).map(({ source, items, isEpd }) => (
+              <MaterialTable key={source} source={source} items={items} isEpd={isEpd} />
+            ))}
           </div>
         </section>
       )}
+
 
       {p.recyclability && (
         <section>
@@ -374,25 +405,107 @@ function ProductPage() {
   );
 }
 
-function IdRow({
+function MetaRow({
   icon,
   label,
   value,
+  mono,
 }: {
   icon: React.ReactNode;
   label: string;
   value: string;
+  mono?: boolean;
 }) {
   return (
-    <div className="rounded-xl border border-border bg-card/60 p-4">
-      <div className="flex items-center gap-1.5 text-xs uppercase tracking-widest text-muted-foreground">
+    <div className="border-b border-dashed border-border/70 pb-2">
+      <dt className="flex items-center gap-1.5 text-[10px] uppercase tracking-widest text-muted-foreground">
         {icon}
         {label}
-      </div>
-      <div className="mt-1 truncate font-mono text-xs">{value}</div>
+      </dt>
+      <dd className={`mt-0.5 truncate text-sm text-foreground ${mono ? "font-mono text-xs" : ""}`}>
+        {value}
+      </dd>
     </div>
   );
 }
+
+function groupBySource(
+  materials: DppMaterial[],
+): { source: string; items: DppMaterial[]; isEpd: boolean }[] {
+  const groups = new Map<string, DppMaterial[]>();
+  for (const m of materials) {
+    const key = m.source ?? "Unknown";
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key)!.push(m);
+  }
+  const arr = Array.from(groups.entries()).map(([source, items]) => ({
+    source,
+    items,
+    isEpd: /^NEPD/i.test(source),
+  }));
+  // EPD (NEPD) tables first, then the rest alphabetically
+  return arr.sort((a, b) => {
+    if (a.isEpd !== b.isEpd) return a.isEpd ? -1 : 1;
+    return a.source.localeCompare(b.source);
+  });
+}
+
+function MaterialTable({
+  source,
+  items,
+  isEpd,
+}: {
+  source: string;
+  items: DppMaterial[];
+  isEpd: boolean;
+}) {
+  return (
+    <div className="overflow-hidden rounded-xl border border-border bg-card">
+      <div className="flex items-center justify-between border-b border-border bg-muted/40 px-4 py-3">
+        <div className="flex items-center gap-2">
+          <FileText className="h-4 w-4 text-muted-foreground" />
+          <span className="text-sm font-medium">{source}</span>
+        </div>
+        <span
+          className={`rounded-full px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider ${
+            isEpd
+              ? "bg-primary text-primary-foreground"
+              : "bg-secondary text-secondary-foreground"
+          }`}
+        >
+          {isEpd ? "Environmental Product Declaration" : "Sustainability Declaration"}
+        </span>
+      </div>
+      <table className="w-full text-sm">
+        <thead className="bg-muted/20 text-xs uppercase tracking-wider text-muted-foreground">
+          <tr>
+            <th className="px-4 py-2.5 text-left font-medium">Material</th>
+            <th className="px-4 py-2.5 text-left font-medium">Category</th>
+            <th className="px-4 py-2.5 text-right font-medium">kg</th>
+            <th className="px-4 py-2.5 text-right font-medium">%</th>
+            <th className="px-4 py-2.5 text-right font-medium">Recycled</th>
+          </tr>
+        </thead>
+        <tbody className="divide-y divide-border">
+          {items.map((m, i) => (
+            <tr key={`${m.name}-${i}`}>
+              <td className="px-4 py-2.5 font-medium">{m.name}</td>
+              <td className="px-4 py-2.5 text-muted-foreground">{m.category}</td>
+              <td className="px-4 py-2.5 text-right font-mono">{m.kg?.toFixed(2) ?? "—"}</td>
+              <td className="px-4 py-2.5 text-right font-mono">
+                {m.percent !== undefined ? `${m.percent.toFixed(2)}%` : "—"}
+              </td>
+              <td className="px-4 py-2.5 text-right font-mono">
+                {m.recycledPercent !== undefined ? `${m.recycledPercent.toFixed(2)}%` : "—"}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
 function EpdField({ label, value }: { label: string; value: string }) {
   return (
     <div>
