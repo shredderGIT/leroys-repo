@@ -17,7 +17,9 @@ import {
   Hash,
   Factory,
   Layers,
+  ChevronDown,
 } from "lucide-react";
+import { useState } from "react";
 import plus6Img from "@/assets/plus-6.png";
 import plus8Img from "@/assets/plus-8.png";
 import capellaImg from "@/assets/capella-esd.png";
