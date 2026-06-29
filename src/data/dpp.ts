@@ -1,8 +1,21 @@
+export type DppEpdInfo = {
+  declarationNumber: string;
+  product: string;
+  issueDate: string;
+  validTo: string;
+  programmeOperator: string;
+  ownerContact: { person: string; phone: string; email: string };
+  verifier: string;
+  approvalStatus: string;
+  standard: string;
+};
+
 export type DppDocument = {
   name: string;
   document: string;
   url: string;
   issuer?: { name: string; orgNr: string };
+  epdInfo?: DppEpdInfo;
 };
 
 
