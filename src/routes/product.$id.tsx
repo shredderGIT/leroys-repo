@@ -484,6 +484,98 @@ function EpdField({ label, value }: { label: string; value: string }) {
   );
 }
 
+function docCategory(d: DppDocument): "epd" | "sd" | "cert" {
+  if (/environmental product declaration/i.test(d.name) || /^NEPD/i.test(d.document)) return "epd";
+  if (/sustainability declaration/i.test(d.name)) return "sd";
+  return "cert";
+}
+
+function sortDocuments(docs: DppDocument[]): DppDocument[] {
+  const order: Record<string, number> = { epd: 0, sd: 1, cert: 2 };
+  return [...docs].sort((a, b) => order[docCategory(a)] - order[docCategory(b)]);
+}
+
+function DocumentRow({ doc: d }: { doc: DppDocument }) {
+  const [open, setOpen] = useState(false);
+  const category = docCategory(d);
+  const hasDetails = Boolean(d.epdInfo || d.issuer);
+  const isCert = category === "cert";
+
+  return (
+    <div className="p-5">
+      <div className="flex items-center gap-4">
+        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+          <FileText className="h-5 w-5" />
+        </div>
+        <div className="flex-1 min-w-0">
+          <div className="flex flex-wrap items-baseline gap-x-2">
+            <span className="font-medium">{d.name}</span>
+            {isCert && (
+              <span className="rounded-full bg-accent/30 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider text-accent-foreground">
+                Certification
+              </span>
+            )}
+          </div>
+          <div className="text-sm text-muted-foreground">
+            {isCert ? `Certificate ID · ${d.document}` : d.document}
+          </div>
+        </div>
+        <a
+          href={d.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-muted-foreground transition-colors hover:text-foreground"
+          aria-label="Open document"
+        >
+          <ExternalLink className="h-4 w-4" />
+        </a>
+        {hasDetails && (
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            aria-expanded={open}
+            aria-label={open ? "Hide details" : "Show details"}
+            className="flex h-8 w-8 items-center justify-center rounded-md border border-border text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+          >
+            <ChevronDown
+              className={`h-4 w-4 transition-transform ${open ? "rotate-180" : ""}`}
+            />
+          </button>
+        )}
+      </div>
+
+      {hasDetails && open && (
+        <div className="mt-4 space-y-3">
+          {d.issuer && (
+            <div className="text-xs text-muted-foreground">
+              Issued by <span className="font-medium text-foreground">{d.issuer.name}</span>
+              {d.issuer.orgNr && ` · ${d.issuer.orgNr}`}
+            </div>
+          )}
+          {d.epdInfo && (
+            <div className="grid gap-3 rounded-lg bg-muted/40 p-4 text-xs sm:grid-cols-2">
+              <EpdField label="Declaration" value={d.epdInfo.declarationNumber} />
+              <EpdField label="Product" value={d.epdInfo.product} />
+              <EpdField label="Issue date" value={d.epdInfo.issueDate} />
+              <EpdField label="Valid to" value={d.epdInfo.validTo} />
+              <EpdField label="Programme operator" value={d.epdInfo.programmeOperator} />
+              <EpdField label="Standard" value={d.epdInfo.standard} />
+              <EpdField label="Owner contact" value={d.epdInfo.ownerContact.person} />
+              <EpdField
+                label="Contact"
+                value={`${d.epdInfo.ownerContact.phone} · ${d.epdInfo.ownerContact.email}`}
+              />
+              <EpdField label="Third-party verifier" value={d.epdInfo.verifier} />
+              <EpdField label="Approval" value={d.epdInfo.approvalStatus} />
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+
 
 
 
