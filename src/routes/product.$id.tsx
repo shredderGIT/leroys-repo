@@ -4,6 +4,8 @@ import {
   passports,
   registryNameMap,
   type DigitalProductPassport,
+  type DigitalProductPassport,
+  type DppDocument,
   type DppMaterial,
 } from "@/data/dpp";
 import {
