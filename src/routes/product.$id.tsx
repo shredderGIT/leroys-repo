@@ -179,7 +179,11 @@ function ProductPage() {
             ) : (
               <ul className="mt-4 space-y-4">
                 {p.classification.map((c) => {
-                  const declared = new Set(p.materials.map((m) => m.name));
+                  const declared = new Set(
+                    p.materials
+                      .map((m) => registryNameMap[m.name])
+                      .filter((n): n is string => Boolean(n)),
+                  );
                   return (
                     <li key={c.category}>
                       <div className="flex items-baseline justify-between">
@@ -214,6 +218,7 @@ function ProductPage() {
                   );
                 })}
               </ul>
+
             )}
           </div>
         </aside>
