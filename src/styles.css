@@ -39,55 +39,55 @@
 
 :root {
   --radius: 0.5rem;
-  --background: #ffffff;
-  --foreground: #0a0a0a;
+  --background: #fbf8f3;
+  --foreground: #3d3328;
   --card: #ffffff;
-  --card-foreground: #0a0a0a;
+  --card-foreground: #3d3328;
   --popover: #ffffff;
-  --popover-foreground: #0a0a0a;
-  --primary: #cc0000;
+  --popover-foreground: #3d3328;
+  --primary: #7fb091;
   --primary-foreground: #ffffff;
-  --secondary: #f5f5f5;
-  --secondary-foreground: #171717;
-  --muted: #f5f5f5;
-  --muted-foreground: #737373;
-  --accent: #f5f5f5;
-  --accent-foreground: #0a0a0a;
-  --destructive: #cc0000;
+  --secondary: #e3eef0;
+  --secondary-foreground: #3d3328;
+  --muted: #f1ebe1;
+  --muted-foreground: #8a7a68;
+  --accent: #c9b39a;
+  --accent-foreground: #3d3328;
+  --destructive: #d98c7a;
   --destructive-foreground: #ffffff;
-  --border: #e5e5e5;
-  --input: #e5e5e5;
-  --ring: #cc0000;
-  --leaf: #a3a3a3;
-  --leaf-foreground: #171717;
-  --clay: #737373;
-  --clay-foreground: #171717;
+  --border: #e6dccb;
+  --input: #e6dccb;
+  --ring: #7fb091;
+  --leaf: #b9d8c2;
+  --leaf-foreground: #2f4a39;
+  --clay: #d6c1a8;
+  --clay-foreground: #4a3a2a;
 }
 
 .dark {
-  --background: #0a0a0a;
-  --foreground: #f5f5f5;
-  --card: #1a1a1a;
-  --card-foreground: #f5f5f5;
-  --popover: #1a1a1a;
-  --popover-foreground: #f5f5f5;
-  --primary: #cc0000;
-  --primary-foreground: #ffffff;
-  --secondary: #1a1a1a;
-  --secondary-foreground: #f5f5f5;
-  --muted: #262626;
-  --muted-foreground: #a3a3a3;
-  --accent: #262626;
-  --accent-foreground: #f5f5f5;
-  --destructive: #ff4444;
+  --background: #2a2520;
+  --foreground: #f1ebe1;
+  --card: #34302a;
+  --card-foreground: #f1ebe1;
+  --popover: #34302a;
+  --popover-foreground: #f1ebe1;
+  --primary: #9ac8aa;
+  --primary-foreground: #1d2a22;
+  --secondary: #3d4a4c;
+  --secondary-foreground: #e3eef0;
+  --muted: #3b352e;
+  --muted-foreground: #b8a895;
+  --accent: #c9b39a;
+  --accent-foreground: #2a2520;
+  --destructive: #d98c7a;
   --destructive-foreground: #ffffff;
   --border: rgba(255, 255, 255, 0.12);
   --input: rgba(255, 255, 255, 0.15);
-  --ring: #cc0000;
-  --leaf: #a3a3a3;
-  --leaf-foreground: #f5f5f5;
-  --clay: #737373;
-  --clay-foreground: #f5f5f5;
+  --ring: #9ac8aa;
+  --leaf: #b9d8c2;
+  --leaf-foreground: #1d2a22;
+  --clay: #d6c1a8;
+  --clay-foreground: #2a2520;
 }
 
 @layer base {
