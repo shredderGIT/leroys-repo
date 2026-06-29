@@ -1,5 +1,11 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { getPassport, passports, type DigitalProductPassport } from "@/data/dpp";
+import {
+  getPassport,
+  passports,
+  registryNameMap,
+  type DigitalProductPassport,
+  type DppMaterial,
+} from "@/data/dpp";
 import {
   ArrowLeft,
   Leaf,
@@ -12,6 +18,15 @@ import {
   Factory,
   Layers,
 } from "lucide-react";
+import plus6Img from "@/assets/plus-6.png";
+import plus8Img from "@/assets/plus-8.png";
+import capellaImg from "@/assets/capella-esd.png";
+
+const productImage: Record<string, string> = {
+  "Plus 6": plus6Img,
+  "Plus 8": plus8Img,
+  "Capella X": capellaImg,
+};
 
 
 export const Route = createFileRoute("/product/$id")({
