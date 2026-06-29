@@ -481,6 +481,11 @@ for (const p of map.values()) {
   p.classification = Array.from(byCat.entries())
     .map(([category, materials]) => ({ category, materials: materials.sort() }))
     .sort((a, b) => a.category.localeCompare(b.category));
+
+  for (const d of p.documents) {
+    const info = epdInfoByDocNumber[d.document];
+    if (info) d.epdInfo = info;
+  }
 }
 
 
