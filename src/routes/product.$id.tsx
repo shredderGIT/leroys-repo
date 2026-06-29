@@ -121,11 +121,6 @@ function ProductPage() {
                 />
                 <MetaRow
                   icon={<Hash className="h-3.5 w-3.5" />}
-                  label="DPP ID"
-                  value={p.dppId}
-                />
-                <MetaRow
-                  icon={<Hash className="h-3.5 w-3.5" />}
                   label="Model"
                   value={p.model}
                   mono
@@ -151,12 +146,23 @@ function ProductPage() {
               </dl>
             </div>
             {productImage[p.product] && (
-              <div className="relative flex h-[220px] items-center justify-center overflow-hidden rounded-2xl border border-border bg-card">
-                <img
-                  src={productImage[p.product]}
-                  alt={`${p.product} task chair`}
-                  className="h-[190px] w-[190px] object-contain"
-                />
+              <div className="flex flex-col gap-3">
+                <div className="relative flex h-[220px] items-center justify-center overflow-hidden rounded-2xl border border-border bg-card">
+                  <img
+                    src={productImage[p.product]}
+                    alt={`${p.product} task chair`}
+                    className="h-[190px] w-[190px] object-contain"
+                  />
+                </div>
+                <div className="rounded-xl border border-border bg-card px-4 py-3">
+                  <div className="flex items-center gap-1.5 text-[10px] uppercase tracking-widest text-muted-foreground">
+                    <Hash className="h-3.5 w-3.5" />
+                    Digital Product Passport ID
+                  </div>
+                  <div className="mt-1 break-all font-mono text-xs text-foreground">
+                    {p.dppId}
+                  </div>
+                </div>
               </div>
             )}
           </div>
