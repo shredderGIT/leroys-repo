@@ -405,6 +405,11 @@ const epdMaterials: Record<string, DppMaterial[]> = {
     { name: "Steel", category: "Metal", kg: 2.91, percent: 20.41, recycledPercent: 39.86, source: "NEPD-9216-8804" },
     { name: "Zinc", category: "Metal", kg: 0.18, percent: 1.26, recycledPercent: 0, source: "NEPD-9216-8804" },
     { name: "Synthetic Textile", category: "Textile", kg: 0.61, percent: 4.26, recycledPercent: 63.93, source: "NEPD-9216-8804" },
+    // Cross-referenced from Sustainability Declaration Capella X PDF
+    { name: "Steel", category: "Metal", kg: 3.0, percent: 21, source: "SD Capella X" },
+    { name: "Aluminium", category: "Metal", kg: 1.8, percent: 13, source: "SD Capella X" },
+    { name: "Zinc", category: "Metal", kg: 0.2, percent: 2, source: "SD Capella X" },
+    { name: "Synthetic Textile", category: "Textile", kg: 0.5, percent: 3, source: "SD Capella X" },
   ],
 };
 
@@ -412,6 +417,7 @@ const epdMaterials: Record<string, DppMaterial[]> = {
 const recyclability: Record<string, DppRecyclability> = {
   "Plus 6": { materialRecyclingPercent: 86, energyRecoveryPercent: 14, totalPercent: 100, source: "SD Plus 6" },
   "Plus 8": { materialRecyclingPercent: 83, energyRecoveryPercent: 17, totalPercent: 100, source: "SD Plus 8" },
+  "Capella X": { materialRecyclingPercent: 90, energyRecoveryPercent: 10, totalPercent: 100, source: "SD Capella X" },
 };
 
 for (const p of map.values()) {
