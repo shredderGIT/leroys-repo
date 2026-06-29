@@ -405,25 +405,107 @@ function ProductPage() {
   );
 }
 
-function IdRow({
+function MetaRow({
   icon,
   label,
   value,
+  mono,
 }: {
   icon: React.ReactNode;
   label: string;
   value: string;
+  mono?: boolean;
 }) {
   return (
-    <div className="rounded-xl border border-border bg-card/60 p-4">
-      <div className="flex items-center gap-1.5 text-xs uppercase tracking-widest text-muted-foreground">
+    <div className="border-b border-dashed border-border/70 pb-2">
+      <dt className="flex items-center gap-1.5 text-[10px] uppercase tracking-widest text-muted-foreground">
         {icon}
         {label}
-      </div>
-      <div className="mt-1 truncate font-mono text-xs">{value}</div>
+      </dt>
+      <dd className={`mt-0.5 truncate text-sm text-foreground ${mono ? "font-mono text-xs" : ""}`}>
+        {value}
+      </dd>
     </div>
   );
 }
+
+function groupBySource(
+  materials: DppMaterial[],
+): { source: string; items: DppMaterial[]; isEpd: boolean }[] {
+  const groups = new Map<string, DppMaterial[]>();
+  for (const m of materials) {
+    const key = m.source ?? "Unknown";
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key)!.push(m);
+  }
+  const arr = Array.from(groups.entries()).map(([source, items]) => ({
+    source,
+    items,
+    isEpd: /^NEPD/i.test(source),
+  }));
+  // EPD (NEPD) tables first, then the rest alphabetically
+  return arr.sort((a, b) => {
+    if (a.isEpd !== b.isEpd) return a.isEpd ? -1 : 1;
+    return a.source.localeCompare(b.source);
+  });
+}
+
+function MaterialTable({
+  source,
+  items,
+  isEpd,
+}: {
+  source: string;
+  items: DppMaterial[];
+  isEpd: boolean;
+}) {
+  return (
+    <div className="overflow-hidden rounded-xl border border-border bg-card">
+      <div className="flex items-center justify-between border-b border-border bg-muted/40 px-4 py-3">
+        <div className="flex items-center gap-2">
+          <FileText className="h-4 w-4 text-muted-foreground" />
+          <span className="text-sm font-medium">{source}</span>
+        </div>
+        <span
+          className={`rounded-full px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider ${
+            isEpd
+              ? "bg-primary text-primary-foreground"
+              : "bg-secondary text-secondary-foreground"
+          }`}
+        >
+          {isEpd ? "Environmental Product Declaration" : "Sustainability Declaration"}
+        </span>
+      </div>
+      <table className="w-full text-sm">
+        <thead className="bg-muted/20 text-xs uppercase tracking-wider text-muted-foreground">
+          <tr>
+            <th className="px-4 py-2.5 text-left font-medium">Material</th>
+            <th className="px-4 py-2.5 text-left font-medium">Category</th>
+            <th className="px-4 py-2.5 text-right font-medium">kg</th>
+            <th className="px-4 py-2.5 text-right font-medium">%</th>
+            <th className="px-4 py-2.5 text-right font-medium">Recycled</th>
+          </tr>
+        </thead>
+        <tbody className="divide-y divide-border">
+          {items.map((m, i) => (
+            <tr key={`${m.name}-${i}`}>
+              <td className="px-4 py-2.5 font-medium">{m.name}</td>
+              <td className="px-4 py-2.5 text-muted-foreground">{m.category}</td>
+              <td className="px-4 py-2.5 text-right font-mono">{m.kg?.toFixed(2) ?? "—"}</td>
+              <td className="px-4 py-2.5 text-right font-mono">
+                {m.percent !== undefined ? `${m.percent.toFixed(2)}%` : "—"}
+              </td>
+              <td className="px-4 py-2.5 text-right font-mono">
+                {m.recycledPercent !== undefined ? `${m.recycledPercent.toFixed(2)}%` : "—"}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
 function EpdField({ label, value }: { label: string; value: string }) {
   return (
     <div>
