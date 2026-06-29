@@ -33,6 +33,13 @@ export type DppClassification = {
   materials: string[];
 };
 
+export type DppRecyclability = {
+  materialRecyclingPercent: number;
+  energyRecoveryPercent: number;
+  totalPercent: number;
+  source: string;
+};
+
 export type DigitalProductPassport = {
   id: string;
   dppId: string;
@@ -50,7 +57,9 @@ export type DigitalProductPassport = {
   documents: DppDocument[];
   materials: DppMaterial[];
   classification: DppClassification[];
+  recyclability?: DppRecyclability;
 };
+
 
 
 
