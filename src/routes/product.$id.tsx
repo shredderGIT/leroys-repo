@@ -252,8 +252,8 @@ function ProductPage() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-border">
-                {p.materials.map((m) => (
-                  <tr key={m.name}>
+                {p.materials.map((m, i) => (
+                  <tr key={`${m.name}-${m.source}-${i}`}>
                     <td className="px-4 py-3 font-medium">{m.name}</td>
                     <td className="px-4 py-3 text-muted-foreground">{m.category}</td>
                     <td className="px-4 py-3 text-right font-mono">{m.kg?.toFixed(2) ?? "—"}</td>
@@ -271,6 +271,42 @@ function ProductPage() {
           </div>
         </section>
       )}
+
+      {p.recyclability && (
+        <section>
+          <div className="flex items-baseline justify-between gap-4">
+            <h2 className="text-xl font-medium">Recyclability</h2>
+            <p className="text-xs text-muted-foreground">Source: {p.recyclability.source}</p>
+          </div>
+          <div className="mt-5 grid gap-4 sm:grid-cols-3">
+            <BigMetric
+              icon={<Recycle className="h-5 w-5" />}
+              label="Material recycling"
+              value={p.recyclability.materialRecyclingPercent.toString()}
+              unit="%"
+              tone="leaf"
+              progress={p.recyclability.materialRecyclingPercent}
+            />
+            <BigMetric
+              icon={<Zap className="h-5 w-5" />}
+              label="Energy recovery"
+              value={p.recyclability.energyRecoveryPercent.toString()}
+              unit="%"
+              tone="clay"
+              progress={p.recyclability.energyRecoveryPercent}
+            />
+            <BigMetric
+              icon={<Leaf className="h-5 w-5" />}
+              label="Total recyclability"
+              value={p.recyclability.totalPercent.toString()}
+              unit="%"
+              tone="leaf"
+              progress={p.recyclability.totalPercent}
+            />
+          </div>
+        </section>
+      )}
+
 
 
 
