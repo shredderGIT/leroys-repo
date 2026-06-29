@@ -56,7 +56,7 @@ function Index() {
             Digital Product Passport
           </p>
           <h1 className="mt-3 max-w-3xl text-3xl font-medium leading-[1.1] text-foreground sm:text-4xl">
-            Transparency from material to manufacture.
+            The Digital Thread from Material to Final Product
           </h1>
           <p className="mt-4 max-w-2xl text-base text-muted-foreground">
             Every passport collects verified environmental performance, traceable
