@@ -385,12 +385,20 @@ const epdMaterials: Record<string, DppMaterial[]> = {
     { name: "Steel", category: "Metal", kg: 9.62, percent: 52.36, recycledPercent: 22.98, source: "NEPD-3609-2539-EN" },
     { name: "Zinc", category: "Metal", kg: 0.03, percent: 0.16, recycledPercent: 0, source: "NEPD-3609-2539-EN" },
     { name: "Fiberglass", category: "Plastic", kg: 0.28, percent: 1.55, recycledPercent: 100, source: "NEPD-3609-2539-EN" },
+    // Cross-referenced from Sustainability Declaration Plus 6 PDF
+    { name: "Steel", category: "Metal", kg: 9.6, percent: 53, source: "SD Plus 6" },
+    { name: "Aluminium", category: "Metal", kg: 1.9, percent: 10, source: "SD Plus 6" },
+    { name: "Synthetic Textile", category: "Textile", kg: 0.6, percent: 4, source: "SD Plus 6" },
   ],
   "Plus 8": [
     { name: "Aluminium", category: "Metal", kg: 1.92, percent: 10.43, recycledPercent: 75.99, source: "NEPD-3609-2539-EN" },
     { name: "Steel", category: "Metal", kg: 9.62, percent: 52.36, recycledPercent: 22.98, source: "NEPD-3609-2539-EN" },
     { name: "Zinc", category: "Metal", kg: 0.03, percent: 0.16, recycledPercent: 0, source: "NEPD-3609-2539-EN" },
     { name: "Fiberglass", category: "Plastic", kg: 0.28, percent: 1.55, recycledPercent: 100, source: "NEPD-3609-2539-EN" },
+    // Cross-referenced from Sustainability Declaration Plus 8 PDF
+    { name: "Steel", category: "Metal", kg: 12.7, percent: 60, source: "SD Plus 8" },
+    { name: "Aluminium", category: "Metal", kg: 1.9, percent: 9, source: "SD Plus 8" },
+    { name: "Synthetic Textile", category: "Textile", kg: 0.5, percent: 2, source: "SD Plus 8" },
   ],
   "Capella X": [
     { name: "Aluminium", category: "Metal", kg: 1.84, percent: 12.91, recycledPercent: 100, source: "NEPD-9216-8804" },
@@ -400,10 +408,17 @@ const epdMaterials: Record<string, DppMaterial[]> = {
   ],
 };
 
+// Recyclability extracted from Sustainability Declaration PDFs
+const recyclability: Record<string, DppRecyclability> = {
+  "Plus 6": { materialRecyclingPercent: 86, energyRecoveryPercent: 14, totalPercent: 100, source: "SD Plus 6" },
+  "Plus 8": { materialRecyclingPercent: 83, energyRecoveryPercent: 17, totalPercent: 100, source: "SD Plus 8" },
+};
+
 for (const p of map.values()) {
   const reg = allowedMaterials[p.product] ?? [];
   const allow = new Set(reg.map((m) => m.name));
   p.materials = (epdMaterials[p.product] ?? []).filter((m) => allow.has(m.name));
+  p.recyclability = recyclability[p.product];
 
   const byCat = new Map<string, string[]>();
   for (const m of reg) {
@@ -414,6 +429,7 @@ for (const p of map.values()) {
     .map(([category, materials]) => ({ category, materials: materials.sort() }))
     .sort((a, b) => a.category.localeCompare(b.category));
 }
+
 
 
 export const passports: DigitalProductPassport[] = Array.from(map.values());
