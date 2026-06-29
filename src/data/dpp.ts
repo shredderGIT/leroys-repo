@@ -390,40 +390,83 @@ const allowedMaterials: Record<string, { name: string; category: string }[]> = {
   ],
 };
 
-// Composition values extracted from the EPD PDFs (only entries that correspond to
-// materials present in the allowed list above are kept).
+// Full material composition extracted from EPD PDFs (NEPD) and Sustainability
+// Declarations. ALL EPD materials are included; the classification sidebar
+// highlights those that map to entries in the allowed material registry.
 const epdMaterials: Record<string, DppMaterial[]> = {
   "Plus 6": [
-    { name: "Aluminium", category: "Metal", kg: 1.92, percent: 10.43, recycledPercent: 75.99, source: "NEPD-3609-2539-EN" },
-    { name: "Steel", category: "Metal", kg: 9.62, percent: 52.36, recycledPercent: 22.98, source: "NEPD-3609-2539-EN" },
-    { name: "Zinc", category: "Metal", kg: 0.03, percent: 0.16, recycledPercent: 0, source: "NEPD-3609-2539-EN" },
-    { name: "Fiberglass", category: "Plastic", kg: 0.28, percent: 1.55, recycledPercent: 100, source: "NEPD-3609-2539-EN" },
-    // Cross-referenced from Sustainability Declaration Plus 6 PDF
+    { name: "Metal - Aluminium", category: "Metal", kg: 1.92, percent: 10.43, recycledPercent: 75.99, source: "NEPD-3609-2539-EN" },
+    { name: "Metal - Steel", category: "Metal", kg: 9.62, percent: 52.36, recycledPercent: 22.98, source: "NEPD-3609-2539-EN" },
+    { name: "Metal - Zinc", category: "Metal", kg: 0.03, percent: 0.16, recycledPercent: 0, source: "NEPD-3609-2539-EN" },
+    { name: "Textile - Wool", category: "Textile", kg: 0.61, percent: 3.32, recycledPercent: 0, source: "NEPD-3609-2539-EN" },
+    { name: "Glass fibre", category: "Plastic", kg: 0.28, percent: 1.55, recycledPercent: 100, source: "NEPD-3609-2539-EN" },
+    { name: "Plastic - Polyurethane (PUR)", category: "Plastic", kg: 1.89, percent: 10.29, recycledPercent: 0, source: "NEPD-3609-2539-EN" },
+    { name: "Plastic - Polypropylene (PP)", category: "Plastic", kg: 1.61, percent: 9.09, recycledPercent: 0, source: "NEPD-3609-2539-EN" },
+    { name: "Plastic - Polystyrene expandable (EPS)", category: "Plastic", kg: 0.01, percent: 0.03, recycledPercent: 0, source: "NEPD-3609-2539-EN" },
+    { name: "Plastic - Polyoxymethylene (POM)", category: "Plastic", kg: 0.09, percent: 0.51, recycledPercent: 0, source: "NEPD-3609-2539-EN" },
+    { name: "Powder coating", category: "Coating", kg: 0.03, percent: 0.16, recycledPercent: 0, source: "NEPD-3609-2539-EN" },
+    { name: "Plastic - Nylon (PA)", category: "Plastic", kg: 0.33, percent: 1.77, recycledPercent: 0.01, source: "NEPD-3609-2539-EN" },
+    { name: "Plastic - Polyamide with glass fibre (PAGF30)", category: "Plastic", kg: 1.89, percent: 10.31, recycledPercent: 0, source: "NEPD-3609-2539-EN" },
     { name: "Steel", category: "Metal", kg: 9.6, percent: 53, source: "SD Plus 6" },
     { name: "Aluminium", category: "Metal", kg: 1.9, percent: 10, source: "SD Plus 6" },
     { name: "Synthetic Textile", category: "Textile", kg: 0.6, percent: 4, source: "SD Plus 6" },
   ],
   "Plus 8": [
-    { name: "Aluminium", category: "Metal", kg: 1.92, percent: 10.43, recycledPercent: 75.99, source: "NEPD-3609-2539-EN" },
-    { name: "Steel", category: "Metal", kg: 9.62, percent: 52.36, recycledPercent: 22.98, source: "NEPD-3609-2539-EN" },
-    { name: "Zinc", category: "Metal", kg: 0.03, percent: 0.16, recycledPercent: 0, source: "NEPD-3609-2539-EN" },
-    { name: "Fiberglass", category: "Plastic", kg: 0.28, percent: 1.55, recycledPercent: 100, source: "NEPD-3609-2539-EN" },
-    // Cross-referenced from Sustainability Declaration Plus 8 PDF
+    { name: "Metal - Aluminium", category: "Metal", kg: 1.92, percent: 10.43, recycledPercent: 75.99, source: "NEPD-3609-2539-EN" },
+    { name: "Metal - Steel", category: "Metal", kg: 9.62, percent: 52.36, recycledPercent: 22.98, source: "NEPD-3609-2539-EN" },
+    { name: "Metal - Zinc", category: "Metal", kg: 0.03, percent: 0.16, recycledPercent: 0, source: "NEPD-3609-2539-EN" },
+    { name: "Textile - Wool", category: "Textile", kg: 0.61, percent: 3.32, recycledPercent: 0, source: "NEPD-3609-2539-EN" },
+    { name: "Glass fibre", category: "Plastic", kg: 0.28, percent: 1.55, recycledPercent: 100, source: "NEPD-3609-2539-EN" },
+    { name: "Plastic - Polyurethane (PUR)", category: "Plastic", kg: 1.89, percent: 10.29, recycledPercent: 0, source: "NEPD-3609-2539-EN" },
+    { name: "Plastic - Polypropylene (PP)", category: "Plastic", kg: 1.61, percent: 9.09, recycledPercent: 0, source: "NEPD-3609-2539-EN" },
+    { name: "Plastic - Polystyrene expandable (EPS)", category: "Plastic", kg: 0.01, percent: 0.03, recycledPercent: 0, source: "NEPD-3609-2539-EN" },
+    { name: "Plastic - Polyoxymethylene (POM)", category: "Plastic", kg: 0.09, percent: 0.51, recycledPercent: 0, source: "NEPD-3609-2539-EN" },
+    { name: "Powder coating", category: "Coating", kg: 0.03, percent: 0.16, recycledPercent: 0, source: "NEPD-3609-2539-EN" },
+    { name: "Plastic - Nylon (PA)", category: "Plastic", kg: 0.33, percent: 1.77, recycledPercent: 0.01, source: "NEPD-3609-2539-EN" },
+    { name: "Plastic - Polyamide with glass fibre (PAGF30)", category: "Plastic", kg: 1.89, percent: 10.31, recycledPercent: 0, source: "NEPD-3609-2539-EN" },
     { name: "Steel", category: "Metal", kg: 12.7, percent: 60, source: "SD Plus 8" },
     { name: "Aluminium", category: "Metal", kg: 1.9, percent: 9, source: "SD Plus 8" },
     { name: "Synthetic Textile", category: "Textile", kg: 0.5, percent: 2, source: "SD Plus 8" },
   ],
   "Capella X": [
-    { name: "Aluminium", category: "Metal", kg: 1.84, percent: 12.91, recycledPercent: 100, source: "NEPD-9216-8804" },
-    { name: "Steel", category: "Metal", kg: 2.91, percent: 20.41, recycledPercent: 39.86, source: "NEPD-9216-8804" },
-    { name: "Zinc", category: "Metal", kg: 0.18, percent: 1.26, recycledPercent: 0, source: "NEPD-9216-8804" },
-    { name: "Synthetic Textile", category: "Textile", kg: 0.61, percent: 4.26, recycledPercent: 63.93, source: "NEPD-9216-8804" },
-    // Cross-referenced from Sustainability Declaration Capella X PDF
+    { name: "Metal - Steel low alloy", category: "Metal", kg: 0.86, percent: 6.01, recycledPercent: 100, source: "NEPD-9216-8804" },
+    { name: "Plastic - Nylon (PA)", category: "Plastic", kg: 2.87, percent: 20.13, recycledPercent: 0, source: "NEPD-9216-8804" },
+    { name: "Plastic - Polyoxymethylene (POM)", category: "Plastic", kg: 0.28, percent: 1.95, recycledPercent: 0.74, source: "NEPD-9216-8804" },
+    { name: "Plastic - Polypropylene (PP)", category: "Plastic", kg: 2.19, percent: 15.37, recycledPercent: 0, source: "NEPD-9216-8804" },
+    { name: "Powder coating", category: "Coating", kg: 0.02, percent: 0.14, recycledPercent: 0, source: "NEPD-9216-8804" },
+    { name: "Rubber, synthetic", category: "Plastic", kg: 0.03, percent: 0.20, recycledPercent: 0, source: "NEPD-9216-8804" },
+    { name: "Textile - Polypropylene (PP)", category: "Textile", kg: 0.15, percent: 1.06, recycledPercent: 0, source: "NEPD-9216-8804" },
+    { name: "Thermoplastic elastomers (TPE)", category: "Plastic", kg: 0.32, percent: 2.23, recycledPercent: 0, source: "NEPD-9216-8804" },
+    { name: "Metal - Aluminium", category: "Metal", kg: 1.84, percent: 12.91, recycledPercent: 100, source: "NEPD-9216-8804" },
+    { name: "Metal - Steel", category: "Metal", kg: 2.05, percent: 14.40, recycledPercent: 14.65, source: "NEPD-9216-8804" },
+    { name: "Metal - Zinc", category: "Metal", kg: 0.18, percent: 1.26, recycledPercent: 0, source: "NEPD-9216-8804" },
+    { name: "Additives", category: "Chemical", kg: 0.46, percent: 3.24, recycledPercent: 0, source: "NEPD-9216-8804" },
+    { name: "Chemical", category: "Chemical", kg: 2.38, percent: 16.70, recycledPercent: 0, source: "NEPD-9216-8804" },
+    { name: "Plastic - Polyurethane (PUR)", category: "Plastic", kg: 0.17, percent: 1.20, recycledPercent: 0, source: "NEPD-9216-8804" },
+    { name: "Textile - Polyester", category: "Textile", kg: 0.46, percent: 3.20, recycledPercent: 85.77, source: "NEPD-9216-8804" },
     { name: "Steel", category: "Metal", kg: 3.0, percent: 21, source: "SD Capella X" },
     { name: "Aluminium", category: "Metal", kg: 1.8, percent: 13, source: "SD Capella X" },
     { name: "Zinc", category: "Metal", kg: 0.2, percent: 2, source: "SD Capella X" },
     { name: "Synthetic Textile", category: "Textile", kg: 0.5, percent: 3, source: "SD Capella X" },
   ],
+};
+
+// Map raw material names from source documents to canonical registry names
+// (from dpp_material.json). Used to flag classification entries as "declared".
+export const registryNameMap: Record<string, string> = {
+  "Metal - Aluminium": "Aluminium",
+  Aluminium: "Aluminium",
+  "Metal - Steel": "Steel",
+  "Metal - Steel low alloy": "Steel",
+  Steel: "Steel",
+  "Metal - Zinc": "Zinc",
+  Zinc: "Zinc",
+  "Glass fibre": "Fiberglass",
+  Fiberglass: "Fiberglass",
+  "Textile - Wool": "Wood Textile",
+  "Textile - Polyester": "Synthetic Textile",
+  "Textile - Polypropylene (PP)": "Synthetic Textile",
+  "Synthetic Textile": "Synthetic Textile",
 };
 
 // Recyclability extracted from Sustainability Declaration PDFs
@@ -469,8 +512,7 @@ const epdInfoByDocNumber: Record<string, DppEpdInfo> = {
 
 for (const p of map.values()) {
   const reg = allowedMaterials[p.product] ?? [];
-  const allow = new Set(reg.map((m) => m.name));
-  p.materials = (epdMaterials[p.product] ?? []).filter((m) => allow.has(m.name));
+  p.materials = epdMaterials[p.product] ?? [];
   p.recyclability = recyclability[p.product];
 
   const byCat = new Map<string, string[]>();
