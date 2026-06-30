@@ -34,46 +34,7 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-function useStretchText() {
-  const containerRef = useRef<HTMLSpanElement>(null);
-  const textRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const apply = () => {
-      const container = containerRef.current;
-      const text = textRef.current;
-      if (!container || !text) return;
-
-      const target = container.getBoundingClientRect().width;
-
-      // Measure natural text width by shrinking to content
-      const savedDisplay = text.style.display;
-      const savedWidth = text.style.width;
-      text.style.display = "inline-block";
-      text.style.width = "auto";
-      text.style.letterSpacing = "0px";
-      const natural = text.getBoundingClientRect().width;
-      text.style.display = savedDisplay;
-      text.style.width = savedWidth;
-
-      const chars = text.textContent?.length ?? 0;
-      if (chars <= 1) return;
-
-      const spacing = (target - natural) / (chars - 1);
-      text.style.letterSpacing = spacing > 0 ? `${spacing}px` : "0px";
-    };
-
-    const handle = () => document.fonts.ready.then(apply);
-    handle();
-    window.addEventListener("resize", handle);
-    return () => window.removeEventListener("resize", handle);
-  }, []);
-
-  return { containerRef, textRef };
-}
-
 function Index() {
-  const { containerRef, textRef } = useStretchText();
   return (
     <div className="min-h-screen">
       <header className="border-b border-border/60 bg-background/80 backdrop-blur">
