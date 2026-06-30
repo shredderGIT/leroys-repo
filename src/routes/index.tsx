@@ -5,11 +5,13 @@ import { Leaf, Zap, Recycle, ArrowRight } from "lucide-react";
 import plus6Img from "@/assets/plus-6.png";
 import plus8Img from "@/assets/plus-8.png";
 import capellaImg from "@/assets/capella-esd.png";
+import oberonImg from "@/assets/oberon-meeting-table.jpg";
 
 const productImage: Record<string, string> = {
   "Plus 6": plus6Img,
   "Plus 8": plus8Img,
   "Capella X": capellaImg,
+  "Oberon Meeting Table": oberonImg,
 };
 
 
