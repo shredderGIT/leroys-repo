@@ -77,7 +77,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Digital Product Passport — Kinnarps Task Chair Plus" },
+      { title: "Consolidated Product Information" },
       { name: "description", content: "Digital product passport registry with EPD data, materials, and certifications for Kinnarps Task Chair Plus[6] and Plus[8]." },
       { name: "author", content: "Lovable" },
       { property: "og:title", content: "Digital Product Passport — Kinnarps Task Chair Plus" },

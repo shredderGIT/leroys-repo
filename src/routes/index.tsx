@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { passports } from "@/data/dpp";
 import { Leaf, Zap, Recycle, ArrowRight } from "lucide-react";
-import { useEffect, useRef } from "react";
+
 import plus6Img from "@/assets/plus-6.png";
 import plus8Img from "@/assets/plus-8.png";
 import capellaImg from "@/assets/capella-esd.png";
@@ -17,7 +17,7 @@ const productImage: Record<string, string> = {
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Digital Product Passport — Kinnarps" },
+      { title: "Consolidated Product Information" },
       {
         name: "description",
         content:
