@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { passports } from "@/data/dpp";
 import { Leaf, Zap, Recycle, ArrowRight } from "lucide-react";
+import { useEffect, useRef } from "react";
 import plus6Img from "@/assets/plus-6.png";
 import plus8Img from "@/assets/plus-8.png";
 import capellaImg from "@/assets/capella-esd.png";
@@ -33,7 +34,46 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
+function useStretchText() {
+  const containerRef = useRef<HTMLSpanElement>(null);
+  const textRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const apply = () => {
+      const container = containerRef.current;
+      const text = textRef.current;
+      if (!container || !text) return;
+
+      const target = container.getBoundingClientRect().width;
+
+      // Measure natural text width by shrinking to content
+      const savedDisplay = text.style.display;
+      const savedWidth = text.style.width;
+      text.style.display = "inline-block";
+      text.style.width = "auto";
+      text.style.letterSpacing = "0px";
+      const natural = text.getBoundingClientRect().width;
+      text.style.display = savedDisplay;
+      text.style.width = savedWidth;
+
+      const chars = text.textContent?.length ?? 0;
+      if (chars <= 1) return;
+
+      const spacing = (target - natural) / (chars - 1);
+      text.style.letterSpacing = spacing > 0 ? `${spacing}px` : "0px";
+    };
+
+    const handle = () => document.fonts.ready.then(apply);
+    handle();
+    window.addEventListener("resize", handle);
+    return () => window.removeEventListener("resize", handle);
+  }, []);
+
+  return { containerRef, textRef };
+}
+
 function Index() {
+  const { containerRef, textRef } = useStretchText();
   return (
     <div className="min-h-screen">
       <header className="border-b border-border/60 bg-background/80 backdrop-blur">
@@ -56,8 +96,10 @@ function Index() {
             Digital Product Passport
           </p>
           <h1 className="mt-3 max-w-3xl text-3xl font-medium leading-[1.1] text-foreground sm:text-4xl">
-            Trace Your Product.
-            <span className="block">Digitally.</span>
+            <span ref={containerRef} className="inline-block">
+              <div className="whitespace-nowrap">Trace Your Product.</div>
+              <div ref={textRef} className="whitespace-nowrap">Digitally.</div>
+            </span>
           </h1>
           <p className="mt-4 max-w-2xl text-base text-muted-foreground">
             Every passport collects verified environmental performance, traceable
