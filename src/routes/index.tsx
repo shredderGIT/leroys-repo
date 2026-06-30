@@ -76,6 +76,7 @@ function useStretchText() {
 }
 
 function Index() {
+  const { line1Ref, line2Ref } = useStretchText();
   return (
     <div className="min-h-screen">
       <header className="border-b border-border/60 bg-background/80 backdrop-blur">
