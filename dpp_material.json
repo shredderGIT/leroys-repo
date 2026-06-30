@@ -1,67 +1,138 @@
 {
   "paged": false,
   "page": 1,
-  "pageSize": 36,
-  "totalSize": 36,
+  "pageSize": 3,
+  "totalSize": 3,
   "totalPages": 1,
   "objectSets": [
     {
       "metadata": {
-        "id": "4fc12a2e-558e-a509-9a33-b47500b03f8b",
-        "name": "KS: Product Material (export)",
+        "id": "20586171-c21d-ca62-7124-b47400d6074d",
+        "name": "KS: Digital Product Passport (export)",
         "attributeNames": [
-          "Presentation",
-          "Model",
-          "Name",
-          "Is a kind of Association Definition 2Name"
+          "DPP ID",
+          "Organisation",
+          "Org nr",
+          "Business Role",
+          "Art nr",
+          "Product Model",
+          "Product Series",
+          "Product",
+          "Name"
         ],
         "columns": [
           {
-            "id": "0d7ab6a8-ff5b-e33c-dbe9-b47500b051c5",
-            "title": "Presentation",
+            "id": "3545a342-cf87-abc1-3405-b47400d6128e",
+            "title": "DPP ID",
             "index": 0,
             "dataType": "String",
             "calculated": false,
             "path": [
-              "Product",
-              "Presentation"
+              "Digital Product Passport",
+              "DPP ID"
             ]
           },
           {
-            "id": "2b3c4406-d89c-749b-1fad-b47500b04e3f",
-            "title": "Model",
+            "id": "8670a2ea-f550-81f5-8043-b475005f3f0b",
+            "title": "Organisation",
             "index": 1,
-            "dataType": "AsInstance",
+            "dataType": "String",
             "calculated": false,
             "path": [
-              "Product",
-              "Model"
+              "Digital Product Passport",
+              "Organisation - DPP - Role",
+              "Organisation (DPP)",
+              "Organisation"
             ]
           },
           {
-            "id": "bc36aaa1-1ec3-0428-4e35-b47500b078c5",
-            "title": "Name",
+            "id": "0cb0a026-17ae-65b8-dffd-b475005e5840",
+            "title": "Org nr",
             "index": 2,
             "dataType": "String",
             "calculated": false,
             "path": [
-              "Product",
-              "Product - Material Composition",
-              "Material",
-              "Name"
+              "Digital Product Passport",
+              "Organisation - DPP - Role",
+              "Organisation (DPP)",
+              "Org nr"
             ]
           },
           {
-            "id": "edf38b4b-032e-dfa4-3147-b47500b0ae71",
-            "title": "Name",
+            "id": "09a750a3-4848-9c98-4277-b475005f4957",
+            "title": "Business Role",
             "index": 3,
             "dataType": "String",
             "calculated": false,
             "path": [
+              "Digital Product Passport",
+              "Organisation - DPP - Role",
+              "Business Role",
+              "Business Role"
+            ]
+          },
+          {
+            "id": "be12379b-9eab-a3b0-0bfc-b47900b5313b",
+            "title": "Art nr",
+            "index": 4,
+            "dataType": "String",
+            "calculated": false,
+            "path": [
+              "Digital Product Passport",
+              "Product Article",
+              "Art nr"
+            ]
+          },
+          {
+            "id": "93ba7744-1255-7deb-d22b-b47900b57eaf",
+            "title": "Product Model",
+            "index": 5,
+            "dataType": "String",
+            "calculated": false,
+            "path": [
+              "Digital Product Passport",
+              "Product Article",
+              "Product Model",
+              "Product Model"
+            ]
+          },
+          {
+            "id": "97929fd1-9a79-2afd-84bc-b47900b58565",
+            "title": "Product Series",
+            "index": 6,
+            "dataType": "String",
+            "calculated": false,
+            "path": [
+              "Digital Product Passport",
+              "Product Article",
+              "Product Series",
+              "Product Series"
+            ]
+          },
+          {
+            "id": "bd205eaa-7408-9b47-731c-b47900b58ec1",
+            "title": "Product",
+            "index": 7,
+            "dataType": "String",
+            "calculated": false,
+            "path": [
+              "Digital Product Passport",
+              "Product Article",
               "Product",
-              "Product - Material Composition",
-              "Material",
-              "Is a kind of Association Definition 2",
+              "Product"
+            ]
+          },
+          {
+            "id": "98c1079f-84f6-8cb5-7321-b47900bcd5bb",
+            "title": "Name",
+            "index": 8,
+            "dataType": "String",
+            "calculated": false,
+            "path": [
+              "Digital Product Passport",
+              "Product Article",
+              "Product Concept - Product Article",
+              "Product Concept",
               "Name"
             ]
           }
@@ -69,220 +140,37 @@
       },
       "objects": [
         {
-          "Presentation": "Plus 6",
-          "Model": "7991ba47-992b-0c02-8a45-b47100bc2c1e",
-          "Name": "Glass",
-          "Is a kind of Association Definition 2Name": "Material"
+          "DPP ID": "DPP-00004",
+          "Organisation": "Kinnarps AB (556256-6736)",
+          "Org nr": "556256-6736",
+          "Business Role": "Holder",
+          "Art nr": "Capella X ESD - 001",
+          "Product Model": "Capella ESD",
+          "Product Series": "Capella X",
+          "Product": "Capella X",
+          "Name": "Capella X ESD"
         },
         {
-          "Presentation": "Plus 6",
-          "Model": "7991ba47-992b-0c02-8a45-b47100bc2c1e",
-          "Name": "Zinc",
-          "Is a kind of Association Definition 2Name": "Metal"
+          "DPP ID": "DPP-00002",
+          "Organisation": "Kinnarps AB (556256-6736)",
+          "Org nr": "556256-6736",
+          "Business Role": "Holder",
+          "Art nr": "Plus 6 - 001",
+          "Product Model": "6770",
+          "Product Series": "Plus 6",
+          "Product": "Plus 6",
+          "Name": "Plus 6"
         },
         {
-          "Presentation": "Plus 6",
-          "Model": "7991ba47-992b-0c02-8a45-b47100bc2c1e",
-          "Name": "Cuttings",
-          "Is a kind of Association Definition 2Name": "Wood"
-        },
-        {
-          "Presentation": "Plus 6",
-          "Model": "7991ba47-992b-0c02-8a45-b47100bc2c1e",
-          "Name": "Synthetic Textile",
-          "Is a kind of Association Definition 2Name": "Textile"
-        },
-        {
-          "Presentation": "Plus 6",
-          "Model": "7991ba47-992b-0c02-8a45-b47100bc2c1e",
-          "Name": "Papper",
-          "Is a kind of Association Definition 2Name": "Material"
-        },
-        {
-          "Presentation": "Plus 6",
-          "Model": "7991ba47-992b-0c02-8a45-b47100bc2c1e",
-          "Name": "Oak",
-          "Is a kind of Association Definition 2Name": "Wood"
-        },
-        {
-          "Presentation": "Plus 6",
-          "Model": "7991ba47-992b-0c02-8a45-b47100bc2c1e",
-          "Name": "Wood Textile",
-          "Is a kind of Association Definition 2Name": "Textile"
-        },
-        {
-          "Presentation": "Plus 6",
-          "Model": "7991ba47-992b-0c02-8a45-b47100bc2c1e",
-          "Name": "Aluminium",
-          "Is a kind of Association Definition 2Name": "Metal"
-        },
-        {
-          "Presentation": "Plus 6",
-          "Model": "7991ba47-992b-0c02-8a45-b47100bc2c1e",
-          "Name": "MDF",
-          "Is a kind of Association Definition 2Name": "Wood"
-        },
-        {
-          "Presentation": "Plus 6",
-          "Model": "7991ba47-992b-0c02-8a45-b47100bc2c1e",
-          "Name": "Steel",
-          "Is a kind of Association Definition 2Name": "Metal"
-        },
-        {
-          "Presentation": "Plus 6",
-          "Model": "7991ba47-992b-0c02-8a45-b47100bc2c1e",
-          "Name": "Birch",
-          "Is a kind of Association Definition 2Name": "Wood"
-        },
-        {
-          "Presentation": "Plus 6",
-          "Model": "7991ba47-992b-0c02-8a45-b47100bc2c1e",
-          "Name": "Fiberglass",
-          "Is a kind of Association Definition 2Name": "Plastic"
-        },
-        {
-          "Presentation": "Plus 8",
-          "Model": "15e2a21e-ac2b-060a-9a63-b4720117a5a7",
-          "Name": "Wood Textile",
-          "Is a kind of Association Definition 2Name": "Textile"
-        },
-        {
-          "Presentation": "Plus 8",
-          "Model": "15e2a21e-ac2b-060a-9a63-b4720117a5a7",
-          "Name": "Zinc",
-          "Is a kind of Association Definition 2Name": "Metal"
-        },
-        {
-          "Presentation": "Plus 8",
-          "Model": "15e2a21e-ac2b-060a-9a63-b4720117a5a7",
-          "Name": "MDF",
-          "Is a kind of Association Definition 2Name": "Wood"
-        },
-        {
-          "Presentation": "Plus 8",
-          "Model": "15e2a21e-ac2b-060a-9a63-b4720117a5a7",
-          "Name": "Glass",
-          "Is a kind of Association Definition 2Name": "Material"
-        },
-        {
-          "Presentation": "Plus 8",
-          "Model": "15e2a21e-ac2b-060a-9a63-b4720117a5a7",
-          "Name": "Papper",
-          "Is a kind of Association Definition 2Name": "Material"
-        },
-        {
-          "Presentation": "Plus 8",
-          "Model": "15e2a21e-ac2b-060a-9a63-b4720117a5a7",
-          "Name": "Birch",
-          "Is a kind of Association Definition 2Name": "Wood"
-        },
-        {
-          "Presentation": "Plus 8",
-          "Model": "15e2a21e-ac2b-060a-9a63-b4720117a5a7",
-          "Name": "Aluminium",
-          "Is a kind of Association Definition 2Name": "Metal"
-        },
-        {
-          "Presentation": "Plus 8",
-          "Model": "15e2a21e-ac2b-060a-9a63-b4720117a5a7",
-          "Name": "Fiberglass",
-          "Is a kind of Association Definition 2Name": "Plastic"
-        },
-        {
-          "Presentation": "Plus 8",
-          "Model": "15e2a21e-ac2b-060a-9a63-b4720117a5a7",
-          "Name": "Cuttings",
-          "Is a kind of Association Definition 2Name": "Wood"
-        },
-        {
-          "Presentation": "Plus 8",
-          "Model": "15e2a21e-ac2b-060a-9a63-b4720117a5a7",
-          "Name": "Steel",
-          "Is a kind of Association Definition 2Name": "Metal"
-        },
-        {
-          "Presentation": "Plus 8",
-          "Model": "15e2a21e-ac2b-060a-9a63-b4720117a5a7",
-          "Name": "Synthetic Textile",
-          "Is a kind of Association Definition 2Name": "Textile"
-        },
-        {
-          "Presentation": "Plus 8",
-          "Model": "15e2a21e-ac2b-060a-9a63-b4720117a5a7",
-          "Name": "Oak",
-          "Is a kind of Association Definition 2Name": "Wood"
-        },
-        {
-          "Presentation": "Capella X",
-          "Model": "a73d4f70-e400-917a-c5ff-b475008edee1",
-          "Name": "Glass",
-          "Is a kind of Association Definition 2Name": "Material"
-        },
-        {
-          "Presentation": "Capella X",
-          "Model": "a73d4f70-e400-917a-c5ff-b475008edee1",
-          "Name": "Aluminium",
-          "Is a kind of Association Definition 2Name": "Metal"
-        },
-        {
-          "Presentation": "Capella X",
-          "Model": "a73d4f70-e400-917a-c5ff-b475008edee1",
-          "Name": "Steel",
-          "Is a kind of Association Definition 2Name": "Metal"
-        },
-        {
-          "Presentation": "Capella X",
-          "Model": "a73d4f70-e400-917a-c5ff-b475008edee1",
-          "Name": "Birch",
-          "Is a kind of Association Definition 2Name": "Wood"
-        },
-        {
-          "Presentation": "Capella X",
-          "Model": "a73d4f70-e400-917a-c5ff-b475008edee1",
-          "Name": "Synthetic Textile",
-          "Is a kind of Association Definition 2Name": "Textile"
-        },
-        {
-          "Presentation": "Capella X",
-          "Model": "a73d4f70-e400-917a-c5ff-b475008edee1",
-          "Name": "MDF",
-          "Is a kind of Association Definition 2Name": "Wood"
-        },
-        {
-          "Presentation": "Capella X",
-          "Model": "a73d4f70-e400-917a-c5ff-b475008edee1",
-          "Name": "Cuttings",
-          "Is a kind of Association Definition 2Name": "Wood"
-        },
-        {
-          "Presentation": "Capella X",
-          "Model": "a73d4f70-e400-917a-c5ff-b475008edee1",
-          "Name": "Wood Textile",
-          "Is a kind of Association Definition 2Name": "Textile"
-        },
-        {
-          "Presentation": "Capella X",
-          "Model": "a73d4f70-e400-917a-c5ff-b475008edee1",
-          "Name": "Oak",
-          "Is a kind of Association Definition 2Name": "Wood"
-        },
-        {
-          "Presentation": "Capella X",
-          "Model": "a73d4f70-e400-917a-c5ff-b475008edee1",
-          "Name": "Papper",
-          "Is a kind of Association Definition 2Name": "Material"
-        },
-        {
-          "Presentation": "Capella X",
-          "Model": "a73d4f70-e400-917a-c5ff-b475008edee1",
-          "Name": "Zinc",
-          "Is a kind of Association Definition 2Name": "Metal"
-        },
-        {
-          "Presentation": "Capella X",
-          "Model": "a73d4f70-e400-917a-c5ff-b475008edee1",
-          "Name": "Fiberglass",
-          "Is a kind of Association Definition 2Name": "Plastic"
+          "DPP ID": "DPP-00003",
+          "Organisation": "Kinnarps AB (556256-6736)",
+          "Org nr": "556256-6736",
+          "Business Role": "Holder",
+          "Art nr": "Plus 8 - 001",
+          "Product Model": "8770",
+          "Product Series": "Plus 8",
+          "Product": "Plus 8",
+          "Name": "Plus 8"
         }
       ]
     }
