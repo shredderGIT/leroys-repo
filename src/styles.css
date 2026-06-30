@@ -101,12 +101,3 @@
     font-family: var(--font-sans);
   }
 }
-
-.stretch-text {
-  text-align: justify;
-}
-.stretch-text::after {
-  content: '';
-  display: inline-block;
-  width: 100%;
-}
