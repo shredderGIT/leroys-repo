@@ -99,8 +99,8 @@ function Index() {
           </p>
           <h1 className="mt-3 max-w-3xl text-3xl font-medium leading-[1.1] text-foreground sm:text-4xl">
             <span className="inline-block">
-              Trace Your Product.
-              <span className="block stretch-text">Digitally.</span>
+              <div ref={line1Ref} className="whitespace-nowrap">Trace Your Product.</div>
+              <div ref={line2Ref} className="whitespace-nowrap">Digitally.</div>
             </span>
           </h1>
           <p className="mt-4 max-w-2xl text-base text-muted-foreground">
