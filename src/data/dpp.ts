@@ -275,7 +275,28 @@ const raw: RawRow[] = [
     "Role (document)Org nr": "556256-6736",
     "Document IssuerPresentation": "Issuer",
   },
-];
+  {
+    "DPP ID": "DPP-00005",
+    "Energy Use": "0",
+    "Carbon Footprint": 0,
+    "Recycled Content": 0,
+    Product: "Oberon Meeting Table",
+    "Art nr": "OB167 SSV2-001",
+    Model: "OB167 SSV2",
+    Presentation: "Kinnarps AB (556256-6736)",
+    "Org nr": "556256-6736",
+    "Business Role": "Holder",
+    Name: "Product Concept",
+    Document: "Oberon Meeting Table Concept",
+    "URL Link": "https://www.kinnarps.com",
+    ID: "dpp-00005-oberon",
+    Organisation: "Kinnarps AB (556256-6736)",
+    "OrganisationOrg nr": "556256-6736",
+    Role: "Manufacturer",
+    "Product SeriesPresentation": "OB167 SSV2",
+    ModelPresentation: "OB167 SSV2",
+  },
+]
 
 const map = new Map<string, DigitalProductPassport>();
 for (const row of raw) {
