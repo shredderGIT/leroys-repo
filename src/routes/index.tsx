@@ -34,6 +34,47 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
+function useStretchText() {
+  const line1Ref = useRef<HTMLDivElement>(null);
+  const line2Ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const apply = () => {
+      const l1 = line1Ref.current;
+      const l2 = line2Ref.current;
+      if (!l1 || !l2) return;
+      const target = l1.getBoundingClientRect().width;
+      const text = l2.textContent ?? "";
+      const chars = text.length;
+      if (chars <= 1) return;
+
+      const saved = l2.style.letterSpacing;
+      l2.style.letterSpacing = "0px";
+      const natural = l2.getBoundingClientRect().width;
+      l2.style.letterSpacing = saved;
+
+      const spacing = (target - natural) / (chars - 1);
+      l2.style.letterSpacing = spacing > 0 ? `${spacing}px` : "0px";
+    };
+
+    const handle = () => {
+      document.fonts.ready.then(apply);
+    };
+
+    handle();
+    window.addEventListener("resize", handle);
+    const ro = new ResizeObserver(handle);
+    if (line1Ref.current) ro.observe(line1Ref.current);
+
+    return () => {
+      window.removeEventListener("resize", handle);
+      ro.disconnect();
+    };
+  }, []);
+
+  return { line1Ref, line2Ref };
+}
+
 function Index() {
   return (
     <div className="min-h-screen">
