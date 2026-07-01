@@ -225,29 +225,7 @@ function ProductPage() {
 
         <div className="space-y-10">
       <section>
-        <div className="flex items-baseline justify-between gap-4">
-          <h2 className="text-xl font-medium">EPD material composition</h2>
-          <p className="text-xs text-muted-foreground">
-            Extracted via <span className="font-mono">epd-mat-info</span> skill
-          </p>
-        </div>
-        {(() => {
-          const epdGroups = groupBySource(p.materials).filter((g) => g.isEpd);
-          if (epdGroups.length === 0) {
-            return (
-              <p className="mt-4 text-sm text-muted-foreground">
-                No EPD material composition table available for this product.
-              </p>
-            );
-          }
-          return (
-            <div className="mt-5 space-y-6">
-              {epdGroups.map(({ source, items }) => (
-                <EpdMatInfoTable key={source} source={source} items={items} />
-              ))}
-            </div>
-          );
-        })()}
+        <ExpandableMaterialTable materials={p.materials} />
       </section>
 
       <section>
@@ -284,20 +262,6 @@ function ProductPage() {
           ))}
         </div>
       </section>
-
-      {p.materials.length > 0 && (
-        <section>
-          <div className="flex items-baseline justify-between gap-4">
-            <h2 className="text-xl font-medium">Material composition</h2>
-            <p className="text-xs text-muted-foreground">Grouped by source document</p>
-          </div>
-          <div className="mt-5 space-y-6">
-            {groupBySource(p.materials).map(({ source, items, isEpd }) => (
-              <MaterialTable key={source} source={source} items={items} isEpd={isEpd} />
-            ))}
-          </div>
-        </section>
-      )}
 
 
       {p.recyclability && (
@@ -386,145 +350,61 @@ function MetaRow({
   );
 }
 
-function groupBySource(
-  materials: DppMaterial[],
-): { source: string; items: DppMaterial[]; isEpd: boolean }[] {
-  const groups = new Map<string, DppMaterial[]>();
-  for (const m of materials) {
-    const key = m.source ?? "Unknown";
-    if (!groups.has(key)) groups.set(key, []);
-    groups.get(key)!.push(m);
-  }
-  const arr = Array.from(groups.entries()).map(([source, items]) => ({
-    source,
-    items,
-    isEpd: /^NEPD/i.test(source),
-  }));
-  // EPD (NEPD) tables first, then the rest alphabetically
-  return arr.sort((a, b) => {
-    if (a.isEpd !== b.isEpd) return a.isEpd ? -1 : 1;
-    return a.source.localeCompare(b.source);
-  });
-}
+function ExpandableMaterialTable({ materials }: { materials: DppMaterial[] }) {
+  const [open, setOpen] = useState(false);
+  if (materials.length === 0) return null;
 
-function MaterialTable({
-  source,
-  items,
-  isEpd,
-}: {
-  source: string;
-  items: DppMaterial[];
-  isEpd: boolean;
-}) {
   return (
     <div className="overflow-hidden rounded-xl border border-border bg-card">
-      <div className="flex items-center justify-between border-b border-border bg-muted/40 px-4 py-3">
-        <div className="flex items-center gap-2">
-          <FileText className="h-4 w-4 text-muted-foreground" />
-          <span className="text-sm font-medium">{source}</span>
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        className="flex w-full items-center justify-between px-5 py-4 text-left transition-colors hover:bg-muted/30"
+        aria-expanded={open}
+      >
+        <div>
+          <h2 className="text-lg font-medium">Material composition</h2>
+          <p className="mt-0.5 text-xs text-muted-foreground">
+            {materials.length} material{materials.length === 1 ? "" : "s"} declared
+          </p>
         </div>
-        <span
-          className={`rounded-full px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider ${
-            isEpd
-              ? "bg-primary text-primary-foreground"
-              : "bg-secondary text-secondary-foreground"
-          }`}
-        >
-          {isEpd ? "Environmental Product Declaration" : "Sustainability Declaration"}
-        </span>
-      </div>
-      <table className="w-full text-sm">
-        <thead className="bg-muted/20 text-xs uppercase tracking-wider text-muted-foreground">
-          <tr>
-            <th className="px-4 py-2.5 text-left font-medium">Material</th>
-            <th className="px-4 py-2.5 text-left font-medium">Category</th>
-            <th className="px-4 py-2.5 text-right font-medium">kg</th>
-            <th className="px-4 py-2.5 text-right font-medium">%</th>
-            <th className="px-4 py-2.5 text-right font-medium">Recycled</th>
-          </tr>
-        </thead>
-        <tbody className="divide-y divide-border">
-          {items.map((m, i) => (
-            <tr key={`${m.name}-${i}`}>
-              <td className="px-4 py-2.5 font-medium">{m.name}</td>
-              <td className="px-4 py-2.5 text-muted-foreground">{m.category}</td>
-              <td className="px-4 py-2.5 text-right font-mono">{m.kg?.toFixed(2) ?? "—"}</td>
-              <td className="px-4 py-2.5 text-right font-mono">
-                {m.percent !== undefined ? `${m.percent.toFixed(2)}%` : "—"}
-              </td>
-              <td className="px-4 py-2.5 text-right font-mono">
-                {m.recycledPercent !== undefined ? `${m.recycledPercent.toFixed(2)}%` : "—"}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
-}
+        <div className="flex h-8 w-8 items-center justify-center rounded-md border border-border text-muted-foreground transition-colors hover:bg-muted hover:text-foreground">
+          <ChevronDown
+            className={`h-4 w-4 transition-transform ${open ? "rotate-180" : ""}`}
+          />
+        </div>
+      </button>
 
-function EpdMatInfoTable({ source, items }: { source: string; items: DppMaterial[] }) {
-  const totalKg = items.reduce((s, m) => s + (m.kg ?? 0), 0);
-  const totalRecKg = items.reduce(
-    (s, m) => s + ((m.kg ?? 0) * (m.recycledPercent ?? 0)) / 100,
-    0,
-  );
-  const fmt = (n: number, d = 2) =>
-    n.toLocaleString("en", { minimumFractionDigits: d, maximumFractionDigits: d });
-  return (
-    <div className="overflow-hidden rounded-xl border border-border bg-card">
-      <div className="flex items-center justify-between border-b border-border bg-muted/40 px-4 py-3">
-        <div className="flex items-center gap-2">
-          <FileText className="h-4 w-4 text-muted-foreground" />
-          <span className="text-sm font-medium">{source}</span>
-        </div>
-        <span className="rounded-full bg-primary px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider text-primary-foreground">
-          Environmental Product Declaration
-        </span>
-      </div>
-      <table className="w-full text-sm">
-        <thead className="bg-muted/20 text-xs uppercase tracking-wider text-muted-foreground">
-          <tr>
-            <th className="px-4 py-2.5 text-left font-medium">Material</th>
-            <th className="px-4 py-2.5 text-right font-medium">Weight (kg)</th>
-            <th className="px-4 py-2.5 text-right font-medium">Weight (%)</th>
-            <th className="px-4 py-2.5 text-right font-medium">Recycled share (kg)</th>
-            <th className="px-4 py-2.5 text-right font-medium">Recycled share (%)</th>
-          </tr>
-        </thead>
-        <tbody className="divide-y divide-border">
-          {items.map((m, i) => {
-            const recKg =
-              m.kg !== undefined && m.recycledPercent !== undefined
-                ? (m.kg * m.recycledPercent) / 100
-                : undefined;
-            return (
-              <tr key={`${m.name}-${i}`}>
-                <td className="px-4 py-2.5 font-medium">{m.name}</td>
-                <td className="px-4 py-2.5 text-right font-mono">
-                  {m.kg !== undefined ? fmt(m.kg) : "—"}
-                </td>
-                <td className="px-4 py-2.5 text-right font-mono">
-                  {m.percent !== undefined ? fmt(m.percent) : "—"}
-                </td>
-                <td className="px-4 py-2.5 text-right font-mono">
-                  {recKg !== undefined ? fmt(recKg) : "—"}
-                </td>
-                <td className="px-4 py-2.5 text-right font-mono">
-                  {m.recycledPercent !== undefined ? fmt(m.recycledPercent) : "—"}
-                </td>
+      {open && (
+        <div className="border-t border-border">
+          <table className="w-full text-sm">
+            <thead className="bg-muted/20 text-xs uppercase tracking-wider text-muted-foreground">
+              <tr>
+                <th className="px-5 py-2.5 text-left font-medium">Material</th>
+                <th className="px-5 py-2.5 text-left font-medium">Category</th>
+                <th className="px-5 py-2.5 text-right font-medium">kg</th>
+                <th className="px-5 py-2.5 text-right font-medium">%</th>
+                <th className="px-5 py-2.5 text-right font-medium">Recycled</th>
               </tr>
-            );
-          })}
-          <tr className="bg-muted/30 font-semibold">
-            <td className="px-4 py-2.5">Total</td>
-            <td className="px-4 py-2.5 text-right font-mono">{fmt(totalKg)}</td>
-            <td className="px-4 py-2.5 text-right font-mono">100.00</td>
-            <td className="px-4 py-2.5 text-right font-mono">{fmt(totalRecKg)}</td>
-            <td className="px-4 py-2.5 text-right font-mono"></td>
-          </tr>
-        </tbody>
-      </table>
+            </thead>
+            <tbody className="divide-y divide-border">
+              {materials.map((m, i) => (
+                <tr key={`${m.name}-${i}`}>
+                  <td className="px-5 py-2.5 font-medium">{m.name}</td>
+                  <td className="px-5 py-2.5 text-muted-foreground">{m.category}</td>
+                  <td className="px-5 py-2.5 text-right font-mono">{m.kg?.toFixed(2) ?? "—"}</td>
+                  <td className="px-5 py-2.5 text-right font-mono">
+                    {m.percent !== undefined ? `${m.percent.toFixed(2)}%` : "—"}
+                  </td>
+                  <td className="px-5 py-2.5 text-right font-mono">
+                    {m.recycledPercent !== undefined ? `${m.recycledPercent.toFixed(2)}%` : "—"}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 }
