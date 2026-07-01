@@ -42,9 +42,7 @@
 :root {
   --radius: 0;
   --background: #0b0d0c;
-  --foreground: #f2 efe6;
   --foreground: #f2efe6;
-  --card: #14171500;
   --card: #141715;
   --card-foreground: #f2efe6;
   --popover: #141715;
