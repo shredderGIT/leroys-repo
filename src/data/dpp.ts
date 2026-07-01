@@ -421,6 +421,11 @@ const allowedMaterials: Record<string, { name: string; category: string }[]> = {
     { name: "Birch", category: "Wood" },
     { name: "Fiberglass", category: "Plastic" },
   ],
+  "Oberon Meeting Table": [
+    { name: "Wood", category: "Material" },
+    { name: "Steel", category: "Metal" },
+    { name: "Plastic", category: "Material" },
+  ],
 };
 
 // Full material composition extracted from EPD PDFs (NEPD) and Sustainability
