@@ -225,29 +225,7 @@ function ProductPage() {
 
         <div className="space-y-10">
       <section>
-        <div className="flex items-baseline justify-between gap-4">
-          <h2 className="text-xl font-medium">EPD material composition</h2>
-          <p className="text-xs text-muted-foreground">
-            Extracted via <span className="font-mono">epd-mat-info</span> skill
-          </p>
-        </div>
-        {(() => {
-          const epdGroups = groupBySource(p.materials).filter((g) => g.isEpd);
-          if (epdGroups.length === 0) {
-            return (
-              <p className="mt-4 text-sm text-muted-foreground">
-                No EPD material composition table available for this product.
-              </p>
-            );
-          }
-          return (
-            <div className="mt-5 space-y-6">
-              {epdGroups.map(({ source, items }) => (
-                <EpdMatInfoTable key={source} source={source} items={items} />
-              ))}
-            </div>
-          );
-        })()}
+        <ExpandableMaterialTable materials={p.materials} />
       </section>
 
       <section>
@@ -284,20 +262,6 @@ function ProductPage() {
           ))}
         </div>
       </section>
-
-      {p.materials.length > 0 && (
-        <section>
-          <div className="flex items-baseline justify-between gap-4">
-            <h2 className="text-xl font-medium">Material composition</h2>
-            <p className="text-xs text-muted-foreground">Grouped by source document</p>
-          </div>
-          <div className="mt-5 space-y-6">
-            {groupBySource(p.materials).map(({ source, items, isEpd }) => (
-              <MaterialTable key={source} source={source} items={items} isEpd={isEpd} />
-            ))}
-          </div>
-        </section>
-      )}
 
 
       {p.recyclability && (
