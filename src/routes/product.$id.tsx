@@ -427,20 +427,20 @@ function sortDocuments(docs: DppDocument[]): DppDocument[] {
 function DocumentRow({ doc: d }: { doc: DppDocument }) {
   const [open, setOpen] = useState(false);
   const category = docCategory(d);
-  const hasDetails = Boolean(d.epdInfo || d.issuer);
+  const hasDetails = Boolean(d.docInfo?.length || d.epdInfo || d.issuer);
   const isCert = category === "cert";
 
   return (
     <div className="p-5">
       <div className="flex items-center gap-4">
-        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+        <div className="flex h-10 w-10 items-center justify-center bg-primary/10 text-primary">
           <FileText className="h-5 w-5" />
         </div>
         <div className="flex-1 min-w-0">
           <div className="flex flex-wrap items-baseline gap-x-2">
             <span className="font-medium">{d.name}</span>
             {isCert && (
-              <span className="rounded-full bg-accent/30 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider text-accent-foreground">
+              <span className="bg-accent/30 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider text-accent-foreground">
                 Certification
               </span>
             )}
@@ -464,7 +464,7 @@ function DocumentRow({ doc: d }: { doc: DppDocument }) {
             onClick={() => setOpen((v) => !v)}
             aria-expanded={open}
             aria-label={open ? "Hide details" : "Show details"}
-            className="flex h-8 w-8 items-center justify-center rounded-md border border-border text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+            className="flex h-8 w-8 items-center justify-center border border-border text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
           >
             <ChevronDown
               className={`h-4 w-4 transition-transform ${open ? "rotate-180" : ""}`}
@@ -481,21 +481,11 @@ function DocumentRow({ doc: d }: { doc: DppDocument }) {
               {d.issuer.orgNr && ` · ${d.issuer.orgNr}`}
             </div>
           )}
-          {d.epdInfo && (
-            <div className="grid gap-3 rounded-lg bg-muted/40 p-4 text-xs sm:grid-cols-2">
-              <EpdField label="Declaration" value={d.epdInfo.declarationNumber} />
-              <EpdField label="Product" value={d.epdInfo.product} />
-              <EpdField label="Issue date" value={d.epdInfo.issueDate} />
-              <EpdField label="Valid to" value={d.epdInfo.validTo} />
-              <EpdField label="Programme operator" value={d.epdInfo.programmeOperator} />
-              <EpdField label="Standard" value={d.epdInfo.standard} />
-              <EpdField label="Owner contact" value={d.epdInfo.ownerContact.person} />
-              <EpdField
-                label="Contact"
-                value={`${d.epdInfo.ownerContact.phone} · ${d.epdInfo.ownerContact.email}`}
-              />
-              <EpdField label="Third-party verifier" value={d.epdInfo.verifier} />
-              <EpdField label="Approval" value={d.epdInfo.approvalStatus} />
+          {d.docInfo && d.docInfo.length > 0 && (
+            <div className="grid gap-3 bg-muted/40 p-4 text-xs sm:grid-cols-2">
+              {d.docInfo.map((f) => (
+                <EpdField key={f.label} label={f.label} value={f.value} />
+              ))}
             </div>
           )}
         </div>
@@ -503,6 +493,7 @@ function DocumentRow({ doc: d }: { doc: DppDocument }) {
     </div>
   );
 }
+
 
 
 
