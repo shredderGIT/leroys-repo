@@ -10,12 +10,15 @@ export type DppEpdInfo = {
   standard: string;
 };
 
+export type DppDocInfoField = { label: string; value: string };
+
 export type DppDocument = {
   name: string;
   document: string;
   url: string;
   issuer?: { name: string; orgNr: string };
   epdInfo?: DppEpdInfo;
+  docInfo?: DppDocInfoField[];
 };
 
 
@@ -548,6 +551,87 @@ const epdInfoByDocNumber: Record<string, DppEpdInfo> = {
   },
 };
 
+// Generic per-document metadata extracted via the epd-doc-info skill from the
+// source PDFs. Keyed by the Document identifier so every document — not just
+// EPDs — can render an expandable info dropdown.
+const docInfoByDocNumber: Record<string, DppDocInfoField[]> = {
+  "0120200914": [
+    { label: "Declaration number", value: "0120200914" },
+    { label: "Product", value: "Arbetsstol Plus [6]" },
+    { label: "Article numbers", value: "6770, 6772, 6774, 6780, 6782, 6784" },
+    { label: "Category", value: "Arbetsstol (Office task chair)" },
+    { label: "User environment", value: "Kontorsmiljö (Office)" },
+    { label: "Valid to", value: "2030-09-14" },
+    { label: "Declaration owner", value: "Kinnarps AB" },
+    { label: "Programme operator", value: "Möbelfakta Sverige AB" },
+    { label: "Programme URL", value: "https://www.mobelfakta.se/Details.html?id=2059" },
+    { label: "Approval status", value: "Approved under Möbelfakta criteria" },
+  ],
+  "0220200914": [
+    { label: "Declaration number", value: "0220200914" },
+    { label: "Product", value: "Arbetsstol Plus [8]" },
+    { label: "Article numbers", value: "8770, 8772, 8774, 8780, 8782, 8784" },
+    { label: "Category", value: "Arbetsstol (Office task chair)" },
+    { label: "User environment", value: "Kontorsmiljö (Office)" },
+    { label: "Valid to", value: "2030-09-14" },
+    { label: "Declaration owner", value: "Kinnarps AB" },
+    { label: "Programme operator", value: "Möbelfakta Sverige AB" },
+    { label: "Programme URL", value: "https://www.mobelfakta.se/Details.html?id=2060" },
+    { label: "Approval status", value: "Approved under Möbelfakta criteria" },
+  ],
+  "SD Plus 6": [
+    { label: "Document type", value: "Sustainability Declaration" },
+    { label: "Product", value: "Plus 6 Task Chair" },
+    { label: "Declaration owner", value: "Kinnarps AB (556256-6736)" },
+    { label: "Manufacturing site", value: "Kinnarp, Sweden" },
+    { label: "Recyclable material share", value: "86 %" },
+    { label: "Post-consumer recycled content", value: "22 %" },
+    { label: "Verified date", value: "2022-12-08" },
+    { label: "Approval status", value: "Verified by Kinnarps AB" },
+  ],
+  "SD Plus 8": [
+    { label: "Document type", value: "Sustainability Declaration" },
+    { label: "Product", value: "Plus 8 Task Chair" },
+    { label: "Declaration owner", value: "Kinnarps AB (556256-6736)" },
+    { label: "Manufacturing site", value: "Kinnarp, Sweden" },
+    { label: "Recyclable material share", value: "83 %" },
+    { label: "Post-consumer recycled content", value: "21 %" },
+    { label: "Verified date", value: "2022-12-08" },
+    { label: "Approval status", value: "Verified by Kinnarps AB" },
+  ],
+  "SD Capella X": [
+    { label: "Document type", value: "Sustainability Declaration" },
+    { label: "Product", value: "Capella X Task Chair" },
+    { label: "Declaration owner", value: "Kinnarps AB (556256-6736)" },
+    { label: "Manufacturing site", value: "Kinnarp, Sweden" },
+    { label: "Total material weight", value: "14.3 kg" },
+    { label: "Recycled content", value: "24 % (3.4 kg post-consumer)" },
+    { label: "Verified date", value: "2025-05-12" },
+    { label: "Approval status", value: "Verified by Kinnarps AB" },
+  ],
+  "00016834": [
+    { label: "Certificate number", value: "00016834" },
+    { label: "Cancels and replaces", value: "00015220" },
+    { label: "Titleholder", value: "Kinnarps SA — 1712 route des quarante sous, 78630 Orgeval" },
+    { label: "Range", value: "Capella X" },
+    { label: "Marketing brand", value: "Kinnarps" },
+    { label: "Product", value: "Operative armchair — office task seat" },
+    { label: "Standards", value: "NF EN 1335-1 (2020), NF EN 1335-2 (2018)" },
+    { label: "Issued", value: "12/11/2025" },
+    { label: "Valid until", value: "11/11/2028" },
+    { label: "Programme operator", value: "FCBA / AFNOR Certification — NF Environnement" },
+    { label: "Signatory", value: "Alain Hocquet, Directeur Certification" },
+    { label: "Approval status", value: "Approved and signed" },
+  ],
+  "Oberon Meeting Table Concept": [
+    { label: "Document type", value: "Product concept reference" },
+    { label: "Product", value: "Oberon Meeting Table (OB167 SSV2)" },
+    { label: "Declaration owner", value: "Kinnarps AB (556256-6736)" },
+    { label: "Reference URL", value: "https://www.kinnarps.com" },
+    { label: "Approval status", value: "Reference document" },
+  ],
+};
+
 for (const p of map.values()) {
   const reg = allowedMaterials[p.product] ?? [];
   p.materials = epdMaterials[p.product] ?? [];
@@ -565,6 +649,24 @@ for (const p of map.values()) {
   for (const d of p.documents) {
     const info = epdInfoByDocNumber[d.document];
     if (info) d.epdInfo = info;
+    const generic = docInfoByDocNumber[d.document];
+    if (generic) d.docInfo = generic;
+    else if (info) {
+      // Build a fallback docInfo from the EPD structured data so the
+      // dropdown UI has a uniform payload for every document.
+      d.docInfo = [
+        { label: "Declaration number", value: info.declarationNumber },
+        { label: "Product", value: info.product },
+        { label: "Issue date", value: info.issueDate },
+        { label: "Valid to", value: info.validTo },
+        { label: "Programme operator", value: info.programmeOperator },
+        { label: "Standard", value: info.standard },
+        { label: "Owner contact", value: info.ownerContact.person },
+        { label: "Contact", value: `${info.ownerContact.phone} · ${info.ownerContact.email}` },
+        { label: "Third-party verifier", value: info.verifier },
+        { label: "Approval status", value: info.approvalStatus },
+      ];
+    }
   }
 }
 
