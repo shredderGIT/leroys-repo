@@ -10,12 +10,15 @@ export type DppEpdInfo = {
   standard: string;
 };
 
+export type DppDocInfoField = { label: string; value: string };
+
 export type DppDocument = {
   name: string;
   document: string;
   url: string;
   issuer?: { name: string; orgNr: string };
   epdInfo?: DppEpdInfo;
+  docInfo?: DppDocInfoField[];
 };
 
 
