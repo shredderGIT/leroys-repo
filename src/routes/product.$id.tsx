@@ -225,32 +225,29 @@ function ProductPage() {
 
         <div className="space-y-10">
       <section>
-
-        <h2 className="text-xl font-medium">Environmental performance</h2>
-        <div className="mt-5 grid gap-4 sm:grid-cols-3">
-          <BigMetric
-            icon={<Zap className="h-5 w-5" />}
-            label="Energy use"
-            value={Number(p.energyUse).toLocaleString()}
-            unit="kWh"
-            tone="clay"
-          />
-          <BigMetric
-            icon={<Leaf className="h-5 w-5" />}
-            label="Carbon footprint"
-            value={p.footprint.toString()}
-            unit="kg CO₂e"
-            tone="leaf"
-          />
-          <BigMetric
-            icon={<Recycle className="h-5 w-5" />}
-            label="Recycled content"
-            value={p.recycledContent.toString()}
-            unit="%"
-            tone="leaf"
-            progress={p.recycledContent}
-          />
+        <div className="flex items-baseline justify-between gap-4">
+          <h2 className="text-xl font-medium">EPD material composition</h2>
+          <p className="text-xs text-muted-foreground">
+            Extracted via <span className="font-mono">epd-mat-info</span> skill
+          </p>
         </div>
+        {(() => {
+          const epdGroups = groupBySource(p.materials).filter((g) => g.isEpd);
+          if (epdGroups.length === 0) {
+            return (
+              <p className="mt-4 text-sm text-muted-foreground">
+                No EPD material composition table available for this product.
+              </p>
+            );
+          }
+          return (
+            <div className="mt-5 space-y-6">
+              {epdGroups.map(({ source, items }) => (
+                <EpdMatInfoTable key={source} source={source} items={items} />
+              ))}
+            </div>
+          );
+        })()}
       </section>
 
       <section>
