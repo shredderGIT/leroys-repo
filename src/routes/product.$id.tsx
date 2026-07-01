@@ -463,6 +463,72 @@ function MaterialTable({
   );
 }
 
+function EpdMatInfoTable({ source, items }: { source: string; items: DppMaterial[] }) {
+  const totalKg = items.reduce((s, m) => s + (m.kg ?? 0), 0);
+  const totalRecKg = items.reduce(
+    (s, m) => s + ((m.kg ?? 0) * (m.recycledPercent ?? 0)) / 100,
+    0,
+  );
+  const fmt = (n: number, d = 2) =>
+    n.toLocaleString("en", { minimumFractionDigits: d, maximumFractionDigits: d });
+  return (
+    <div className="overflow-hidden rounded-xl border border-border bg-card">
+      <div className="flex items-center justify-between border-b border-border bg-muted/40 px-4 py-3">
+        <div className="flex items-center gap-2">
+          <FileText className="h-4 w-4 text-muted-foreground" />
+          <span className="text-sm font-medium">{source}</span>
+        </div>
+        <span className="rounded-full bg-primary px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider text-primary-foreground">
+          Environmental Product Declaration
+        </span>
+      </div>
+      <table className="w-full text-sm">
+        <thead className="bg-muted/20 text-xs uppercase tracking-wider text-muted-foreground">
+          <tr>
+            <th className="px-4 py-2.5 text-left font-medium">Material</th>
+            <th className="px-4 py-2.5 text-right font-medium">Weight (kg)</th>
+            <th className="px-4 py-2.5 text-right font-medium">Weight (%)</th>
+            <th className="px-4 py-2.5 text-right font-medium">Recycled share (kg)</th>
+            <th className="px-4 py-2.5 text-right font-medium">Recycled share (%)</th>
+          </tr>
+        </thead>
+        <tbody className="divide-y divide-border">
+          {items.map((m, i) => {
+            const recKg =
+              m.kg !== undefined && m.recycledPercent !== undefined
+                ? (m.kg * m.recycledPercent) / 100
+                : undefined;
+            return (
+              <tr key={`${m.name}-${i}`}>
+                <td className="px-4 py-2.5 font-medium">{m.name}</td>
+                <td className="px-4 py-2.5 text-right font-mono">
+                  {m.kg !== undefined ? fmt(m.kg) : "—"}
+                </td>
+                <td className="px-4 py-2.5 text-right font-mono">
+                  {m.percent !== undefined ? fmt(m.percent) : "—"}
+                </td>
+                <td className="px-4 py-2.5 text-right font-mono">
+                  {recKg !== undefined ? fmt(recKg) : "—"}
+                </td>
+                <td className="px-4 py-2.5 text-right font-mono">
+                  {m.recycledPercent !== undefined ? fmt(m.recycledPercent) : "—"}
+                </td>
+              </tr>
+            );
+          })}
+          <tr className="bg-muted/30 font-semibold">
+            <td className="px-4 py-2.5">Total</td>
+            <td className="px-4 py-2.5 text-right font-mono">{fmt(totalKg)}</td>
+            <td className="px-4 py-2.5 text-right font-mono">100.00</td>
+            <td className="px-4 py-2.5 text-right font-mono">{fmt(totalRecKg)}</td>
+            <td className="px-4 py-2.5 text-right font-mono"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
 function EpdField({ label, value }: { label: string; value: string }) {
   return (
     <div>
