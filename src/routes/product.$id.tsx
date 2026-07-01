@@ -125,22 +125,11 @@ function ProductPage() {
                   value={p.modelPresentation ?? "—"}
                 />
                 <MetaRow
-                  icon={<Hash className="h-3.5 w-3.5" />}
-                  label="Model"
-                  value={p.model}
-                  mono
-                />
-                <MetaRow
                   icon={<Layers className="h-3.5 w-3.5" />}
                   label="Series"
                   value={p.series ?? "—"}
                 />
-                <MetaRow
-                  icon={<Hash className="h-3.5 w-3.5" />}
-                  label="Passport ID"
-                  value={p.id}
-                  mono
-                />
+
                 {p.artNr && (
                   <MetaRow
                     icon={<Hash className="h-3.5 w-3.5" />}
