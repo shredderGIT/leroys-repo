@@ -224,46 +224,6 @@ function ProductPage() {
         </aside>
 
         <div className="space-y-10">
-      <section>
-        <ExpandableMaterialTable materials={p.materials} />
-      </section>
-
-      <section>
-        <h2 className="text-xl font-medium">Organisations</h2>
-        <div className="mt-5 grid gap-4 sm:grid-cols-2">
-          {p.organisations.map((o, i) => (
-            <div
-              key={`${o.orgNr}-${o.role}-${i}`}
-              className="flex items-start gap-4 rounded-xl border border-border bg-card p-5"
-            >
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-secondary text-secondary-foreground">
-                <Building2 className="h-5 w-5" />
-              </div>
-              <div>
-                {o.url ? (
-                  <a
-                    href={o.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-base font-medium text-primary hover:underline"
-                  >
-                    {o.name} <ExternalLink className="inline h-3 w-3" />
-                  </a>
-                ) : (
-                  <div className="text-base font-medium">{o.name}</div>
-                )}
-                <div className="text-sm text-muted-foreground">Org nr · {o.orgNr}</div>
-                <span className="mt-2 inline-block rounded-full bg-accent/30 px-2.5 py-1 text-xs font-medium text-accent-foreground">
-                  {o.role}
-                </span>
-              </div>
-
-            </div>
-          ))}
-        </div>
-      </section>
-
-
       {p.recyclability && (
         <section>
           <div className="flex items-baseline justify-between gap-4">
@@ -299,20 +259,55 @@ function ProductPage() {
         </section>
       )}
 
-
-
-
-
+      <section>
+        <ExpandableMaterialTable materials={p.materials} />
+      </section>
 
       <section>
         <h2 className="text-xl font-medium">Documentation</h2>
 
-        <div className="mt-5 divide-y divide-border overflow-hidden rounded-xl border border-border bg-card">
+        <div className="mt-5 divide-y divide-border overflow-hidden border border-border bg-card">
           {sortDocuments(p.documents).map((d) => (
             <DocumentRow key={d.url} doc={d} />
           ))}
         </div>
       </section>
+
+      <section>
+        <h2 className="text-xl font-medium">Organisations</h2>
+        <div className="mt-5 grid gap-4 sm:grid-cols-2">
+          {p.organisations.map((o, i) => (
+            <div
+              key={`${o.orgNr}-${o.role}-${i}`}
+              className="flex items-start gap-4 border border-border bg-card p-5"
+            >
+              <div className="flex h-10 w-10 items-center justify-center bg-secondary text-secondary-foreground">
+                <Building2 className="h-5 w-5" />
+              </div>
+              <div>
+                {o.url ? (
+                  <a
+                    href={o.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-base font-medium text-primary hover:underline"
+                  >
+                    {o.name} <ExternalLink className="inline h-3 w-3" />
+                  </a>
+                ) : (
+                  <div className="text-base font-medium">{o.name}</div>
+                )}
+                <div className="text-sm text-muted-foreground">Org nr · {o.orgNr}</div>
+                <span className="mt-2 inline-block bg-accent/30 px-2.5 py-1 text-xs font-medium text-accent-foreground">
+                  {o.role}
+                </span>
+              </div>
+
+            </div>
+          ))}
+        </div>
+      </section>
+
         </div>
       </div>
 
