@@ -364,6 +364,18 @@ for (const row of raw) {
   }
 }
 
+// Article numbers sourced from dpp_v5.json (KS: Digital Product Passport export).
+const artNrByDppId: Record<string, string> = {
+  "DPP-00002": "Plus 6 - 001",
+  "DPP-00003": "Plus 8 - 001",
+  "DPP-00004": "Capella X ESD - 001",
+  "DPP-00005": "OB167 SSV2-001",
+};
+for (const p of map.values()) {
+  const artNr = artNrByDppId[p.dppId];
+  if (artNr) p.artNr = artNr;
+}
+
 // Allowed materials per product (from dpp_material.json — "KS: Product Material" export).
 // Only these materials may be surfaced from the EPD source documents.
 const allowedMaterials: Record<string, { name: string; category: string }[]> = {
