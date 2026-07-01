@@ -24,7 +24,7 @@ import { useState } from "react";
 import plus6Img from "@/assets/plus-6.png";
 import plus8Img from "@/assets/plus-8.png";
 import capellaImg from "@/assets/capella-esd.png";
-import oberonImg from "@/assets/oberon-meeting-table.jpg";
+import oberonImg from "@/assets/oberon-167-ssv2.png";
 
 const productImage: Record<string, string> = {
   "Plus 6": plus6Img,
