@@ -56,6 +56,15 @@ export type DppRecyclability = {
   source: string;
 };
 
+export type DppDimensionRange = { min: number; max: number } | { value: number } | null;
+
+export type DppDimensions = {
+  unit: string;
+  source: string;
+  variantsCovered: string;
+  fields: { label: string; value: string }[];
+};
+
 export type DigitalProductPassport = {
   id: string;
   dppId: string;
@@ -74,7 +83,9 @@ export type DigitalProductPassport = {
   materials: DppMaterial[];
   classification: DppClassification[];
   recyclability?: DppRecyclability;
+  dimensions?: DppDimensions;
 };
+
 
 
 
