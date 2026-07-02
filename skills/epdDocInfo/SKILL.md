@@ -1,5 +1,5 @@
 ---
-name: epdDocInfo
+name: Dpp Doc Info
 description: Extract document-level metadata from an Environmental Product Declaration (EPD) PDF — declaration/registration number, declaration owner (organisation, org number, contact person, phone, email), product, issue and valid-to dates, programme operator, and approval/signature status. Use when the user provides an EPD document and asks for its identifying information, header data, owner, validity dates, programme operator, or whether it is approved/signed.
 ---
 
