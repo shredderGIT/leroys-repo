@@ -437,14 +437,15 @@ function EpdField({ label, value }: { label: string; value: string }) {
   );
 }
 
-function docCategory(d: DppDocument): "epd" | "sd" | "cert" {
+function docCategory(d: DppDocument): "epd" | "sd" | "brochure" | "cert" {
   if (/environmental product declaration/i.test(d.name) || /^NEPD/i.test(d.document)) return "epd";
   if (/sustainability declaration/i.test(d.name)) return "sd";
+  if (/brochure/i.test(d.name)) return "brochure";
   return "cert";
 }
 
 function sortDocuments(docs: DppDocument[]): DppDocument[] {
-  const order: Record<string, number> = { epd: 0, sd: 1, cert: 2 };
+  const order: Record<string, number> = { epd: 0, sd: 1, brochure: 2, cert: 3 };
   return [...docs].sort((a, b) => order[docCategory(a)] - order[docCategory(b)]);
 }
 
