@@ -685,11 +685,11 @@ const dimensionsByProduct: Record<string, DppDimensions> = {
     variantsCovered: "CFM/CSM 110 A · 115 A · 120 A · 125 A (ESD variants)",
     fields: [
       { label: "Seat width", value: "450 mm" },
+      { label: "Width", value: "620 mm" },
       { label: "Seat height", value: "380–470 mm" },
-      { label: "Seat depth", value: "400–530 mm" },
       { label: "Armrest height", value: "190–295 mm" },
       { label: "Total height", value: "930–1240 mm" },
-      { label: "Width", value: "620 mm" },
+      { label: "Seat depth", value: "400–530 mm" },
       { label: "Depth", value: "655 mm" },
     ],
   },
