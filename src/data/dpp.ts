@@ -56,6 +56,15 @@ export type DppRecyclability = {
   source: string;
 };
 
+export type DppDimensionRange = { min: number; max: number } | { value: number } | null;
+
+export type DppDimensions = {
+  unit: string;
+  source: string;
+  variantsCovered: string;
+  fields: { label: string; value: string }[];
+};
+
 export type DigitalProductPassport = {
   id: string;
   dppId: string;
@@ -74,7 +83,9 @@ export type DigitalProductPassport = {
   materials: DppMaterial[];
   classification: DppClassification[];
   recyclability?: DppRecyclability;
+  dimensions?: DppDimensions;
 };
+
 
 
 
@@ -247,6 +258,27 @@ const raw: RawRow[] = [
     Document: "SD Capella X",
     "URL Link":
       "https://www.kinnarps.se/mediacdn/79ff6f4f-b68a-4716-a33a-53abc54cbd74/dd9abd0b-df58-5eff-8839-855715e6d205/Sustainability_Declaration_Kinnarps_Capella_X.pdf",
+    ID: "3a96dfc7-2c65-9678-c289-b47500a803d1",
+    Organisation: "Kinnarps AB (556256-6736)",
+    "OrganisationOrg nr": "556256-6736",
+    Role: "Manufacturer",
+    "Product SeriesPresentation": "Capella X",
+    ModelPresentation: "Capella ESD",
+  },
+  {
+    "DPP ID": "DPP-00004",
+    "Energy Use": "933",
+    "Carbon Footprint": 68,
+    "Recycled Content": 24,
+    Product: "Capella X",
+    Model: "a73d4f70-e400-917a-c5ff-b475008edee1",
+    Presentation: "Kinnarps AB (556256-6736)",
+    "Org nr": "556256-6736",
+    "Business Role": "Holder",
+    Name: "Product Brochure",
+    Document: "Capella X Brochure SE",
+    "URL Link":
+      "https://github.com/shredderGIT/leroys-repo/raw/DigitalProductPassport/Capella_X-Product_brochure-SE.pdf",
     ID: "3a96dfc7-2c65-9678-c289-b47500a803d1",
     Organisation: "Kinnarps AB (556256-6736)",
     "OrganisationOrg nr": "556256-6736",
@@ -630,12 +662,47 @@ const docInfoByDocNumber: Record<string, DppDocInfoField[]> = {
     { label: "Reference URL", value: "https://www.kinnarps.com" },
     { label: "Approval status", value: "Reference document" },
   ],
+  "Capella X Brochure SE": [
+    { label: "Document type", value: "Product Brochure" },
+    { label: "Product range", value: "Capella X (Classic, Nature, Energy, XL, 24/7, ESD)" },
+    { label: "Publisher", value: "Kinnarps AB" },
+    { label: "Language", value: "Swedish" },
+    { label: "Designer", value: "Kinnarps Studio" },
+    { label: "Standards referenced", value: "EN 1335-1 (type A/AX), EN 1335-2, BS 5459-2" },
+    { label: "Certifications referenced", value: "NEPD-9216-8804" },
+    { label: "Dimension table", value: "17 model variants, page 3 (Enhet mm.)" },
+    { label: "Reference URL", value: "https://kinnarps.se" },
+  ],
 };
+
+// Product dimensions extracted from Capella X brochure (page 3, Enhet mm.)
+// via the dpp-prod-dimension skill. Filtered to ESD variants for the
+// Capella X ESD passport (Model presentation "Capella ESD").
+const dimensionsByProduct: Record<string, DppDimensions> = {
+  "Capella X": {
+    unit: "mm",
+    source: "Capella X Product Brochure (SE) — page 3",
+    variantsCovered: "CFM/CSM 110 A · 115 A · 120 A · 125 A (ESD variants)",
+    fields: [
+      { label: "Seat width", value: "450 mm" },
+      { label: "Seat height", value: "380–470 mm" },
+      { label: "Seat depth", value: "400–530 mm" },
+      { label: "Armrest height", value: "190–295 mm" },
+      { label: "Total height", value: "930–1240 mm" },
+      { label: "Width", value: "620 mm" },
+      { label: "Depth", value: "655 mm" },
+    ],
+  },
+};
+
 
 for (const p of map.values()) {
   const reg = allowedMaterials[p.product] ?? [];
   p.materials = epdMaterials[p.product] ?? [];
   p.recyclability = recyclability[p.product];
+  p.dimensions = dimensionsByProduct[p.product];
+
+
 
   const byCat = new Map<string, string[]>();
   for (const m of reg) {

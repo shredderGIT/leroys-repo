@@ -138,6 +138,30 @@ function ProductPage() {
                   />
                 )}
               </dl>
+
+              {p.dimensions && (
+                <div className="mt-6 border border-border bg-card p-4">
+                  <div className="flex items-baseline justify-between gap-3">
+                    <div className="text-[10px] uppercase tracking-widest text-muted-foreground">
+                      Dimensions ({p.dimensions.unit})
+                    </div>
+                    <div className="text-[10px] text-muted-foreground">
+                      {p.dimensions.variantsCovered}
+                    </div>
+                  </div>
+                  <dl className="mt-3 grid gap-x-6 gap-y-2 text-sm sm:grid-cols-2">
+                    {p.dimensions.fields.map((f) => (
+                      <div key={f.label} className="flex justify-between border-b border-dashed border-border/60 pb-1">
+                        <dt className="text-muted-foreground">{f.label}</dt>
+                        <dd className="font-mono text-xs text-foreground">{f.value}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                  <p className="mt-3 text-[10px] text-muted-foreground">
+                    Source: {p.dimensions.source}
+                  </p>
+                </div>
+              )}
             </div>
             {productImage[p.product] && (
               <div className="flex flex-col gap-3">
@@ -413,14 +437,15 @@ function EpdField({ label, value }: { label: string; value: string }) {
   );
 }
 
-function docCategory(d: DppDocument): "epd" | "sd" | "cert" {
+function docCategory(d: DppDocument): "epd" | "sd" | "brochure" | "cert" {
   if (/environmental product declaration/i.test(d.name) || /^NEPD/i.test(d.document)) return "epd";
   if (/sustainability declaration/i.test(d.name)) return "sd";
+  if (/brochure/i.test(d.name)) return "brochure";
   return "cert";
 }
 
 function sortDocuments(docs: DppDocument[]): DppDocument[] {
-  const order: Record<string, number> = { epd: 0, sd: 1, cert: 2 };
+  const order: Record<string, number> = { epd: 0, sd: 1, brochure: 2, cert: 3 };
   return [...docs].sort((a, b) => order[docCategory(a)] - order[docCategory(b)]);
 }
 
