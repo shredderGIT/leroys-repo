@@ -1,5 +1,5 @@
 ---
-name: epdMatInfo
+name: Dpp Material Info
 description: Extract the material composition table from an Environmental Product Declaration (EPD) PDF — each material with its weight (kg), weight percentage (%), recycled share in material (kg), and recycled share in material (%), plus the Total row. Use when the user provides an EPD and asks for its materials / material content / composition / recycled-content breakdown by weight and percentage.
 ---
 
