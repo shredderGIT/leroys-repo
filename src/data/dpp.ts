@@ -675,9 +675,8 @@ const docInfoByDocNumber: Record<string, DppDocInfoField[]> = {
   ],
 };
 
-// Product dimensions extracted from Capella X brochure (page 3, Enhet mm.)
-// via the dpp-prod-dimension skill. Filtered to ESD variants for the
-// Capella X ESD passport (Model presentation "Capella ESD").
+// Product dimensions extracted from product brochures (Enhet mm.)
+// via the dpp-prod-dimension skill.
 const dimensionsByProduct: Record<string, DppDimensions> = {
   "Capella X": {
     unit: "mm",
@@ -691,6 +690,42 @@ const dimensionsByProduct: Record<string, DppDimensions> = {
       { label: "Total height", value: "930–1240 mm" },
       { label: "Seat depth", value: "400–530 mm" },
       { label: "Depth", value: "655 mm" },
+    ],
+  },
+  "Plus 6": {
+    unit: "mm",
+    source: "Plus 6/8 Product Brochure (SE) — page 2",
+    variantsCovered: "Low back 6770 · 6772 · 6774 (armrests 2/4 optional)",
+    fields: [
+      { label: "Seat width", value: "450 mm" },
+      { label: "Width", value: "650 mm" },
+      { label: "Seat height", value: "400–530 mm" },
+      { label: "Armrest height", value: "180–310 mm" },
+      { label: "Seat depth", value: "400–470 mm" },
+      { label: "Depth", value: "660 mm" },
+    ],
+  },
+  "Plus 8": {
+    unit: "mm",
+    source: "Plus 6/8 Product Brochure (SE) — page 2",
+    variantsCovered: "High back 6780 · 6782 · 6784 (armrests 2/4 optional)",
+    fields: [
+      { label: "Seat width", value: "450 mm" },
+      { label: "Width", value: "650 mm" },
+      { label: "Seat height", value: "400–530 mm" },
+      { label: "Armrest height", value: "180–310 mm" },
+      { label: "Seat depth", value: "400–470 mm" },
+      { label: "Depth", value: "660 mm" },
+    ],
+  },
+  "Oberon Meeting Table": {
+    unit: "mm",
+    source: "Oberon Product Brochure (SE) — Mötesbord section",
+    variantsCovered: "OB167 SSV2 — meeting table, height 740 mm",
+    fields: [
+      { label: "Width", value: "1600 mm" },
+      { label: "Depth", value: "700 mm" },
+      { label: "Height", value: "740 mm" },
     ],
   },
 };
