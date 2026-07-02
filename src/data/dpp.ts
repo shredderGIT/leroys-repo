@@ -700,6 +700,9 @@ for (const p of map.values()) {
   const reg = allowedMaterials[p.product] ?? [];
   p.materials = epdMaterials[p.product] ?? [];
   p.recyclability = recyclability[p.product];
+  p.dimensions = dimensionsByProduct[p.product];
+
+
 
   const byCat = new Map<string, string[]>();
   for (const m of reg) {
