@@ -676,6 +676,11 @@ const epdMaterials: Record<string, DppMaterial[]> = {
     { name: "Zinc", category: "Metal", kg: 0.2, percent: 2, source: "SD Capella X" },
     { name: "Synthetic Textile", category: "Textile", kg: 0.5, percent: 3, source: "SD Capella X" },
   ],
+  "Oberon Meeting Table": [
+    { name: "Steel", category: "Metal", kg: 26.2, percent: 54, source: "SD Oberon" },
+    { name: "Wood", category: "Wood", kg: 21.5, percent: 45, source: "SD Oberon" },
+    { name: "Plastic", category: "Plastic", kg: 0.4, percent: 1, source: "SD Oberon" },
+  ],
 };
 
 // Map raw material names from source documents to canonical registry names
