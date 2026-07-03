@@ -701,6 +701,7 @@ const recyclability: Record<string, DppRecyclability> = {
   "Plus 6": { materialRecyclingPercent: 86, energyRecoveryPercent: 14, totalPercent: 100, source: "SD Plus 6" },
   "Plus 8": { materialRecyclingPercent: 83, energyRecoveryPercent: 17, totalPercent: 100, source: "SD Plus 8" },
   "Capella X": { materialRecyclingPercent: 90, energyRecoveryPercent: 10, totalPercent: 100, source: "SD Capella X" },
+  "Oberon Meeting Table": { materialRecyclingPercent: 55, energyRecoveryPercent: 45, totalPercent: 100, source: "SD Oberon" },
 };
 
 // EPD document metadata extracted via the epdDocInfo skill from the source PDFs
