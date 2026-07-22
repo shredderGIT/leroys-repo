@@ -1,0 +1,223 @@
+{
+  "paged": false,
+  "page": 1,
+  "pageSize": 4,
+  "totalSize": 4,
+  "totalPages": 1,
+  "objectSets": [
+    {
+      "metadata": {
+        "id": "20586171-c21d-ca62-7124-b47400d6074d",
+        "name": "KS: Digital Product Passport (export)",
+        "attributeNames": [
+          "DPP ID",
+          "Business Role",
+          "Art nr",
+          "Product Model",
+          "Product Series",
+          "Product",
+          "Name",
+          "Legal EntityName",
+          "Org nr",
+          "Ownership TypeName",
+          "Organisation TypeName"
+        ],
+        "columns": [
+          {
+            "id": "3545a342-cf87-abc1-3405-b47400d6128e",
+            "title": "DPP ID",
+            "index": 0,
+            "dataType": "String",
+            "calculated": false,
+            "path": [
+              "Digital Product Passport",
+              "DPP ID"
+            ]
+          },
+          {
+            "id": "09a750a3-4848-9c98-4277-b475005f4957",
+            "title": "Business Role",
+            "index": 1,
+            "dataType": "String",
+            "calculated": false,
+            "path": [
+              "Digital Product Passport",
+              "Organisation - DPP - Role",
+              "Business Role",
+              "Business Role"
+            ]
+          },
+          {
+            "id": "be12379b-9eab-a3b0-0bfc-b47900b5313b",
+            "title": "Art nr",
+            "index": 2,
+            "dataType": "String",
+            "calculated": false,
+            "path": [
+              "Digital Product Passport",
+              "Product Article",
+              "Art nr"
+            ]
+          },
+          {
+            "id": "93ba7744-1255-7deb-d22b-b47900b57eaf",
+            "title": "Product Model",
+            "index": 3,
+            "dataType": "String",
+            "calculated": false,
+            "path": [
+              "Digital Product Passport",
+              "Product Article",
+              "Product Model",
+              "Product Model"
+            ]
+          },
+          {
+            "id": "97929fd1-9a79-2afd-84bc-b47900b58565",
+            "title": "Product Series",
+            "index": 4,
+            "dataType": "String",
+            "calculated": false,
+            "path": [
+              "Digital Product Passport",
+              "Product Article",
+              "Product Series",
+              "Product Series"
+            ]
+          },
+          {
+            "id": "bd205eaa-7408-9b47-731c-b47900b58ec1",
+            "title": "Product",
+            "index": 5,
+            "dataType": "String",
+            "calculated": false,
+            "path": [
+              "Digital Product Passport",
+              "Product Article",
+              "Product",
+              "Product"
+            ]
+          },
+          {
+            "id": "98c1079f-84f6-8cb5-7321-b47900bcd5bb",
+            "title": "Name",
+            "index": 6,
+            "dataType": "String",
+            "calculated": false,
+            "path": [
+              "Digital Product Passport",
+              "Product Article",
+              "Product Concept - Product Article",
+              "Product Concept",
+              "Name"
+            ]
+          },
+          {
+            "id": "0862148c-7583-cefe-7c13-b48e00c7429c",
+            "title": "Name",
+            "index": 7,
+            "dataType": "String",
+            "calculated": false,
+            "path": [
+              "Digital Product Passport",
+              "Organisation - DPP - Role",
+              "Legal Entity",
+              "Name"
+            ]
+          },
+          {
+            "id": "8c4277dc-b9b7-1a2e-51f3-b48e00c7429f",
+            "title": "Org nr",
+            "index": 8,
+            "dataType": "String",
+            "calculated": false,
+            "path": [
+              "Digital Product Passport",
+              "Organisation - DPP - Role",
+              "Legal Entity",
+              "Org nr"
+            ]
+          },
+          {
+            "id": "853ed334-85de-0be7-7053-b48e00cc40fc",
+            "title": "Name",
+            "index": 9,
+            "dataType": "String",
+            "calculated": false,
+            "path": [
+              "Digital Product Passport",
+              "Organisation - DPP - Role",
+              "Legal Entity",
+              "Ownership Type",
+              "Name"
+            ]
+          },
+          {
+            "id": "0b60be92-95ec-20b5-17e4-b48e00cc464f",
+            "title": "Name",
+            "index": 10,
+            "dataType": "String",
+            "calculated": false,
+            "path": [
+              "Digital Product Passport",
+              "Organisation - DPP - Role",
+              "Legal Entity",
+              "Organisation Type",
+              "Name"
+            ]
+          }
+        ]
+      },
+      "objects": [
+        {
+          "DPP ID": "DPP-00004",
+          "Business Role": "Holder",
+          "Art nr": "CAP-X-001",
+          "Product Model": "Capella ESD",
+          "Product Series": "Capella X",
+          "Product": "Capella X Capella ESD",
+          "Name": "Capella",
+          "Legal EntityName": "Kinnarps AB",
+          "Org nr": "556256-6736",
+          "Ownership TypeName": "Family Owned"
+        },
+        {
+          "DPP ID": "DPP-00005",
+          "Business Role": "Holder",
+          "Art nr": "OB167 SSV2 - 001",
+          "Product Model": "OB167 SSV2",
+          "Product Series": "OB167 SSV2",
+          "Product": "Oberon Meeting Table",
+          "Name": "Oberon",
+          "Legal EntityName": "Kinnarps AB",
+          "Org nr": "556256-6736",
+          "Ownership TypeName": "Family Owned"
+        },
+        {
+          "DPP ID": "DPP-00002",
+          "Business Role": "Holder",
+          "Art nr": "Plus 6 - 001",
+          "Product Model": "6770",
+          "Product Series": "Plus 6",
+          "Product": "Plus 6 6770",
+          "Name": "Plus",
+          "Legal EntityName": "Kinnarps AB",
+          "Org nr": "556256-6736",
+          "Ownership TypeName": "Family Owned"
+        },
+        {
+          "DPP ID": "DPP-00003",
+          "Business Role": "Holder",
+          "Art nr": "Plus 8 - 001",
+          "Product Model": "8770",
+          "Product Series": "Plus 8",
+          "Product": "Plus 8 8770",
+          "Name": "Plus",
+          "Legal EntityName": "Kinnarps AB",
+          "Org nr": "556256-6736",
+          "Ownership TypeName": "Family Owned"
+        }
+      ]
+    }
+  ]
+}
