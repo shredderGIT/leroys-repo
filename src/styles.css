@@ -37,59 +37,58 @@
   --color-clay-foreground: var(--clay-foreground);
 }
 
-/* Bold editorial theme: deep ink background, warm off-white type,
-   electric lime primary, molten amber accent. Sharp square corners. */
+/* High-contrast monochrome theme. Sharp square corners. */
 :root {
   --radius: 0;
-  --background: #0b0d0c;
-  --foreground: #f2efe6;
-  --card: #141715;
-  --card-foreground: #f2efe6;
-  --popover: #141715;
-  --popover-foreground: #f2efe6;
-  --primary: #c5f025;
-  --primary-foreground: #0b0d0c;
-  --secondary: #1b1f1d;
-  --secondary-foreground: #f2efe6;
-  --muted: #1b1f1d;
-  --muted-foreground: #a6a89f;
-  --accent: #ff5b1f;
-  --accent-foreground: #0b0d0c;
-  --destructive: #ff5b1f;
-  --destructive-foreground: #0b0d0c;
-  --border: #2a2f2c;
-  --input: #2a2f2c;
-  --ring: #c5f025;
-  --leaf: #c5f025;
-  --leaf-foreground: #0b0d0c;
-  --clay: #ff5b1f;
-  --clay-foreground: #0b0d0c;
+  --background: #ffffff;
+  --foreground: #000000;
+  --card: #ffffff;
+  --card-foreground: #000000;
+  --popover: #ffffff;
+  --popover-foreground: #000000;
+  --primary: #000000;
+  --primary-foreground: #ffffff;
+  --secondary: #f3f3f3;
+  --secondary-foreground: #000000;
+  --muted: #ededed;
+  --muted-foreground: #5c5c5c;
+  --accent: #d8d8d8;
+  --accent-foreground: #000000;
+  --destructive: #1f1f1f;
+  --destructive-foreground: #ffffff;
+  --border: #c7c7c7;
+  --input: #c7c7c7;
+  --ring: #000000;
+  --leaf: #000000;
+  --leaf-foreground: #ffffff;
+  --clay: #606060;
+  --clay-foreground: #ffffff;
 }
 
 .dark {
-  --background: #0b0d0c;
-  --foreground: #f2efe6;
-  --card: #141715;
-  --card-foreground: #f2efe6;
-  --popover: #141715;
-  --popover-foreground: #f2efe6;
-  --primary: #c5f025;
-  --primary-foreground: #0b0d0c;
-  --secondary: #1b1f1d;
-  --secondary-foreground: #f2efe6;
-  --muted: #1b1f1d;
-  --muted-foreground: #a6a89f;
-  --accent: #ff5b1f;
-  --accent-foreground: #0b0d0c;
-  --destructive: #ff5b1f;
-  --destructive-foreground: #0b0d0c;
-  --border: #2a2f2c;
-  --input: #2a2f2c;
-  --ring: #c5f025;
-  --leaf: #c5f025;
-  --leaf-foreground: #0b0d0c;
-  --clay: #ff5b1f;
-  --clay-foreground: #0b0d0c;
+  --background: #000000;
+  --foreground: #ffffff;
+  --card: #0d0d0d;
+  --card-foreground: #ffffff;
+  --popover: #0d0d0d;
+  --popover-foreground: #ffffff;
+  --primary: #ffffff;
+  --primary-foreground: #000000;
+  --secondary: #171717;
+  --secondary-foreground: #ffffff;
+  --muted: #202020;
+  --muted-foreground: #b5b5b5;
+  --accent: #3a3a3a;
+  --accent-foreground: #ffffff;
+  --destructive: #e0e0e0;
+  --destructive-foreground: #000000;
+  --border: #424242;
+  --input: #424242;
+  --ring: #ffffff;
+  --leaf: #ffffff;
+  --leaf-foreground: #000000;
+  --clay: #a0a0a0;
+  --clay-foreground: #000000;
 }
 
 @layer base {
