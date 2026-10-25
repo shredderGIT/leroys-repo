@@ -73,7 +73,9 @@ export const Route = createFileRoute("/product/$id")({
     <div className="flex min-h-screen items-center justify-center px-4 text-center">
       <div>
         <h1 className="text-lg font-medium">Couldn't load this passport</h1>
-        <p className="mt-2 text-sm text-muted-foreground">{error.message}</p>
+        <p className="mt-2 text-sm text-muted-foreground">
+          {error instanceof Error ? error.message : "An unexpected error occurred."}
+        </p>
         <button
           onClick={reset}
           className="mt-4 rounded-md bg-primary px-4 py-2 text-sm text-primary-foreground"

@@ -37,58 +37,58 @@
   --color-clay-foreground: var(--clay-foreground);
 }
 
-/* High-contrast monochrome theme. Sharp square corners. */
+/* Forest green theme. Sharp square corners. */
 :root {
   --radius: 0;
-  --background: #ffffff;
-  --foreground: #000000;
+  --background: #fbfcfa;
+  --foreground: #14261b;
   --card: #ffffff;
-  --card-foreground: #000000;
+  --card-foreground: #14261b;
   --popover: #ffffff;
-  --popover-foreground: #000000;
-  --primary: #000000;
+  --popover-foreground: #14261b;
+  --primary: #1e5c3a;
   --primary-foreground: #ffffff;
-  --secondary: #f3f3f3;
-  --secondary-foreground: #000000;
-  --muted: #ededed;
-  --muted-foreground: #5c5c5c;
-  --accent: #d8d8d8;
-  --accent-foreground: #000000;
-  --destructive: #1f1f1f;
+  --secondary: #eaf2ea;
+  --secondary-foreground: #14261b;
+  --muted: #e6eee6;
+  --muted-foreground: #5a6f60;
+  --accent: #cfe4d2;
+  --accent-foreground: #14261b;
+  --destructive: #7a3b2b;
   --destructive-foreground: #ffffff;
-  --border: #c7c7c7;
-  --input: #c7c7c7;
-  --ring: #000000;
-  --leaf: #000000;
+  --border: #c3d3c4;
+  --input: #c3d3c4;
+  --ring: #1e5c3a;
+  --leaf: #1e5c3a;
   --leaf-foreground: #ffffff;
-  --clay: #606060;
+  --clay: #5c7358;
   --clay-foreground: #ffffff;
 }
 
 .dark {
-  --background: #000000;
-  --foreground: #ffffff;
-  --card: #0d0d0d;
-  --card-foreground: #ffffff;
-  --popover: #0d0d0d;
-  --popover-foreground: #ffffff;
-  --primary: #ffffff;
-  --primary-foreground: #000000;
-  --secondary: #171717;
-  --secondary-foreground: #ffffff;
-  --muted: #202020;
-  --muted-foreground: #b5b5b5;
-  --accent: #3a3a3a;
-  --accent-foreground: #ffffff;
-  --destructive: #e0e0e0;
-  --destructive-foreground: #000000;
-  --border: #424242;
-  --input: #424242;
-  --ring: #ffffff;
-  --leaf: #ffffff;
-  --leaf-foreground: #000000;
-  --clay: #a0a0a0;
-  --clay-foreground: #000000;
+  --background: #0b140e;
+  --foreground: #ecf3ec;
+  --card: #101d14;
+  --card-foreground: #ecf3ec;
+  --popover: #101d14;
+  --popover-foreground: #ecf3ec;
+  --primary: #6fc492;
+  --primary-foreground: #0b140e;
+  --secondary: #16281c;
+  --secondary-foreground: #ecf3ec;
+  --muted: #1a2c20;
+  --muted-foreground: #9db3a4;
+  --accent: #24402d;
+  --accent-foreground: #ecf3ec;
+  --destructive: #d8a795;
+  --destructive-foreground: #0b140e;
+  --border: #2a3d2f;
+  --input: #2a3d2f;
+  --ring: #6fc492;
+  --leaf: #6fc492;
+  --leaf-foreground: #0b140e;
+  --clay: #8aa78f;
+  --clay-foreground: #0b140e;
 }
 
 @layer base {
